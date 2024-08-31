@@ -13,7 +13,7 @@ function Navbar({ children }) {
     <NavbarContext.Provider value={{ openName, close, open }}>
       <header
         // className="h-80 transition-all has-[:empty]:h-20"
-        className="fixed z-20 w-full bg-white"
+        className="fixed z-20 w-full bg-stone-100"
         onMouseLeave={close}
       >
         {children}
@@ -24,7 +24,11 @@ function Navbar({ children }) {
 
 // # NAV
 function Nav({ children }) {
-  return <nav className="flex items-center px-8 py-4">{children}</nav>;
+  return (
+    <nav className="flex h-16 items-center px-8 xl:px-10 2xl:h-20 2xl:px-12">
+      {children}
+    </nav>
+  );
 }
 
 // # NAVLINKS
@@ -64,7 +68,7 @@ function NavOverlay() {
   return createPortal(
     <div
       onMouseEnter={close}
-      className="fixed inset-0 z-10 h-[100vh] w-[100vw] bg-yellow-300"
+      className="fixed inset-0 z-10 h-[100vh] w-[100vw]"
     ></div>,
     document.body,
   );

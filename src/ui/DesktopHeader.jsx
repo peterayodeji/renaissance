@@ -1,4 +1,6 @@
+import MenNav from './MenNav';
 import Navbar from './Navbar';
+import WomenNav from './WomenNav';
 
 function DesktopHeader() {
   return (
@@ -15,7 +17,7 @@ function DesktopHeader() {
         </Navbar.NavLinks>
 
         <div>
-          {/* <img src="/renaissance-logo.svg" alt="" /> */}
+          {/* <img src="/renaissance-logo.svg" alt="Brand Logo" /> */}
           <h1 className="text-3xl font-bold text-gray-800">RENAISSANCE</h1>
         </div>
 
@@ -39,37 +41,13 @@ function DesktopHeader() {
         </div>
       </Navbar.Nav>
 
-      <div className="bg-red-300 py-4 transition-all duration-300 ease-in-out empty:h-0 empty:p-0">
+      <div className="py-8 transition-all duration-300 ease-in-out empty:h-0 empty:p-0">
         <Navbar.Body name="women">
-          <div className="bg-blue-300 px-8">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore
-            tenetur dolore, sapiente nobis praesentium at consequuntur mollitia
-            autem reprehenderit cupiditate voluptatem, repellendus omnis?
-            Doloribus error, quas minus ipsa ex, dolor recusandae nostrum est
-            aliquid rem quia. Quis facilis vero, eum deleniti officia mollitia
-            ratione unde odit quibusdam placeat, aperiam nisi. Lorem ipsum dolor
-            sit amet consectetur adipisicing elit. Odit, quae autem aut suscipit
-            sint reiciendis soluta expedita totam labore voluptas perferendis
-            rerum modi nesciunt est quaerat. Illum quaerat animi necessitatibus
-            perspiciatis ducimus, nobis voluptatum. Adipisci provident suscipit
-            sit quibusdam! Temporibus consequatur soluta vitae aut odit eligendi
-            obcaecati aliquid nihil delectus.
-          </div>
+          <WomenNav />
         </Navbar.Body>
 
         <Navbar.Body name="men">
-          <div className="bg-blue-300 px-8">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore
-            t ratione unde odit quibusdam Lorem ipsum dolor, sit amet
-            consectetur adipisicing elit. Vitae, temporibus vero obcaecati
-            voluptas quod minima expedita, rem similique suscipit error maiores
-            eos optio rerum, iste numquam non earum. Illum debitis, illo maxime
-            animi, nam odit dolorem quia aliquam eaque quisquam impedit, at
-            dicta aut modi recusandae reiciendis totam consectetur quos eveniet
-            est et. Qui odio maxime consectetur praesentium magnam? Doloremque
-            nesciunt aliquam doloribus commodi aperiam a possimus explicabo
-            impedit earum. placeat, aperiam nisi.
-          </div>
+          <MenNav />
         </Navbar.Body>
       </div>
 

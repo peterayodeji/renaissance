@@ -16,7 +16,7 @@ function Hero() {
       </div>
 
       {/* // #MOBILE HERO  */}
-      <div className="space-y-4 px-4 py-16 text-center md:hidden">
+      <div className="space-y-4 px-2 py-14 text-center md:hidden">
         <img src="/header-mob-w.jpg" alt="Header" />
         <h1 className="text-xl tracking-wider sm:text-2xl">Aura Line</h1>
         <p className="text-sm font-medium">DISCOVER YOUR SIGNATURE STYLE</p>

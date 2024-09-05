@@ -4,7 +4,7 @@ import WomenNav from './WomenNav';
 
 function DesktopHeader() {
   return (
-    <div className="relative">
+    <div className="relative hidden lg:block">
       <Navbar>
         <Navbar.Nav>
           <Navbar.NavLinks>

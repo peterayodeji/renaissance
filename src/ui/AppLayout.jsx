@@ -1,5 +1,6 @@
 import Footer from './Footer';
 import Hero from './Hero';
+import NewArrivals from './NewArrivals';
 import PageHeader from './PageHeader';
 
 function AppLayout() {
@@ -7,6 +8,7 @@ function AppLayout() {
     <main>
       <PageHeader />
       <Hero />
+      <NewArrivals />
       <Footer />
     </main>
   );

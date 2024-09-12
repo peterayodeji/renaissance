@@ -67,6 +67,7 @@ function NewArrivals() {
           modules={[Navigation, Pagination]}
           spaceBetween={10}
           slidesPerView="auto"
+          centeredSlides={true}
           loop={true}
           navigation={{
             nextEl: '.custom-next', // Custom next arrow
@@ -79,11 +80,9 @@ function NewArrivals() {
           breakpoints={{
             768: {
               slidesPerView: 3,
-              centeredSlides: false,
             },
             1024: {
               slidesPerView: 5,
-              centeredSlides: false,
             },
           }}
         >

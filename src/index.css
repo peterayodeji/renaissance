@@ -12,6 +12,18 @@
       0.3px 0.3px 0 #000;
   }
 
+  /* REMOVING SCROLLBARS */
+  /* ... For firefox and ms respectively */
+  .remove-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  /* ... For webkit */
+  .remove-scrollbar::-webkit-scrollbar {
+    width: 0 !important;
+  }
+
   /* SWIPER CUSTOM CSS */
   /* Navigation buttons */
   .custom-prev,

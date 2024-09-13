@@ -7,7 +7,7 @@ import 'swiper/css/pagination';
 const ITEMS = [
   {
     id: '001',
-    name: 'Vienne Multi-color Sweater',
+    name: 'Vienne Colored Sweater',
     price: '$50.00',
     image: '/vivienne-westwood-multicolor-stuart-sweater.webp',
   },
@@ -58,14 +58,14 @@ const ITEMS = [
 function NewArrivals() {
   return (
     <div className="bg-green-30 px-4 pb-28 pt-4 md:pb-32 md:pt-16 lg:pb-40 lg:pt-20">
-      <h2 className="mb-10 text-center text-xl md:mb-12 md:text-2xl lg:text-3xl">
+      <h2 className="mb-10 text-center text-xl tracking-wide md:mb-12 md:text-2xl lg:text-3xl">
         NEW ARRIVALS
       </h2>
 
       <div className="relative">
         <Swiper
           modules={[Navigation, Pagination]}
-          spaceBetween={10}
+          spaceBetween={20}
           slidesPerView="auto"
           centeredSlides={true}
           loop={true}
@@ -79,6 +79,7 @@ function NewArrivals() {
           }}
           breakpoints={{
             768: {
+              spaceBetween: 10,
               slidesPerView: 3,
             },
             1024: {
@@ -89,7 +90,7 @@ function NewArrivals() {
           {/* Slides */}
           {ITEMS.map(item => (
             <SwiperSlide key={item.id} className="w-[200px] sm:w-[250px]">
-              <li>
+              <li className="text-base sm:text-base">
                 <img src={item.image} alt={item.name} />
                 <div>
                   <p>{item.name}</p>

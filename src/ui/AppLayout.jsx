@@ -1,3 +1,4 @@
+import Category from './Category';
 import Footer from './Footer';
 import Hero from './Hero';
 import NewArrivals from './NewArrivals';
@@ -10,6 +11,7 @@ function AppLayout() {
       <PageHeader />
       <Hero />
       <NewArrivals />
+      <Category />
       <SubCategory />
       <Footer />
     </main>

@@ -1,5 +1,14 @@
+import Newsletter from './Newsletter';
+
 function Footer() {
-  return <footer className="h-48 bg-yellow-200"></footer>;
+  return (
+    <footer>
+      <Newsletter />
+
+      {/* SITEMAP */}
+      <div className="h-56"></div>
+    </footer>
+  );
 }
 
 export default Footer;

@@ -40,7 +40,7 @@ function SubCategory() {
   }
 
   return (
-    <div className="bg-blue-30 h-36 px-2 pt-8 sm:px-4 md:h-40 md:px-8">
+    <div className="bg-blue-30 mb-8 h-36 px-2 pt-8 sm:px-4 md:h-40 md:px-8">
       <h3 className="mb-4 text-sm sm:text-base">WOMAN</h3>
 
       <div className="relative">

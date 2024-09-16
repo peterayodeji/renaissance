@@ -7,14 +7,18 @@ import SubCategory from './SubCategory';
 
 function AppLayout() {
   return (
-    <main>
+    <>
       <PageHeader />
-      <Hero />
-      <NewArrivals />
-      <Category />
-      <SubCategory />
+
+      <main className="min-h-screen">
+        <Hero />
+        <NewArrivals />
+        <Category />
+        <SubCategory />
+      </main>
+
       <Footer />
-    </main>
+    </>
   );
 }
 

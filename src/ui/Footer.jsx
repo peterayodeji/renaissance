@@ -1,12 +1,13 @@
 import Newsletter from './Newsletter';
+import SiteMap from './SiteMap';
+import Copyright from './Copyright';
 
 function Footer() {
   return (
     <footer>
       <Newsletter />
-
-      {/* SITEMAP */}
-      <div className="h-56"></div>
+      <SiteMap />
+      <Copyright />
     </footer>
   );
 }

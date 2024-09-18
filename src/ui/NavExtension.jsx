@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 const NavExtensionContext = createContext();
 
@@ -35,9 +36,9 @@ function Link({ children, to, opens: opensLinkName }) {
 
   return (
     <li>
-      <a href={to} onMouseEnter={() => handleHover(opensLinkName)}>
+      <NavLink to={to} onMouseEnter={() => handleHover(opensLinkName)}>
         {children}
-      </a>{' '}
+      </NavLink>{' '}
       {opensLinkName && openName === opensLinkName && (
         <span className="inline-block animate-SlideInShort">&rarr;</span>
       )}

@@ -6,6 +6,7 @@ function Category() {
       </h2>
 
       <div className="grid grid-cols-2 gap-y-10 md:gap-y-12">
+        {/* MEN'S / WOMEN'S Category */}
         <div>
           <img src="/women-startpage-3.webp" alt="Women Category" />
           <div className="bg-gray-40 pl-2 pt-2 text-sm sm:pl-4 sm:text-base md:pl-8 md:pt-3">

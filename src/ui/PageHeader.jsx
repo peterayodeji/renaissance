@@ -1,11 +1,14 @@
+import { useScreenLessThan } from '../hooks/useScreenLessThan';
 import DesktopHeader from './DesktopHeader';
 import MobileHeader from './MobileHeader';
 
 function PageHeader() {
+  const isMobile = useScreenLessThan(1024);
+
   return (
     <>
-      <DesktopHeader />
-      <MobileHeader />
+      {!isMobile && <DesktopHeader />}
+      {isMobile && <MobileHeader />}
     </>
   );
 }

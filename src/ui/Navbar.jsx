@@ -1,21 +1,26 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 const NavbarContext = createContext();
 
 // # NAVBAR
 function Navbar({ children }) {
   const [openName, setOpenName] = useState('');
+  const location = useLocation();
   const close = () => setOpenName('');
   const open = setOpenName;
 
+  useEffect(
+    function () {
+      close();
+    },
+    [location.pathname, location.search],
+  );
+
   return (
     <NavbarContext.Provider value={{ openName, close, open }}>
-      <header
-        // className="h-80 transition-all has-[:empty]:h-20"
-        className="fixed z-20 w-full bg-stone-100"
-        onMouseLeave={close}
-      >
+      <header className="fixed z-20 w-full bg-white" onMouseLeave={close}>
         {children}
       </header>
     </NavbarContext.Provider>
@@ -31,13 +36,13 @@ function Nav({ children }) {
   );
 }
 
-// # NAVLINKS
-function NavLinks({ children }) {
+// # LINKS
+function Links({ children }) {
   return <ul className="flex flex-1 gap-x-8">{children}</ul>;
 }
 
-// # NAVLINK
-function NavLink({ children, to, opens: opensBodyName }) {
+// # LINK
+function Link({ children, to, opens: opensBodyName }) {
   const { openName, open } = useContext(NavbarContext);
 
   function handleHover(opensBodyName) {
@@ -47,7 +52,7 @@ function NavLink({ children, to, opens: opensBodyName }) {
 
   return (
     <li onMouseEnter={() => handleHover(opensBodyName)}>
-      <a href={to}>{children}</a>
+      <NavLink to={to}>{children}</NavLink>
     </li>
   );
 }
@@ -76,8 +81,8 @@ function NavOverlay() {
 
 // * Set each component to be property of Navbar
 Navbar.Nav = Nav;
-Navbar.NavLinks = NavLinks;
-Navbar.NavLink = NavLink;
+Navbar.Links = Links;
+Navbar.Link = Link;
 Navbar.Body = Body;
 Navbar.NavOverlay = NavOverlay;
 

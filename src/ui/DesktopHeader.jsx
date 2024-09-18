@@ -4,18 +4,18 @@ import WomenNav from './WomenNav';
 
 function DesktopHeader() {
   return (
-    <div className="relative hidden lg:block">
+    <div className="relative">
       <Navbar>
         <Navbar.Nav>
-          <Navbar.NavLinks>
-            <Navbar.NavLink to="/women" opens="women">
+          <Navbar.Links>
+            <Navbar.Link to="/women" opens="women">
               Women
-            </Navbar.NavLink>
-            <Navbar.NavLink to="/men" opens="men">
+            </Navbar.Link>
+            <Navbar.Link to="/men" opens="men">
               Men
-            </Navbar.NavLink>
-            <Navbar.NavLink to="/lifestyle">Lifestyle</Navbar.NavLink>
-          </Navbar.NavLinks>
+            </Navbar.Link>
+            <Navbar.Link to="/lifestyle">Lifestyle</Navbar.Link>
+          </Navbar.Links>
 
           <div>
             {/* <img src="/renaissance-logo.svg" alt="Brand Logo" /> */}

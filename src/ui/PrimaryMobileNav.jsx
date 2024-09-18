@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import MobileNavActions from './MobileNavActions';
 import NavLinksList from './NavLinksList';
 import EnclosedLink from './EnclosedLink';
+import { NavLink } from 'react-router-dom';
 
 const PRIMARY_LINKS = [
   { name: 'Women', to: 'women', isEnclosed: true },
@@ -36,7 +37,7 @@ function PrimaryMobileNav({ activeOption, setActiveOption, onClose }) {
 
             {!isEnclosed && (
               <li>
-                <a href={to}>{name}</a>
+                <NavLink to={to}>{name}</NavLink>
               </li>
             )}
           </Fragment>

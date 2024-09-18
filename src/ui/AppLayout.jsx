@@ -1,22 +1,17 @@
-import Category from './Category';
-import Footer from './Footer';
-import Hero from './Hero';
-import NewArrivals from './NewArrivals';
+import { Outlet, ScrollRestoration } from 'react-router-dom';
+
 import PageHeader from './PageHeader';
-import SubCategory from './SubCategory';
+import Main from './Main';
+import Footer from './Footer';
 
 function AppLayout() {
   return (
     <>
+      <ScrollRestoration />
       <PageHeader />
-
-      <main className="min-h-screen">
-        <Hero />
-        <NewArrivals />
-        <Category />
-        <SubCategory />
-      </main>
-
+      <Main>
+        <Outlet />
+      </Main>
       <Footer />
     </>
   );

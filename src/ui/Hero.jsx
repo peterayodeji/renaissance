@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { usePathFinder } from '../hooks/usePathFinder';
 
 const HERO_IMG = {
   women: {
@@ -12,8 +12,7 @@ const HERO_IMG = {
 };
 
 function Hero() {
-  const { pathname } = useLocation();
-  const path = pathname.slice(1) || 'women';
+  const path = usePathFinder();
   const imageUrl = HERO_IMG[path];
 
   return (
@@ -28,9 +27,12 @@ function Hero() {
             <p className="outlined-text text-base font-medium 2xl:text-lg">
               DISCOVER YOUR SIGNATURE STYLE
             </p>
-            <button className="bg-gray-950 px-10 py-2 text-white 2xl:text-lg">
+            <a
+              href="#"
+              className="inline-block bg-gray-950 px-10 py-2 text-white 2xl:text-lg"
+            >
               Shop Now
-            </button>
+            </a>
           </div>
         </div>
       </div>

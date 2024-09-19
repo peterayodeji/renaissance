@@ -51,8 +51,10 @@ function Link({ children, to, opens: opensBodyName }) {
   }
 
   return (
-    <li onMouseEnter={() => handleHover(opensBodyName)}>
-      <NavLink to={to}>{children}</NavLink>
+    <li>
+      <NavLink to={to} onMouseEnter={() => handleHover(opensBodyName)}>
+        {children}
+      </NavLink>
     </li>
   );
 }
@@ -73,7 +75,7 @@ function NavOverlay() {
   return createPortal(
     <div
       onMouseEnter={close}
-      className="fixed inset-0 z-10 h-[100vh] w-[100vw]"
+      className="fixed inset-0 z-10 h-[100vh] w-[100vw] bg-stone-50/20"
     ></div>,
     document.body,
   );

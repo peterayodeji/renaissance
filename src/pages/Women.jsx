@@ -1,5 +1,5 @@
 import Hero from '../ui/Hero';
-import NewArrivals from '../ui/NewArrivals';
+import WomenNewArrivals from '../features/new-arrivals/WomenNewArrivals';
 import Category from '../ui/Category';
 import SubCategory from '../ui/SubCategory';
 
@@ -7,7 +7,7 @@ function Women() {
   return (
     <>
       <Hero />
-      <NewArrivals />
+      <WomenNewArrivals />
       <Category />
       <SubCategory />
     </>

@@ -24,12 +24,12 @@ function Hero() {
       >
         <div className="absolute left-[50%] top-[50%] space-y-6 text-white [transform:translate(-50%,20%)]">
           <h1 className="text-5xl tracking-wide 2xl:text-6xl">Aura Line</h1>
-          <p className="outlined-text text-base font-medium 2xl:text-lg">
+          <p className="outlined-text text-base font-medium xl:text-lg">
             DISCOVER YOUR SIGNATURE STYLE
           </p>
           <a
             href="#"
-            className="inline-block bg-gray-950 px-10 py-2 text-white 2xl:text-lg"
+            className="inline-block bg-gray-950 px-10 py-2 text-white xl:text-lg"
           >
             Shop Now
           </a>

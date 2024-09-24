@@ -14,7 +14,7 @@ function ProductsTitle() {
   }
 
   return (
-    <h2 className="bg-yellow-40 mb-6 text-4xl font-semibold uppercase tracking-tight">
+    <h2 className="mb-6 text-2xl font-semibold uppercase tracking-tight sm:text-3xl md:text-4xl lg:mb-8">
       {title}
     </h2>
   );

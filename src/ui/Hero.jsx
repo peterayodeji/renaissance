@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { usePathFinder } from '../hooks/usePathFinder';
 
 const HERO_IMG = {
@@ -27,12 +28,12 @@ function Hero() {
           <p className="outlined-text text-base font-medium xl:text-lg">
             DISCOVER YOUR SIGNATURE STYLE
           </p>
-          <a
-            href="#"
+          <Link
+            to="/products"
             className="inline-block bg-gray-950 px-10 py-2 text-white xl:text-lg"
           >
             Shop Now
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -41,9 +42,12 @@ function Hero() {
         <img src={imageUrl.mob} alt="Header" />
         <h1 className="text-xl tracking-wider sm:text-2xl">Aura Line</h1>
         <p className="text-sm font-medium">DISCOVER YOUR SIGNATURE STYLE</p>
-        <button className="w-[70%] bg-gray-950 py-2 text-white">
+        <Link
+          to="/products"
+          className="inline-block w-[70%] bg-gray-950 py-2 text-white"
+        >
           Shop Now
-        </button>
+        </Link>
       </div>
     </>
   );

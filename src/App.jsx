@@ -1,3 +1,5 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+// import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -8,7 +10,17 @@ import {
 import AppLayout from './ui/AppLayout';
 import Women from './pages/Women';
 import Men from './pages/Men';
+import Products from './pages/Products';
 import PageNotFound from './ui/PageNotFound';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 0,
+      // staleTime: 60 * 1000, // 1min
+    },
+  },
+});
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,6 +29,7 @@ const router = createBrowserRouter(
         <Route index element={<Women />} />
         <Route path="women" element={<Women />} />
         <Route path="men" element={<Men />} />
+        <Route path="products" element={<Products />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>
     </Route>,
@@ -24,7 +37,11 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
+  );
 }
 
 export default App;

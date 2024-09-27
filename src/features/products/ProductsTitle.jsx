@@ -4,17 +4,19 @@ function ProductsTitle() {
   const { category, subCategory } = useProductsParams();
 
   let title = 'Shop Products';
+  // let title = "Shop Men's";
+  // let title = 'Shirts';
 
   if (category) {
-    title = `${category}'s products`;
+    title = `Shop ${category}'s `;
   }
 
   if (category && subCategory) {
-    title = `${category}'s ${subCategory}`;
+    title = subCategory;
   }
 
   return (
-    <h2 className="mb-6 text-2xl font-semibold uppercase tracking-tight sm:text-3xl md:text-4xl lg:mb-8">
+    <h2 className="mb-12 text-2xl font-semibold uppercase tracking-tight sm:text-3xl md:text-4xl">
       {title}
     </h2>
   );

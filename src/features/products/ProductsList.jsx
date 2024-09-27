@@ -1,5 +1,7 @@
 // import { useProducts } from './useProducts';
 
+import ProductsMap from './ProductsMap';
+
 function ProductsList() {
   // const { isLoading, data, error } = useProducts();
   // console.log(isLoading, error, data);
@@ -128,6 +130,10 @@ function ProductsList() {
           </div>
         </li>
       </ul>
+
+      <div className="bg-stone-200 py-10 text-center">PAGINATION</div>
+
+      <ProductsMap />
 
       {/* ERROR/LOADER */}
       <div className="absolute left-[50%] top-[45%] block translate-x-[-50%] translate-y-[-50%] transform bg-red-700 text-center">

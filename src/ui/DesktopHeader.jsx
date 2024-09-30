@@ -15,11 +15,7 @@ function DesktopHeader() {
               Men
             </Navbar.Link>
             <Navbar.Link to="/lifestyle">Lifestyle</Navbar.Link>
-            <Navbar.Link
-              to={'/products?category=Men&subcategory=Jackets&tags=leather'}
-            >
-              Shop
-            </Navbar.Link>
+            <Navbar.Link to={'/products?category=Men'}>Shop</Navbar.Link>
           </Navbar.Links>
 
           <div>

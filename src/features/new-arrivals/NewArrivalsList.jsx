@@ -45,10 +45,10 @@ function NewArrivalsList({ newArrivalsItems }) {
 
         {/* Custom navigation buttons */}
         <div className="custom-prev">
-          <img src="/arrow-left-1.svg" alt="Left Arrow" className="h-5" />
+          <img src="/arrow-left.svg" alt="Left Arrow" className="h-5" />
         </div>
         <div className="custom-next">
-          <img src="/arrow-right-1.svg" alt="Right Arrow" className="h-5" />
+          <img src="/arrow-right.svg" alt="Right Arrow" className="h-5" />
         </div>
       </Swiper>
 

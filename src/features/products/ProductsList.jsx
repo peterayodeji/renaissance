@@ -1,147 +1,68 @@
-// import { useProducts } from './useProducts';
+import { useProducts } from './useProducts';
+import ProductsFeed from './ProductsFeed';
 
-import ProductsMap from './ProductsMap';
+function ProductsList({ isLoadingFilterData, errorFilterData }) {
+  const {
+    isLoading: isLoadingProducts,
+    products,
+    pageCount,
+    error: errorProducts,
+  } = useProducts();
 
-function ProductsList() {
-  // const { isLoading, data, error } = useProducts();
-  // console.log(isLoading, error, data);
+  const showStatus = Boolean(
+    isLoadingFilterData ||
+      isLoadingProducts ||
+      errorFilterData ||
+      errorProducts,
+  );
 
   return (
     <>
-      <ul className="bg-blue-80 grid grid-cols-2 gap-x-4 gap-y-12 py-8 sm:gap-x-8 md:grid-cols-3 lg:grid-cols-4">
-        <li className="text-base sm:text-base">
-          <img
-            src="/vivienne-westwood-multicolor-stuart-sweater.webp"
-            alt="Product Image"
-          />
-          <div>
-            <p>Vivienne Sweater</p>
-            <div>$50.00</div>
-          </div>
-        </li>
-        <li className="text-base sm:text-base">
-          <img
-            src="/vivienne-westwood-multicolor-stuart-sweater.webp"
-            alt="Product Image"
-          />
-          <div>
-            <p>Vivienne Multi-color Sweater</p>
-            <div>$50.00</div>
-          </div>
-        </li>
-        <li className="text-base sm:text-base">
-          <img
-            src="/vivienne-westwood-multicolor-stuart-sweater.webp"
-            alt="Product Image"
-          />
-          <div>
-            <p>Vivienne Multi-color Sweater</p>
-            <div>$50.00</div>
-          </div>
-        </li>
-        <li className="text-base sm:text-base">
-          <img
-            src="/vivienne-westwood-multicolor-stuart-sweater.webp"
-            alt="Product Image"
-          />
-          <div>
-            <p>Vivienne Multi-color Sweater</p>
-            <div>$50.00</div>
-          </div>
-        </li>
-        <li className="text-base sm:text-base">
-          <img
-            src="/vivienne-westwood-multicolor-stuart-sweater.webp"
-            alt="Product Image"
-          />
-          <div>
-            <p>Vivienne Multi-color Sweater</p>
-            <div>$50.00</div>
-          </div>
-        </li>
-        <li className="text-base sm:text-base">
-          <img
-            src="/vivienne-westwood-multicolor-stuart-sweater.webp"
-            alt="Product Image"
-          />
-          <div>
-            <p>Vivienne Multi-color Sweater</p>
-            <div>$50.00</div>
-          </div>
-        </li>
-        <li className="text-base sm:text-base">
-          <img
-            src="/vivienne-westwood-multicolor-stuart-sweater.webp"
-            alt="Product Image"
-          />
-          <div>
-            <p>Vivienne Multi-color Sweater</p>
-            <div>$50.00</div>
-          </div>
-        </li>
-        <li className="text-base sm:text-base">
-          <img
-            src="/vivienne-westwood-multicolor-stuart-sweater.webp"
-            alt="Product Image"
-          />
-          <div>
-            <p>Vivienne Multi-color Sweater</p>
-            <div>$50.00</div>
-          </div>
-        </li>
-        <li className="text-base sm:text-base">
-          <img
-            src="/vivienne-westwood-multicolor-stuart-sweater.webp"
-            alt="Product Image"
-          />
-          <div>
-            <p>Vivienne Multi-color Sweater</p>
-            <div>$50.00</div>
-          </div>
-        </li>
-        <li className="text-base sm:text-base">
-          <img
-            src="/vivienne-westwood-multicolor-stuart-sweater.webp"
-            alt="Product Image"
-          />
-          <div>
-            <p>Vivienne Multi-color Sweater</p>
-            <div>$50.00</div>
-          </div>
-        </li>
-        <li className="text-base sm:text-base">
-          <img
-            src="/vivienne-westwood-multicolor-stuart-sweater.webp"
-            alt="Product Image"
-          />
-          <div>
-            <p>Vivienne Multi-color Sweater</p>
-            <div>$50.00</div>
-          </div>
-        </li>
-        <li className="text-base sm:text-base">
-          <img
-            src="/vivienne-westwood-multicolor-stuart-sweater.webp"
-            alt="Product Image"
-          />
-          <div>
-            <p>Vivienne Multi-color Sweater</p>
-            <div>$50.00</div>
-          </div>
-        </li>
-      </ul>
+      {showStatus && (
+        <StatusFeedback
+          isLoadingFilterData={isLoadingFilterData}
+          isLoading={isLoadingProducts}
+          errorFilterData={errorFilterData}
+          error={errorProducts}
+        />
+      )}
 
-      <div className="bg-stone-200 py-10 text-center">PAGINATION</div>
-
-      <ProductsMap />
-
-      {/* ERROR/LOADER */}
-      <div className="absolute left-[50%] top-[45%] block translate-x-[-50%] translate-y-[-50%] transform bg-red-700 text-center">
-        {/* <p>An error occured while loading products!</p> */}
-        {/* <p>Loading...</p> */}
-      </div>
+      {!showStatus && (
+        <ProductsFeed products={products} pageCount={pageCount} />
+      )}
     </>
   );
 }
 
 export default ProductsList;
+
+function StatusFeedback({
+  isLoadingFilterData,
+  isLoading,
+  errorFilterData,
+  error,
+}) {
+  if (isLoadingFilterData || isLoading) {
+    return (
+      <StatusFeedbackWrapper>
+        <p>LOADING...</p>
+      </StatusFeedbackWrapper>
+    );
+  }
+
+  if (errorFilterData || error) {
+    return (
+      <StatusFeedbackWrapper>
+        <p>Products could not be loaded.</p>
+      </StatusFeedbackWrapper>
+    );
+  }
+}
+
+function StatusFeedbackWrapper({ children }) {
+  return (
+    <div className="absolute left-[50%] top-[45%] block translate-x-[-50%] translate-y-[-50%] transform bg-red-700 text-center">
+      {children}
+    </div>
+  );
+}

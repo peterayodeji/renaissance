@@ -1,8 +1,10 @@
 import supabase from './supabase';
+import { PAGE_SIZE } from '../utils/constants';
 
-export async function getProducts({ category, subCategory, tags }) {
-  let query = supabase.from('products').select('*');
+export async function getProducts({ category, subCategory, tags, page }) {
+  let query = supabase.from('products').select('*', { count: 'exact' });
 
+  // * FILTER
   if (category) {
     query = query.eq('category', category);
   }
@@ -15,16 +17,23 @@ export async function getProducts({ category, subCategory, tags }) {
     query = query.contains('tags', JSON.stringify([tags]));
   }
 
-  const { data, error } = await query;
+  // * SORT
+
+  // * PAGINATION
+  if (page) {
+    const from = (page - 1) * PAGE_SIZE;
+    const to = from + PAGE_SIZE - 1;
+    query = query.range(from, to);
+  }
+
+  const { data, error, count } = await query;
 
   if (error) {
-    console.error(error);
+    // console.error(error);
     throw new Error('Products could not be loaded');
   }
 
-  // console.log(data);
-
-  return { data };
+  return { data, count };
 }
 
 export async function getProductsFilters({ category, subCategory }) {
@@ -48,8 +57,6 @@ export async function getProductsFilters({ category, subCategory }) {
     // console.error(error);
     throw new Error('Product Filters could not be loaded');
   }
-
-  // console.log(data);
 
   return { data };
 }

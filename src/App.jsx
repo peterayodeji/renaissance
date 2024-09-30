@@ -18,6 +18,7 @@ const queryClient = new QueryClient({
     queries: {
       staleTime: 0,
       // staleTime: 60 * 1000, // 1min
+      // staleTime: 60 * 30000, // 30min
     },
   },
 });

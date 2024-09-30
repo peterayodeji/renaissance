@@ -4,8 +4,6 @@ function ProductsTitle() {
   const { category, subCategory } = useProductsParams();
 
   let title = 'Shop Products';
-  // let title = "Shop Men's";
-  // let title = 'Shirts';
 
   if (category) {
     title = `Shop ${category}'s `;

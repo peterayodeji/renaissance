@@ -27,7 +27,7 @@ function ProductsList({ isLoadingFilterData, errorFilterData }) {
         />
       )}
 
-      {!showStatus && (
+      {!showStatus && Array.isArray(products) && products.length && (
         <ProductsFeed products={products} pageCount={pageCount} />
       )}
     </>

@@ -3,11 +3,24 @@ import { useSearchParams } from 'react-router-dom';
 export function useProductsParams() {
   const [searchParams] = useSearchParams();
 
-  // LATER Decode URL to be plain string - make hook
   // * FILTER
-  const category = searchParams.get('category');
-  const subCategory = searchParams.get('subcategory');
-  const tags = searchParams.get('tags');
+  const categoryParam = searchParams.get('category');
+  const category =
+    !categoryParam || categoryParam === 'all'
+      ? null
+      : decodeURIComponent(searchParams.get('category'));
+
+  const subCategoryParam = searchParams.get('subcategory');
+  const subCategory =
+    !subCategoryParam || subCategoryParam === 'all'
+      ? null
+      : decodeURIComponent(searchParams.get('subcategory'));
+
+  const tagsParam = searchParams.get('tags');
+  const tags =
+    !tagsParam || tagsParam === 'all'
+      ? null
+      : decodeURIComponent(searchParams.get('tags'));
 
   // * SORT
 

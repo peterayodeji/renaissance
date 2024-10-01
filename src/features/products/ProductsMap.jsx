@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 import { useProductsParams } from './useProductsParams';
 
 function ProductsMap() {
-  const { category, subCategory } = useProductsParams();
+  const { category, subcategory } = useProductsParams();
 
-  if (!category && !subCategory) return null;
+  if (!category && !subcategory) return null;
 
   return (
     <div className="py-8 uppercase tracking-tight">
@@ -15,7 +15,7 @@ function ProductsMap() {
       {category && (
         <span>
           <Separator />
-          {subCategory ? (
+          {subcategory ? (
             <Link
               to={`/products?category=${category}`}
               className="font-medium text-stone-500"
@@ -28,10 +28,10 @@ function ProductsMap() {
         </span>
       )}
 
-      {subCategory && (
+      {subcategory && (
         <span>
           <Separator />
-          <span className="text-stone-900">{subCategory}</span>
+          <span className="text-stone-900">{subcategory}</span>
         </span>
       )}
     </div>

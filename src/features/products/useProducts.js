@@ -5,7 +5,7 @@ import { PAGE_SIZE } from '../../utils/constants';
 
 export function useProducts() {
   const queryClient = useQueryClient();
-  const { category, subCategory, tags, page } = useProductsParams();
+  const { category, subcategory, tags, sort, page } = useProductsParams();
 
   // * QUERY
   const {
@@ -13,24 +13,24 @@ export function useProducts() {
     data: { data: products, count } = {},
     error,
   } = useQuery({
-    queryKey: ['products', category, subCategory, tags, page],
-    queryFn: () => getProducts({ category, subCategory, tags, page }),
+    queryKey: ['products', category, subcategory, tags, sort, page],
+    queryFn: () => getProducts({ category, subcategory, tags, sort, page }),
   });
 
   // * PRE-FETCHING
   const pageCount = Math.ceil(count / PAGE_SIZE);
   if (page < pageCount)
     queryClient.prefetchQuery({
-      queryKey: ['products', category, subCategory, tags, page + 1],
+      queryKey: ['products', category, subcategory, tags, sort, page + 1],
       queryFn: () =>
-        getProducts({ category, subCategory, tags, page: page + 1 }),
+        getProducts({ category, subcategory, tags, sort, page: page + 1 }),
     });
 
   if (page < pageCount)
     queryClient.prefetchQuery({
-      queryKey: ['products', category, subCategory, tags, page - 1],
+      queryKey: ['products', category, subcategory, tags, sort, page - 1],
       queryFn: () =>
-        getProducts({ category, subCategory, tags, page: page - 1 }),
+        getProducts({ category, subcategory, tags, sort, page: page - 1 }),
     });
 
   return { isLoading, products, pageCount, error };

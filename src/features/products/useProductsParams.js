@@ -8,24 +8,25 @@ export function useProductsParams() {
   const category =
     !categoryParam || categoryParam === 'all'
       ? null
-      : decodeURIComponent(searchParams.get('category'));
+      : decodeURIComponent(categoryParam);
 
-  const subCategoryParam = searchParams.get('subcategory');
-  const subCategory =
-    !subCategoryParam || subCategoryParam === 'all'
+  const subcategoryParam = searchParams.get('subcategory');
+  const subcategory =
+    !subcategoryParam || subcategoryParam === 'all'
       ? null
-      : decodeURIComponent(searchParams.get('subcategory'));
+      : decodeURIComponent(subcategoryParam);
 
   const tagsParam = searchParams.get('tags');
   const tags =
-    !tagsParam || tagsParam === 'all'
-      ? null
-      : decodeURIComponent(searchParams.get('tags'));
+    !tagsParam || tagsParam === 'all' ? null : decodeURIComponent(tagsParam);
 
   // * SORT
+  const sortValue = searchParams.get('sort') || 'created_at-asc';
+  const [field, direction] = sortValue.split('-');
+  const sort = { field, direction };
 
   // * PAGINATION
   const page = !searchParams.get('page') ? 1 : Number(searchParams.get('page'));
 
-  return { category, subCategory, tags, page };
+  return { category, subcategory, tags, sortValue, sort, page };
 }

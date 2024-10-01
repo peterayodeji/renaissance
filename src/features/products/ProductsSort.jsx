@@ -1,15 +1,18 @@
 import { useCallback, useRef, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
+import { useProductsParams } from './useProductsParams';
 
 const SORT_OPTIONS = [
-  { label: 'Recommended', value: 'recommended' },
-  { label: 'Newest', value: 'newest' },
-  { label: 'Lowest Price', value: 'lowest-price' },
-  { label: 'Highest Price', value: 'highest-price' },
+  { label: 'Recommended', value: 'created_at-asc' },
+  { label: 'Newest', value: 'created_at-desc' },
+  { label: 'Lowest Price', value: 'price-asc' },
+  { label: 'Highest Price', value: 'price-desc' },
 ];
 
 function ProductsSort() {
-  const [value, setValue] = useState('recommended');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { sortValue } = useProductsParams();
   const [isOpen, setIsOpen] = useState(false);
   const listRef = useRef(null);
 
@@ -23,8 +26,8 @@ function ProductsSort() {
   }
 
   function handleSelectOption(value) {
-    setValue(value);
-    // console.log(value);
+    searchParams.set('sort', value);
+    setSearchParams(searchParams);
     close();
   }
 
@@ -43,7 +46,7 @@ function ProductsSort() {
         <ul
           ref={listRef}
           role="radiogroup"
-          className="absolute w-56 border border-black bg-white"
+          className="absolute w-52 border border-black bg-white sm:w-56"
         >
           {SORT_OPTIONS.map(opt => (
             <li
@@ -53,7 +56,7 @@ function ProductsSort() {
               className="flex cursor-pointer items-center gap-x-3 px-4 py-3 hover:bg-stone-50"
             >
               <div className="flex h-7 w-7 items-center justify-center rounded-full border border-black bg-white">
-                {value === opt.value ? (
+                {sortValue === opt.value ? (
                   <span className="h-5 w-5 rounded-full bg-black"></span>
                 ) : null}
               </div>

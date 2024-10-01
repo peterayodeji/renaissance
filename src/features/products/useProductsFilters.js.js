@@ -3,7 +3,7 @@ import { useProductsParams } from './useProductsParams';
 import { getProductsFilters } from '../../services/apiProducts';
 
 export function useProductsFilters() {
-  const { category, subCategory } = useProductsParams();
+  const { category, subcategory } = useProductsParams();
 
   // * QUERY
   const {
@@ -11,8 +11,8 @@ export function useProductsFilters() {
     data: { data: filters } = {},
     error,
   } = useQuery({
-    queryKey: ['productsFilters', category, subCategory],
-    queryFn: () => getProductsFilters({ category, subCategory }),
+    queryKey: ['productsFilters', category, subcategory],
+    queryFn: () => getProductsFilters({ category, subcategory }),
   });
 
   return { isLoading, filters, error };

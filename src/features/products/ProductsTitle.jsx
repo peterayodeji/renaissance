@@ -1,7 +1,7 @@
 import { useProductsParams } from './useProductsParams';
 
 function ProductsTitle() {
-  const { category, subCategory } = useProductsParams();
+  const { category, subcategory } = useProductsParams();
 
   let title = 'Shop Products';
 
@@ -9,8 +9,8 @@ function ProductsTitle() {
     title = `Shop ${category}'s `;
   }
 
-  if (category && subCategory) {
-    title = subCategory;
+  if (category && subcategory) {
+    title = subcategory;
   }
 
   return (

@@ -1,7 +1,7 @@
 import supabase from './supabase';
 import { PAGE_SIZE } from '../utils/constants';
 
-export async function getProducts({ category, subCategory, tags, page }) {
+export async function getProducts({ category, subcategory, tags, sort, page }) {
   let query = supabase.from('products').select('*', { count: 'exact' });
 
   // * FILTER
@@ -9,15 +9,19 @@ export async function getProducts({ category, subCategory, tags, page }) {
     query = query.eq('category', category);
   }
 
-  if (category && subCategory) {
-    query = query.eq('subcategory', subCategory);
+  if (category && subcategory) {
+    query = query.eq('subcategory', subcategory);
   }
 
-  if (category && subCategory && tags) {
+  if (category && subcategory && tags) {
     query = query.contains('tags', JSON.stringify([tags]));
   }
 
   // * SORT
+  if (sort)
+    query = query.order(sort.field, {
+      ascending: sort.direction === 'asc',
+    });
 
   // * PAGINATION
   if (page) {
@@ -36,10 +40,10 @@ export async function getProducts({ category, subCategory, tags, page }) {
   return { data, count };
 }
 
-export async function getProductsFilters({ category, subCategory }) {
+export async function getProductsFilters({ category, subcategory }) {
   let query = supabase.from('products');
 
-  if (!category && !subCategory) {
+  if (!category && !subcategory) {
     query = query.select('category');
   }
 
@@ -47,8 +51,8 @@ export async function getProductsFilters({ category, subCategory }) {
     query = query.select('*').eq('category', category).select('subcategory');
   }
 
-  if (category && subCategory) {
-    query = query.select('*').eq('subcategory', subCategory).select('tags');
+  if (category && subcategory) {
+    query = query.select('*').eq('subcategory', subcategory).select('tags');
   }
 
   const { data, error } = await query;

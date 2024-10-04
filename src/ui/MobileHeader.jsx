@@ -16,9 +16,7 @@ function MobileHeader() {
         <img src="/search-1.svg" alt="Search" />
       </div>
 
-      <h1 className="text-xl font-bold text-gray-800 sm:text-2xl">
-        RENAISSANCE
-      </h1>
+      <h1 className="text-xl font-bold text-black sm:text-2xl">RENAISSANCE</h1>
 
       <div className="flex flex-row items-center">
         <img src="/shopping-bag.svg" alt="Shopping Bag" />

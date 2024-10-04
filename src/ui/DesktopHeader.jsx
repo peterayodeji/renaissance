@@ -20,7 +20,7 @@ function DesktopHeader() {
 
           <div>
             {/* <img src="/renaissance-logo.svg" alt="Brand Logo" /> */}
-            <h1 className="text-3xl font-bold text-gray-800">RENAISSANCE</h1>
+            <h1 className="text-3xl font-bold text-black">RENAISSANCE</h1>
           </div>
 
           <div className="flex flex-1 justify-end gap-x-8">

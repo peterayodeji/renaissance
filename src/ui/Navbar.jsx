@@ -18,9 +18,23 @@ function Navbar({ children }) {
     [location.pathname, location.search],
   );
 
+  // Dynamically set transparency on header
+  const onProduct = false;
+  let headerBgClassName = 'bg-white';
+  if (onProduct) {
+    headerBgClassName = 'bg-transparent';
+  }
+
+  if (onProduct && openName) {
+    headerBgClassName = 'bg-white';
+  }
+
   return (
     <NavbarContext.Provider value={{ openName, close, open }}>
-      <header className="fixed z-20 w-full bg-white" onMouseLeave={close}>
+      <header
+        className={`fixed z-20 w-full ${headerBgClassName}`}
+        onMouseLeave={close}
+      >
         {children}
       </header>
     </NavbarContext.Provider>

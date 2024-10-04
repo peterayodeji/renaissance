@@ -11,14 +11,15 @@ import AppLayout from './ui/AppLayout';
 import Women from './pages/Women';
 import Men from './pages/Men';
 import Products from './pages/Products';
-import PageNotFound from './ui/PageNotFound';
+import Product from './pages/Product';
+import PageNotFound from './pages/PageNotFound';
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 0,
+      // staleTime: 0,
       // staleTime: 60 * 1000, // 1min
-      // staleTime: 60 * 30000, // 30min
+      staleTime: 60 * 30000, // 30min
     },
   },
 });
@@ -31,6 +32,7 @@ const router = createBrowserRouter(
         <Route path="women" element={<Women />} />
         <Route path="men" element={<Men />} />
         <Route path="products" element={<Products />} />
+        <Route path="product/:productId" element={<Product />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>
     </Route>,

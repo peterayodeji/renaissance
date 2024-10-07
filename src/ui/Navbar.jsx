@@ -19,13 +19,13 @@ function Navbar({ children }) {
   );
 
   // Dynamically set transparency on header
-  const onProduct = false;
+  const onProductPage = location.pathname.split('/').includes('product');
   let headerBgClassName = 'bg-white';
-  if (onProduct) {
+  if (onProductPage) {
     headerBgClassName = 'bg-transparent';
   }
 
-  if (onProduct && openName) {
+  if (onProductPage && openName) {
     headerBgClassName = 'bg-white';
   }
 

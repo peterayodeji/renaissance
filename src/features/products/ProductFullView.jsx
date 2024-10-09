@@ -10,8 +10,8 @@ function ProductFullView({ zoomViewIndex, setZoomViewIndex, images }) {
   );
 
   return createPortal(
-    <div className="fixed inset-0 z-30 w-screen overflow-y-scroll bg-white">
-      <div className="space-y-32">
+    <div className="fixed inset-0 z-30 w-screen overflow-y-scroll bg-white pt-12">
+      <div className="space-y-20 sm:space-y-24 md:space-y-28 lg:space-y-32">
         {images.map((img, index) => (
           <div
             key={index}
@@ -32,7 +32,7 @@ function ProductFullView({ zoomViewIndex, setZoomViewIndex, images }) {
         <img src="/x.svg" alt="Close" className="w-9" />
       </button>
 
-      <div className="fixed right-[14px] top-1/2 -translate-y-1/2 transform">
+      <div className="fixed right-[14px] top-1/2 hidden -translate-y-1/2 transform lg:block">
         {images.map((img, index) => (
           <button
             key={index}

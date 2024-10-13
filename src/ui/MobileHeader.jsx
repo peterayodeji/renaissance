@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import MobileNav from './MobileNav';
-import MobileNavOverlay from './MobileNavOverlay';
 import Search from '../features/search/search';
+import Overlay from './Overlay';
 
 function MobileHeader() {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +26,7 @@ function MobileHeader() {
       </div>
 
       <MobileNav isOpen={isOpen} onClose={handleClose} />
-      {isOpen && <MobileNavOverlay onClose={handleClose} />}
+      {isOpen && <Overlay onClick={handleClose} />}
     </div>
   );
 }

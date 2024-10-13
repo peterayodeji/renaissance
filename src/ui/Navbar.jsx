@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { NavLink, useLocation } from 'react-router-dom';
+import Overlay from './Overlay';
 
 const NavbarContext = createContext();
 
@@ -86,13 +87,7 @@ function NavOverlay() {
 
   if (!openName) return null;
 
-  return createPortal(
-    <div
-      onMouseEnter={close}
-      className="fixed inset-0 z-10 h-[100vh] w-[100vw] bg-stone-50/20"
-    ></div>,
-    document.body,
-  );
+  return createPortal(<Overlay onMouseEnter={close} />, document.body);
 }
 
 // * Set each component to be property of Navbar

@@ -5,10 +5,7 @@ export function useProductFullView(imageRefs, zoomViewIndex) {
 
   useEffect(
     function () {
-      document.body.style.overflowY = 'hidden';
       imageRefs.current[zoomViewIndex].scrollIntoView();
-
-      return () => (document.body.style.overflowY = 'scroll');
     },
     [zoomViewIndex, imageRefs],
   );

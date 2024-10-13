@@ -71,7 +71,7 @@ function Newsletter() {
             />
             <button
               type="submit"
-              disabled={!selectedOption || !email}
+              disabled={!selectedOption}
               className="flex-1 bg-black py-2 text-white focus:outline-none focus:ring-1 focus:ring-black focus:ring-offset-0 disabled:cursor-not-allowed disabled:bg-black/80"
             >
               Sign Me Up

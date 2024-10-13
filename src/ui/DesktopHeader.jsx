@@ -1,5 +1,6 @@
 import MenNav from './MenNav';
 import Navbar from './Navbar';
+import NavMenu from './NavMenu';
 import WomenNav from './WomenNav';
 
 function DesktopHeader() {
@@ -23,24 +24,7 @@ function DesktopHeader() {
             <h1 className="text-3xl font-bold text-black">RENAISSANCE</h1>
           </div>
 
-          <div className="flex flex-1 justify-end gap-x-8">
-            <div className="flex flex-col items-center text-xs">
-              <img src="/search.svg" alt="Search" />
-              <span>Search</span>
-            </div>
-            <div className="flex flex-col items-center text-xs">
-              <img src="/user.svg" alt="User" />
-              <span>Sign in</span>
-            </div>
-            <div className="flex flex-col items-center text-xs">
-              <img src="/heart.svg" alt="Heart" />
-              <span>Wishlist</span>
-            </div>
-            <div className="flex flex-col items-center text-xs">
-              <img src="/shopping-bag.svg" alt="Shopping Bag" />
-              <span>Cart</span>
-            </div>
-          </div>
+          <NavMenu />
         </Navbar.Nav>
 
         <div className="py-8 transition-all duration-300 ease-in-out empty:h-0 empty:p-0">

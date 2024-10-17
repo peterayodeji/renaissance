@@ -2,17 +2,17 @@ import { createPortal } from 'react-dom';
 import { useFixedScrollFlicker } from '../../hooks/useFixedScrollFlicker';
 import MobileNavActions from '../../ui/MobileNavActions';
 import { useState } from 'react';
-import { useSearch } from './useSearch';
-import { useDebouncedQuery } from '../../hooks/useDebouncedQuery';
+// import { useSearch } from './useSearch';
+// import { useDebouncedQuery } from '../../hooks/useDebouncedQuery';
 
 function SearchView({ onClose }) {
   const [searchInput, setSearchInput] = useState('');
   const [category, setCategory] = useState('Women');
-  const debouncedQuery = useDebouncedQuery(searchInput);
-  const { isLoading, subcategoryMatches, nameMatches, error } = useSearch({
-    debouncedQuery,
-    category,
-  });
+  // const debouncedQuery = useDebouncedQuery(searchInput);
+  // const { isLoading, subcategoryMatches, nameMatches, error } = useSearch({
+  //   debouncedQuery,
+  //   category,
+  // });
   useFixedScrollFlicker();
 
   // console.log(subcategoryMatches, nameMatches);

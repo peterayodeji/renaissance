@@ -1,5 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
 import ScrollableListContainer from '../../ui/ScrollableListContainer';
+import ProductsExit from './ProductsExit';
 
 function ProductsFilter({ filters: filterOptions }) {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -29,22 +30,26 @@ function ProductsFilter({ filters: filterOptions }) {
   }
 
   return (
-    <ScrollableListContainer
-      navigationBtn={false}
-      style={{ columnGap: '0.5rem' }}
-    >
-      {allFilterValues.map(val => (
-        <li key={val}>
-          <FilterButton
-            onClick={() => handleClick(val)}
-            active={currentFilter === val}
-            disabled={currentFilter === val}
-          >
-            {val}
-          </FilterButton>
-        </li>
-      ))}
-    </ScrollableListContainer>
+    <div className="flex items-center -space-x-3 sm:-space-x-2 md:-space-x-1">
+      <ProductsExit />
+
+      <ScrollableListContainer
+        navigationBtn={false}
+        style={{ columnGap: '0.5rem' }}
+      >
+        {allFilterValues.map(val => (
+          <li key={val}>
+            <FilterButton
+              onClick={() => handleClick(val)}
+              active={currentFilter === val}
+              disabled={currentFilter === val}
+            >
+              {val}
+            </FilterButton>
+          </li>
+        ))}
+      </ScrollableListContainer>
+    </div>
   );
 }
 
@@ -54,7 +59,7 @@ function FilterButton({ active, children, ...props }) {
   return (
     <button
       {...props}
-      className={`border border-black px-2 py-1 uppercase transition-all hover:bg-black hover:text-white disabled:cursor-not-allowed ${active ? 'bg-black text-white' : 'bg-white text-black'}`}
+      className={`border border-black px-2 py-1 uppercase transition-all disabled:cursor-not-allowed ${active ? 'bg-black text-white' : 'bg-white text-black'}`}
     >
       {children}
     </button>

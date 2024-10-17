@@ -15,11 +15,11 @@ function ScrollableListContainer({
   } = useContainerScroll();
 
   return (
-    <div className="relative">
+    <div className="relative w-full overflow-hidden">
       <ul
         ref={containerRef}
         onScroll={handleScroll}
-        className="remove-scrollbar flex gap-x-3 overflow-x-scroll md:gap-x-6 [&>*]:shrink-0"
+        className="remove-scrollbar flex items-center gap-x-3 overflow-x-scroll md:gap-x-6 [&>*]:shrink-0"
         style={style}
       >
         {children}

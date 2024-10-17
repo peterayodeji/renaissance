@@ -1,4 +1,4 @@
-import { useProductsFilters } from '../features/products/useProductsFilters.js';
+import { useProductsFilters } from '../features/products/useProductsFilters';
 
 import ProductsHeader from '../features/products/ProductsHeader';
 import ProductsTitle from '../features/products/ProductsTitle';

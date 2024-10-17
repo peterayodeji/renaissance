@@ -13,6 +13,8 @@ function Search() {
       </NavMenuButton>
 
       {open ? <SearchView onClose={() => setOpen(false)} /> : null}
+
+      {/* <SearchView open={open} onClose={() => setOpen(false)} /> */}
     </>
   );
 }

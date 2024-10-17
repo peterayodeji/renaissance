@@ -1,3 +1,15 @@
+export function removeDuplicates(arr, prop) {
+  const seen = new Set();
+  return arr?.filter(item => {
+    const propValue = item[prop];
+    if (seen.has(propValue)) {
+      return false;
+    }
+    seen.add(propValue);
+    return true;
+  });
+}
+
 const getRange = function (start, end, step = 1) {
   const range = [];
   for (let i = start; i < end; i += step) {

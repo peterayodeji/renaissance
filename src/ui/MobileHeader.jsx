@@ -11,7 +11,7 @@ function MobileHeader() {
   }
 
   return (
-    <div className="fixed inset-0 z-20 flex h-14 w-full items-center justify-between bg-white px-4 sm:px-8 md:h-16 md:px-12">
+    <div className="sticky top-0 z-20 flex h-14 w-full items-center justify-between bg-white px-4 sm:px-8 md:h-16 md:px-12">
       <div className="flex flex-row items-center gap-x-2 md:gap-x-4">
         <img src="/menu.svg" alt="Search" onClick={() => setIsOpen(true)} />
 

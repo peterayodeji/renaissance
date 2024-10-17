@@ -9,6 +9,8 @@ function ProductsList({ isLoadingFilterData, errorFilterData }) {
     error: errorProducts,
   } = useProducts();
 
+  console.log(products);
+
   const showStatus = Boolean(
     isLoadingFilterData ||
       isLoadingProducts ||

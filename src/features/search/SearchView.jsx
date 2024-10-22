@@ -70,8 +70,7 @@ function SearchView({ open, onClose }) {
                 subcategoryMatches={subcategoryMatches}
                 tagsMatches={tagsMatches}
                 nameMatches={nameMatches}
-                isValidResult={isValidResult}
-                error={error}
+                onClose={onClose}
               />
             )}
           </div>

@@ -10,5 +10,5 @@ function SearchNotifier({ searchInput, isValidInput, isValidResult, error }) {
 export default SearchNotifier;
 
 function Notifier({ children }) {
-  return <p className="mb-4 text-stone-500 sm:text-base">{children}</p>;
+  return <p className="mb-4 text-stone-500 sm:text-base lg:mb-5">{children}</p>;
 }

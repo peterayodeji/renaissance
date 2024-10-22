@@ -1,3 +1,13 @@
+export function isValidRes([...values]) {
+  const isArr = [...values]?.every(val => Array.isArray(val));
+  const itemPresent = [...values]?.some(
+    val => Array.isArray(val) && val.length > 0,
+  );
+
+  const isValid = isArr && itemPresent;
+  return isValid;
+}
+
 export function removeDuplicates(arr, prop) {
   const seen = new Set();
   return arr?.filter(item => {
@@ -8,6 +18,26 @@ export function removeDuplicates(arr, prop) {
     seen.add(propValue);
     return true;
   });
+}
+
+export function collectUniqueTags(arr, searchValue) {
+  const uniqueTags = new Set();
+  const result = [];
+
+  arr?.forEach(item => {
+    item.tags.forEach(tag => {
+      const key = item.subcategory + tag;
+      if (
+        tag.toLowerCase().includes(searchValue.toLowerCase()) &&
+        !uniqueTags.has(key)
+      ) {
+        uniqueTags.add(key);
+        result.push({ key, tag, subcategory: item.subcategory });
+      }
+    });
+  });
+
+  return result;
 }
 
 const getRange = function (start, end, step = 1) {

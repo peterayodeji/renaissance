@@ -12,9 +12,7 @@ function Search() {
         <span className="hidden lg:block">Search</span>
       </NavMenuButton>
 
-      {open ? <SearchView onClose={() => setOpen(false)} /> : null}
-
-      {/* <SearchView open={open} onClose={() => setOpen(false)} /> */}
+      <SearchView open={open} onClose={() => setOpen(false)} />
     </>
   );
 }

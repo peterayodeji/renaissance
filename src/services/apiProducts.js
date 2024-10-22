@@ -66,28 +66,32 @@ export async function getProductsFilters({ category, subcategory }) {
 }
 
 export async function getProductsSearch({ searchValue, category }) {
-  // console.log({ searchValue, category });
-
-  const [subcategory, name] = await Promise.all([
+  const [subcategory, name, tags] = await Promise.all([
     supabase
       .from('products')
       .select('*')
       .eq('category', category)
       .ilike('subcategory', `%${searchValue}%`)
-      .select('subcategory, id'),
+      .select('id, subcategory'),
 
     supabase
       .from('products')
       .select('*')
       .eq('category', category)
       .ilike('name', `%${searchValue}%`)
-      .select('name, id'),
+      .select('id, name'),
+
+    supabase
+      .from('products')
+      .select('*')
+      .eq('category', category)
+      .select('id, subcategory, tags'),
   ]);
 
-  if (subcategory.error || name.error) {
+  if (subcategory.error || name.error || tags.error) {
     // console.error(nameError.message);
     throw new Error('An error has occured!');
   }
 
-  return { subcategory: subcategory.data, name: name.data };
+  return { subcategory: subcategory.data, name: name.data, tags: tags.data };
 }

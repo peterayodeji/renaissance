@@ -1,24 +1,35 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import { getProductsSearch } from '../../services/apiProducts';
-import { removeDuplicates } from '../../utils/helpers';
+import {
+  collectUniqueTags,
+  isValidRes,
+  removeDuplicates,
+} from '../../utils/helpers';
 
-export function useSearch({ debouncedQuery: searchValue, category }) {
+export function useSearch({
+  debouncedQuery: searchValue,
+  category,
+  isValidInput,
+}) {
   // * QUERY
-  const {
-    isLoading,
-    data: { subcategory, name } = {},
-    error,
-  } = useQuery({
+  const { data: { subcategory, name, tags } = {}, error } = useQuery({
     queryKey: ['productsSearch', searchValue, category],
     queryFn: () => getProductsSearch({ searchValue, category }),
-    enabled: searchValue?.length >= 2,
+    placeholderData: keepPreviousData,
+    enabled: isValidInput,
+    // enabled: !!searchValue,
   });
-
-  // console.log({ subcategory });
-  // console.log({ name });
 
   const subcategoryMatches = removeDuplicates(subcategory, 'subcategory');
   const nameMatches = removeDuplicates(name, 'name');
+  const tagsMatches = collectUniqueTags(tags, searchValue);
+  const isValid = isValidRes([subcategoryMatches, nameMatches, tagsMatches]);
 
-  return { isLoading, subcategoryMatches, nameMatches, error };
+  return {
+    subcategoryMatches,
+    nameMatches,
+    tagsMatches,
+    isValid,
+    error,
+  };
 }

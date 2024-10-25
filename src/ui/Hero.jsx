@@ -23,11 +23,9 @@ function Hero() {
         style={{ backgroundImage: `url(${imageUrl.des})` }}
         className={`relative hidden h-[calc(100vh-4rem)] bg-stone-400 bg-cover bg-center bg-no-repeat md:block 2xl:h-[calc(100vh-5rem)]`}
       >
-        <div className="absolute left-[50%] top-[50%] space-y-6 text-white [transform:translate(-50%,20%)]">
+        <div className="absolute left-[50%] top-[50%] space-y-6 text-white [transform:translate(-60%,20%)]">
           <h1 className="text-5xl tracking-wide 2xl:text-6xl">Aura Line</h1>
-          <p className="outlined-text text-base font-medium xl:text-lg">
-            DISCOVER YOUR SIGNATURE STYLE
-          </p>
+          <p>DISCOVER YOUR SIGNATURE STYLE</p>
           <Link
             to="/products"
             className="inline-block bg-gray-950 px-10 py-2 text-white xl:text-lg"

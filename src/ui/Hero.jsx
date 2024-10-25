@@ -21,14 +21,14 @@ function Hero() {
       {/* // # DESKTOP HERO  */}
       <div
         style={{ backgroundImage: `url(${imageUrl.des})` }}
-        className={`relative hidden h-[calc(100vh-4rem)] bg-stone-400 bg-cover bg-center bg-no-repeat md:block 2xl:h-[calc(100vh-5rem)]`}
+        className={`relative hidden h-[calc(100vh-4rem)] max-h-[800px] bg-cover bg-center bg-no-repeat md:block xl:max-h-none 2xl:h-[calc(100vh-5rem)]`}
       >
-        <div className="absolute left-[50%] top-[50%] space-y-6 text-white [transform:translate(-60%,20%)]">
+        <div className="absolute bottom-[20%] left-[50%] space-y-6 text-white [transform:translate(-70%,20%)]">
           <h1 className="text-5xl tracking-wide 2xl:text-6xl">Aura Line</h1>
           <p>DISCOVER YOUR SIGNATURE STYLE</p>
           <Link
             to="/products"
-            className="inline-block bg-gray-950 px-10 py-2 text-white xl:text-lg"
+            className="inline-block bg-black px-10 py-2 text-white"
           >
             Shop Now
           </Link>

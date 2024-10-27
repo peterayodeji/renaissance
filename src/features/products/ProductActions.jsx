@@ -1,15 +1,21 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem, getCartItemById } from '../cart/cartSlice';
+
+import {
+  getCartItemById,
+  increaseItemQuantity,
+  addItem,
+} from '../cart/cartSlice';
 
 function ProductActions({ product }) {
   const dispatch = useDispatch();
   const [currentSize, setCurrentSize] = useState({ value: '', quantity: null });
-
   const { id, name, description, color, price, sizes, model } = product;
+
+  // Create unique id for cart item using id, size, and color
   const cartItemId = id + currentSize.value + color;
 
-  // Get cartItem from cart that matches (id, size, color)
+  // Get cartItem that matches current id, size and color
   const cartItem = useSelector(getCartItemById(cartItemId));
 
   function handleInputChange(e) {
@@ -21,6 +27,11 @@ function ProductActions({ product }) {
 
   function handleAddToCart(e) {
     e.preventDefault();
+
+    if (cartItem) {
+      dispatch(increaseItemQuantity(cartItemId));
+      return;
+    }
 
     const newItem = {
       itemId: cartItemId,

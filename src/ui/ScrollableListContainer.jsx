@@ -15,11 +15,11 @@ function ScrollableListContainer({
   } = useContainerScroll();
 
   return (
-    <div className="relative w-full overflow-hidden">
+    <div className="relative flex w-full items-center overflow-hidden">
       <ul
         ref={containerRef}
         onScroll={handleScroll}
-        className="remove-scrollbar flex items-center gap-x-3 overflow-x-scroll md:gap-x-6 [&>*]:shrink-0"
+        className="remove-scrollbar inline-flex items-center gap-x-3 overflow-x-scroll md:gap-x-6 [&>*]:shrink-0"
         style={style}
       >
         {children}
@@ -30,7 +30,7 @@ function ScrollableListContainer({
         <>
           <div
             onClick={handleClickPrev}
-            className={`absolute left-0 top-0 flex h-full items-center ${scrollPosition === 'start' ? 'hidden' : 'block'}`}
+            className={`absolute left-0 top-0 flex h-full cursor-pointer items-center ${scrollPosition === 'start' ? 'hidden' : 'block'}`}
           >
             <button className="flex h-full items-center justify-center bg-white px-2">
               <img src="/chevron-left.svg" alt="Left Arrow" className="h-5" />
@@ -43,7 +43,7 @@ function ScrollableListContainer({
 
           <div
             onClick={handleClickNext}
-            className={`absolute right-0 top-0 flex h-full items-center ${scrollPosition === 'end' || !containerOverflows ? 'hidden' : 'block'}`}
+            className={`absolute right-0 top-0 flex h-full cursor-pointer items-center ${scrollPosition === 'end' || !containerOverflows ? 'hidden' : 'block'}`}
           >
             <div className="h-full w-6 bg-[linear-gradient(to_right,rgba(255,255,255,0.3),rgba(255,255,255,0.9))]">
               &nbsp;

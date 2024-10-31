@@ -9,11 +9,25 @@ export function useContainerScroll() {
   const containerRef = useRef(null);
 
   useEffect(function () {
-    const container = containerRef.current;
-    const scrollWidth = container.scrollWidth;
-    const clientWidth = container.clientWidth;
+    function checkContainerOverflows() {
+      const container = containerRef.current;
+      const scrollWidth = container.scrollWidth;
+      const clientWidth = container.clientWidth;
 
-    if (scrollWidth > clientWidth) setContainerOverflows(true);
+      if (scrollWidth > clientWidth) {
+        setContainerOverflows(true);
+      } else {
+        setContainerOverflows(false);
+      }
+    }
+
+    checkContainerOverflows();
+
+    window.addEventListener('resize', checkContainerOverflows);
+
+    return () => {
+      window.removeEventListener('resize', checkContainerOverflows);
+    };
   }, []);
 
   function handleClickPrev() {

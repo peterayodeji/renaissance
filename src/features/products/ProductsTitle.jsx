@@ -1,4 +1,5 @@
 import { useProductsParams } from './useProductsParams';
+import HeadingPrimary from '../../ui/HeadingPrimary';
 
 function ProductsTitle() {
   const { category, subcategory } = useProductsParams();
@@ -13,11 +14,7 @@ function ProductsTitle() {
     title = subcategory;
   }
 
-  return (
-    <h2 className="mb-12 text-2xl font-semibold uppercase tracking-tight sm:text-3xl md:text-4xl">
-      {title}
-    </h2>
-  );
+  return <HeadingPrimary>{title}</HeadingPrimary>;
 }
 
 export default ProductsTitle;

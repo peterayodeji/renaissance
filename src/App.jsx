@@ -12,6 +12,7 @@ import Women from './pages/Women';
 import Men from './pages/Men';
 import Products from './pages/Products';
 import Product from './pages/Product';
+import Cart from './features/cart/Cart';
 import PageNotFound from './pages/PageNotFound';
 
 const queryClient = new QueryClient({
@@ -33,6 +34,7 @@ const router = createBrowserRouter(
         <Route path="men" element={<Men />} />
         <Route path="products" element={<Products />} />
         <Route path="product/:productId" element={<Product />} />
+        <Route path="cart" element={<Cart />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>
     </Route>,

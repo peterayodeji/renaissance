@@ -1,204 +1,71 @@
 import HeadingPrimary from '../../ui/HeadingPrimary';
+import CartTable from './CartTable';
 
 function Cart() {
   return (
-    <div className="bg-yellow-20 grow px-2 py-10 sm:px-4 md:px-8">
+    <div className="bg-yellow-20 mb-12 grow px-2 py-10 sm:px-4 md:px-8">
       <HeadingPrimary>Shopping bag</HeadingPrimary>
 
-      <div className="bg-green-200">
-        {/* HEAD */}
-        <div className="hidden font-semibold lg:block">
-          <div className="bg-blue-20 grid grid-cols-[130px_2fr_0.5fr_1fr_1fr_1fr_1fr_0.3fr] items-center gap-x-4 border-b py-4 lg:gap-x-8">
-            <div></div>
-            <div>Description</div>
-            <div>Size</div>
-            <div>Color</div>
-            <div>Unit Price</div>
-            <div>Quantity</div>
-            <div>Price</div>
-            <div></div>
-          </div>
-        </div>
+      <div className="bg-orange-30 grid grid-cols-1 items-end justify-between gap-y-8 md:grid-cols-[320px_250px] md:gap-y-0 lg:grid-cols-1">
+        <CartTable />
 
-        {/* BODY */}
-        <div className="text-s bg-yellow-30">
-          <div className="bg-green-30 relative grid grid-cols-[130px_1fr] grid-rows-[auto_auto_auto_auto_auto_auto] items-center gap-y-2 border-b border-t bg-white pb-6 pt-16 lg:auto-rows-auto lg:grid-cols-[130px_2fr_0.5fr_1fr_1fr_1fr_1fr_0.3fr] lg:grid-rows-1 lg:gap-x-8 lg:py-4 xl:py-2">
-            <img
-              src="/vivienne-westwood-multicolor-stuart-sweater.webp"
-              alt="Product Image"
-              className="row-span-5 h-[150px] lg:row-span-1 lg:justify-self-center"
-            />
+        {/* CART SUMMARY */}
+        <div className="bg-amber-30 bottom-10 md:sticky lg:static lg:w-[30%] lg:place-self-end">
+          <div className="space-y-4">
+            <h5 className="lg:hidden">CART SUMMARY</h5>
 
-            <div className="bg-yellow-30 flex h-full flex-col xl:h-[120px]">
-              <h4 className="pr-8 text-sm font-semibold uppercase sm:pr-0 sm:text-base">
-                Multicolor Stuart Sweater
-              </h4>
+            <div>
+              <CartSummaryItem>
+                <p>Original price</p>
 
-              <p className="pr-4 text-sm sm:text-base lg:text-sm">
-                Knit nylon - and alpaca-blend sweater
-              </p>
+                <CartSummaryValue>
+                  <span>$</span>
+                  <span>149.97</span>
+                </CartSummaryValue>
+              </CartSummaryItem>
 
-              <p className="mb-4 text-sm sm:text-base lg:mb-0 lg:text-sm">
-                Only 1 remaining
-              </p>
+              <CartSummaryItem>
+                <p>Promotion</p>
 
-              <div className="mt-auto hidden lg:block">
-                <div className="bg-purple-30 flex items-center gap-x-1 text-sm">
-                  <img src="/heart.svg" alt="Favourite" className="w-5" />
-                  <span>Take off wishlist</span>
-                  {/* <span>Add to wishlist</span> */}
-                </div>
-              </div>
+                <CartSummaryValue>
+                  <span>-$</span>
+                  <span>37.47</span>
+                </CartSummaryValue>
+              </CartSummaryItem>
+
+              <CartSummaryItem>
+                <p>Delivery fee</p>
+
+                <CartSummaryValue>
+                  <span>&nbsp;</span>
+                  <span>Free</span>
+                </CartSummaryValue>
+              </CartSummaryItem>
             </div>
 
-            <div className="bg-blue-20 flex h-full gap-x-3 text-sm sm:text-base xl:h-[120px]">
-              <span className="lg:hidden">Size:</span> <span>L</span>
-            </div>
-
-            <div className="bg-blue-20 flex h-full gap-x-3 text-sm sm:text-base xl:h-[120px]">
-              <span className="lg:hidden">Color:</span> <span>Multi-color</span>
-            </div>
-
-            <div className="bg-red-20 col-start-2 row-start-5 flex h-full gap-x-3 text-sm sm:text-base lg:col-start-auto lg:row-start-auto xl:h-[120px]">
-              <span className="lg:hidden">Price:</span> <span>USD 388</span>
-            </div>
-            <div className="bg-blue-20 flex h-full gap-x-3 text-sm sm:text-base xl:h-[120px]">
-              <span className="lg:hidden">Quantity:</span> <span>- 1 +</span>
-            </div>
-
-            <div className="bg-purple-30 mt-8 flex items-center gap-x-1 text-sm lg:hidden">
-              <img src="/heart.svg" alt="Favourite" className="w-5" />
-              {/* <span>Take off wishlist</span> */}
-              <span>Add to wishlist</span>
-            </div>
-
-            <div className="bg-blue-40 mt-8 text-right text-sm sm:text-base lg:mt-0 lg:h-full lg:text-left xl:h-[120px]">
-              USD 388
-            </div>
-
-            <div className="bg-blue-10 absolute right-0 top-3 h-full text-sm lg:static lg:text-base xl:h-[120px]">
-              X
-            </div>
+            <CartSummaryItem>
+              <p>TOTAL</p>
+              <CartSummaryValue>
+                <span>$</span>
+                <span>112.50</span>
+              </CartSummaryValue>
+            </CartSummaryItem>
           </div>
 
-          {/* HEYY */}
-          <div className="bg-green-30 relative grid grid-cols-[130px_1fr] grid-rows-[auto_auto_auto_auto_auto_auto] items-center gap-y-2 border-b border-t bg-white pb-6 pt-16 lg:auto-rows-auto lg:grid-cols-[130px_2fr_0.5fr_1fr_1fr_1fr_1fr_0.3fr] lg:grid-rows-1 lg:gap-x-8 lg:py-4 xl:py-2">
-            <img
-              src="/vivienne-westwood-multicolor-stuart-sweater.webp"
-              alt="Product Image"
-              className="row-span-5 h-[150px] lg:row-span-1 lg:justify-self-center"
-            />
+          {/* CART SUMMARY BUTTONS */}
+          <div className="my-8 space-y-4">
+            <button className="block w-full bg-black py-2 uppercase text-white">
+              Sign In
+            </button>
 
-            <div className="bg-yellow-30 flex h-full flex-col xl:h-[120px]">
-              <h4 className="pr-8 text-sm font-semibold uppercase sm:pr-0 sm:text-base">
-                Multicolor Stuart Sweater
-              </h4>
-
-              <p className="pr-4 text-sm sm:text-base lg:text-sm">
-                Knit nylon - and alpaca-blend sweater
-              </p>
-
-              <p className="mb-4 text-sm sm:text-base lg:mb-0 lg:text-sm">
-                Only 1 remaining
-              </p>
-
-              <div className="mt-auto hidden lg:block">
-                <div className="bg-purple-30 flex items-center gap-x-1 text-sm">
-                  <img src="/heart.svg" alt="Favourite" className="w-5" />
-                  <span>Take off wishlist</span>
-                  {/* <span>Add to wishlist</span> */}
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-blue-20 flex h-full gap-x-3 text-sm sm:text-base xl:h-[120px]">
-              <span className="lg:hidden">Size:</span> <span>L</span>
-            </div>
-
-            <div className="bg-blue-20 flex h-full gap-x-3 text-sm sm:text-base xl:h-[120px]">
-              <span className="lg:hidden">Color:</span> <span>Multi-color</span>
-            </div>
-
-            <div className="bg-red-20 col-start-2 row-start-5 flex h-full gap-x-3 text-sm sm:text-base lg:col-start-auto lg:row-start-auto xl:h-[120px]">
-              <span className="lg:hidden">Price:</span> <span>USD 388</span>
-            </div>
-            <div className="bg-blue-20 flex h-full gap-x-3 text-sm sm:text-base xl:h-[120px]">
-              <span className="lg:hidden">Quantity:</span> <span>- 1 +</span>
-            </div>
-
-            <div className="bg-purple-30 mt-8 flex items-center gap-x-1 text-sm lg:hidden">
-              <img src="/heart.svg" alt="Favourite" className="w-5" />
-              {/* <span>Take off wishlist</span> */}
-              <span>Add to wishlist</span>
-            </div>
-
-            <div className="bg-blue-40 mt-8 text-right text-sm sm:text-base lg:mt-0 lg:h-full lg:text-left xl:h-[120px]">
-              USD 388
-            </div>
-
-            <div className="bg-blue-10 absolute right-0 top-3 h-full text-sm lg:static lg:text-base xl:h-[120px]">
-              X
-            </div>
+            <button className="block w-full border border-black py-2 uppercase">
+              Checkout
+            </button>
           </div>
 
-          <div className="bg-green-30 relative grid grid-cols-[130px_1fr] grid-rows-[auto_auto_auto_auto_auto_auto] items-center gap-y-2 border-b border-t bg-white pb-6 pt-16 lg:auto-rows-auto lg:grid-cols-[130px_2fr_0.5fr_1fr_1fr_1fr_1fr_0.3fr] lg:grid-rows-1 lg:gap-x-8 lg:py-4 xl:py-2">
-            <img
-              src="/vivienne-westwood-multicolor-stuart-sweater.webp"
-              alt="Product Image"
-              className="row-span-5 h-[150px] lg:row-span-1 lg:justify-self-center"
-            />
-
-            <div className="bg-yellow-30 flex h-full flex-col xl:h-[120px]">
-              <h4 className="pr-8 text-sm font-semibold uppercase sm:pr-0 sm:text-base">
-                Multicolor Stuart Sweater
-              </h4>
-
-              <p className="pr-4 text-sm sm:text-base lg:text-sm">
-                Knit nylon - and alpaca-blend sweater
-              </p>
-
-              <p className="mb-4 text-sm sm:text-base lg:mb-0 lg:text-sm">
-                Only 1 remaining
-              </p>
-
-              <div className="mt-auto hidden lg:block">
-                <div className="bg-purple-30 flex items-center gap-x-1 text-sm">
-                  <img src="/heart.svg" alt="Favourite" className="w-5" />
-                  <span>Take off wishlist</span>
-                  {/* <span>Add to wishlist</span> */}
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-blue-20 flex h-full gap-x-3 text-sm sm:text-base xl:h-[120px]">
-              <span className="lg:hidden">Size:</span> <span>L</span>
-            </div>
-
-            <div className="bg-blue-20 flex h-full gap-x-3 text-sm sm:text-base xl:h-[120px]">
-              <span className="lg:hidden">Color:</span> <span>Multi-color</span>
-            </div>
-
-            <div className="bg-red-20 col-start-2 row-start-5 flex h-full gap-x-3 text-sm sm:text-base lg:col-start-auto lg:row-start-auto xl:h-[120px]">
-              <span className="lg:hidden">Price:</span> <span>USD 388</span>
-            </div>
-            <div className="bg-blue-20 flex h-full gap-x-3 text-sm sm:text-base xl:h-[120px]">
-              <span className="lg:hidden">Quantity:</span> <span>- 1 +</span>
-            </div>
-
-            <div className="bg-purple-30 mt-8 flex items-center gap-x-1 text-sm lg:hidden">
-              <img src="/heart.svg" alt="Favourite" className="w-5" />
-              {/* <span>Take off wishlist</span> */}
-              <span>Add to wishlist</span>
-            </div>
-
-            <div className="bg-blue-40 mt-8 text-right text-sm sm:text-base lg:mt-0 lg:h-full lg:text-left xl:h-[120px]">
-              USD 388
-            </div>
-
-            <div className="bg-blue-10 absolute right-0 top-3 h-full text-sm lg:static lg:text-base xl:h-[120px]">
-              X
-            </div>
-          </div>
+          <p className="text-sm">
+            Final prices and shipping costs are confirmed at checkout.
+          </p>
         </div>
       </div>
     </div>
@@ -206,3 +73,13 @@ function Cart() {
 }
 
 export default Cart;
+
+function CartSummaryItem({ children }) {
+  return <div className="flex justify-between">{children}</div>;
+}
+
+function CartSummaryValue({ children }) {
+  return (
+    <div className="uppercase [&>*:nth-child(2)]:font-semibold">{children}</div>
+  );
+}

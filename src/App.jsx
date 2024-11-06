@@ -13,6 +13,7 @@ import Men from './pages/Men';
 import Products from './pages/Products';
 import Product from './pages/Product';
 import Cart from './features/cart/Cart';
+import SignIn from './features/auth/SignIn';
 import PageNotFound from './pages/PageNotFound';
 
 const queryClient = new QueryClient({
@@ -35,6 +36,7 @@ const router = createBrowserRouter(
         <Route path="products" element={<Products />} />
         <Route path="product/:productId" element={<Product />} />
         <Route path="cart" element={<Cart />} />
+        <Route path="account/sign-in" element={<SignIn />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>
     </Route>,

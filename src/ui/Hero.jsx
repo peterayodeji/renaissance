@@ -3,12 +3,12 @@ import { usePathFinder } from '../hooks/usePathFinder';
 
 const HERO_IMG = {
   women: {
-    des: '/header-des-w.jpg',
-    mob: '/header-mob-w.jpg',
+    des: '/header-des-w.webp',
+    mob: '/header-mob-w.webp',
   },
   men: {
-    des: '/header-des-m.jpg',
-    mob: '/header-mob-m.jpg',
+    des: '/header-des-m.webp',
+    mob: '/header-mob-m.webp',
   },
 };
 
@@ -23,12 +23,12 @@ function Hero() {
         style={{ backgroundImage: `url(${imageUrl.des})` }}
         className={`relative hidden h-[calc(100vh-4rem)] max-h-[800px] bg-cover bg-center bg-no-repeat md:block xl:max-h-none 2xl:h-[calc(100vh-5rem)]`}
       >
-        <div className="absolute bottom-[20%] left-[50%] space-y-6 text-white [transform:translate(-70%,20%)]">
+        <div className="absolute bottom-[20%] left-[50%] space-y-6 text-white [transform:translate(-50%,20%)]">
           <h1 className="text-5xl tracking-wide 2xl:text-6xl">Aura Line</h1>
           <p>DISCOVER YOUR SIGNATURE STYLE</p>
           <Link
             to="/products"
-            className="inline-block bg-black px-10 py-2 text-white"
+            className="inline-block bg-black px-14 py-3 text-white shadow-sm"
           >
             Shop Now
           </Link>

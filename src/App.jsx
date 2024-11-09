@@ -14,6 +14,9 @@ import Products from './pages/Products';
 import Product from './pages/Product';
 import Cart from './features/cart/Cart';
 import SignIn from './features/auth/SignIn';
+import SignUp from './features/auth/SignUp';
+import ResetPassword from './features/auth/ResetPassword';
+import CheckoutR from './features/checkout/CheckoutR';
 import PageNotFound from './pages/PageNotFound';
 
 const queryClient = new QueryClient({
@@ -37,6 +40,9 @@ const router = createBrowserRouter(
         <Route path="product/:productId" element={<Product />} />
         <Route path="cart" element={<Cart />} />
         <Route path="account/sign-in" element={<SignIn />} />
+        <Route path="account/register" element={<SignUp />} />
+        <Route path="account/reset-password" element={<ResetPassword />} />
+        <Route path="/checkout-r" element={<CheckoutR />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>
     </Route>,

@@ -1,7 +1,10 @@
+import { useNavigate } from 'react-router-dom';
 import HeadingPrimary from '../../ui/HeadingPrimary';
 import CartTable from './CartTable';
 
 function Cart() {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-yellow-20 mb-12 grow px-2 py-10 sm:px-4 md:px-8">
       <HeadingPrimary>Shopping bag</HeadingPrimary>
@@ -54,12 +57,18 @@ function Cart() {
 
           {/* CART SUMMARY BUTTONS */}
           <div className="my-8 space-y-4">
-            <button className="block w-full bg-black py-2 uppercase text-white">
-              Sign In
+            <button
+              onClick={() => navigate('/checkout-r')}
+              className="block w-full bg-black py-2 uppercase text-white"
+            >
+              Continue to Checkout
             </button>
 
-            <button className="block w-full border border-black py-2 uppercase">
-              Checkout
+            <button
+              onClick={() => navigate('/account/sign-in')}
+              className="block w-full border border-black py-2 uppercase"
+            >
+              Sign In
             </button>
           </div>
 

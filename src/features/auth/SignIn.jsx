@@ -1,6 +1,8 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 function SignIn() {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-stone-0 grow pb-14 pt-12">
       <form className="bg-blue-30 mx-auto max-w-sm text-sm xl:max-w-md">
@@ -37,16 +39,21 @@ function SignIn() {
               className="border border-stone-300 px-4 py-3 text-sm outline-none placeholder:text-sm placeholder:text-inherit"
             />
 
-            <div className="bg-green-30 mt-1 text-red-600">
+            {/* <div className="bg-green-30 mt-1 text-red-600">
               Use between 10 and 30 characters, with atleast 1 letter and 1
               number
-            </div>
+            </div> */}
           </div>
         </div>
 
-        <NavLink className="mb-10 block text-center underline decoration-[0.99px]">
-          Forgot Your Password?
-        </NavLink>
+        <div className="mb-10 block text-center">
+          <NavLink
+            to="/account/reset-password"
+            className="underline decoration-[0.99px]"
+          >
+            Forgot Your Password?
+          </NavLink>
+        </div>
 
         <button className="mb-12 w-full bg-black py-4 font-medium tracking-wider text-white">
           <span className="undeline">Sign In</span>
@@ -63,7 +70,10 @@ function SignIn() {
           Wishlists, book exclusive services and more.
         </p>
 
-        <button className="w-full border border-black py-4 tracking-wider">
+        <button
+          onClick={() => navigate('/account/register')}
+          className="w-full border border-black py-4 tracking-wider"
+        >
           <span>Create Account</span>
         </button>
       </form>

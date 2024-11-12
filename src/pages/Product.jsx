@@ -13,7 +13,27 @@ const productSample = {
     'Dropped shoulders',
     'Button fastening at rolled cuffs',
   ],
-  color: 'Multi',
+  color: {
+    name: 'Black diamond',
+    value: '#000',
+  },
+  colorOptions: [
+    {
+      name: 'Yellow summer',
+      value: '#ff4',
+      productId: '234',
+    },
+    {
+      name: 'Green lemonade',
+      value: '#379e3e',
+      productId: '345',
+    },
+    {
+      name: 'Sky blue',
+      value: '#ac99ee',
+      productId: '444',
+    },
+  ],
   composition: '30% polyamide, 28% alpaca, 19% wool, 16% cotton, 7% polyester.',
   sizes: [
     { label: 'XS-S = XS', value: 'XS', quantity: 3 },

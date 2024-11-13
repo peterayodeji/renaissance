@@ -10,6 +10,7 @@ import SearchInput from './SearchInput';
 import SearchCategory from './SearchCategory';
 import SearchNotifier from './SearchNotifier';
 import SearchResultsList from './SearchResultsList';
+import PartialOverlay from '../../ui/PartialOverlay';
 
 function SearchView({ open, onClose }) {
   const [searchInput, setSearchInput] = useState('');
@@ -35,7 +36,7 @@ function SearchView({ open, onClose }) {
   if (!open) return null;
 
   return createPortal(
-    <div className="fixed inset-0 z-20 flex w-screen bg-transparent lg:flex-col lg:overflow-y-hidden">
+    <div className="fixed inset-0 z-40 flex w-screen bg-transparent lg:flex-col lg:overflow-y-hidden">
       <div className="bg-blue-40 block h-screen w-full flex-col items-center overflow-y-scroll bg-white pb-6 shadow-sm sm:h-auto sm:w-[65vw] lg:flex lg:w-screen lg:overflow-y-hidden lg:pb-12 lg:pt-8">
         {/* // # LOGO COMP. */}
         <h1 className="mb-10 hidden text-3xl font-bold text-black lg:block">
@@ -89,12 +90,7 @@ export default SearchView;
 function SearchOverlay({ onClose }) {
   useFixedScrollFlicker();
 
-  return (
-    <div
-      onClick={() => onClose()}
-      className="flex-1 backdrop-brightness-[.9]"
-    ></div>
-  );
+  return <PartialOverlay onClick={onClose} />;
 }
 
 function SearchClose({ onClose }) {

@@ -1,14 +1,13 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
 import { NavLink, useLocation } from 'react-router-dom';
-import Overlay from './Overlay';
+import PartialOverlay from './PartialOverlay';
 
 const NavbarContext = createContext();
 
 // # NAVBAR
 function Navbar({ children }) {
-  const [openName, setOpenName] = useState('');
   const location = useLocation();
+  const [openName, setOpenName] = useState('');
   const close = () => setOpenName('');
   const open = setOpenName;
 
@@ -19,23 +18,9 @@ function Navbar({ children }) {
     [location.pathname, location.search],
   );
 
-  // Dynamically set transparency on header
-  const onProductPage = location.pathname.split('/').includes('product');
-  let headerBgClassName = 'bg-white';
-  if (onProductPage) {
-    headerBgClassName = 'bg-transparent';
-  }
-
-  if (onProductPage && openName) {
-    headerBgClassName = 'bg-white';
-  }
-
   return (
     <NavbarContext.Provider value={{ openName, close, open }}>
-      <header
-        className={`fixed z-20 w-full ${headerBgClassName}`}
-        onMouseLeave={close}
-      >
+      <header className={`fixed z-20 w-full`} onMouseLeave={close}>
         {children}
       </header>
     </NavbarContext.Provider>
@@ -44,8 +29,24 @@ function Navbar({ children }) {
 
 // # NAV
 function Nav({ children }) {
+  const location = useLocation();
+  const { openName } = useContext(NavbarContext);
+
+  // Dynamically set transparency on Nav
+  const onProductPage = location.pathname.split('/').includes('product');
+  let navBgClassName = 'bg-white';
+  if (onProductPage) {
+    navBgClassName = 'bg-transparent';
+  }
+
+  if (onProductPage && openName) {
+    navBgClassName = 'bg-white';
+  }
+
   return (
-    <nav className="flex h-16 items-center px-8 xl:px-10 2xl:h-20 2xl:px-12">
+    <nav
+      className={`flex h-16 items-center px-8 xl:px-10 2xl:h-20 2xl:px-12 ${navBgClassName}`}
+    >
       {children}
     </nav>
   );
@@ -76,18 +77,15 @@ function Link({ children, to, opens: opensBodyName }) {
 
 // # BODY
 function Body({ children, name }) {
-  const { openName } = useContext(NavbarContext);
-
-  if (name !== openName) return null;
-  return <article>{children}</article>;
-}
-
-function NavOverlay() {
   const { openName, close } = useContext(NavbarContext);
 
-  if (!openName) return null;
-
-  return createPortal(<Overlay onMouseEnter={close} />, document.body);
+  if (name !== openName) return null;
+  return (
+    <article className="flex h-[calc(100vh-4rem)] flex-col 2xl:h-[calc(100vh-5rem)]">
+      {children}
+      <PartialOverlay onMouseEnter={close} />
+    </article>
+  );
 }
 
 // * Set each component to be property of Navbar
@@ -95,6 +93,5 @@ Navbar.Nav = Nav;
 Navbar.Links = Links;
 Navbar.Link = Link;
 Navbar.Body = Body;
-Navbar.NavOverlay = NavOverlay;
 
 export default Navbar;

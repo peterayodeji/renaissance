@@ -3,6 +3,7 @@ import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import ProductDisplay from '../products/ProductDisplay';
 
 function NewArrivalsList({ newArrivalsItems }) {
   return (
@@ -33,13 +34,7 @@ function NewArrivalsList({ newArrivalsItems }) {
       >
         {newArrivalsItems.map(item => (
           <SwiperSlide key={item.id} className="w-[200px] sm:w-[250px]">
-            <li className="text-base sm:text-base">
-              <img src={item.image} alt={item.name} />
-              <div>
-                <p>{item.name}</p>
-                <div>{item.price}</div>
-              </div>
-            </li>
+            <ProductDisplay product={item} />
           </SwiperSlide>
         ))}
 

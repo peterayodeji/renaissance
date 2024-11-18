@@ -35,7 +35,7 @@ function Pagination({ pageCount }) {
 
   return (
     <div className="bg-cyan-20 py-10">
-      <div className="m-auto w-full max-w-[350px] space-y-3 sm:max-w-[400px]">
+      <div className="bg-purple-30 m-auto w-full max-w-sm space-y-3">
         <button
           onClick={() => handlePageChange('next')}
           disabled={curPage === pageCount}

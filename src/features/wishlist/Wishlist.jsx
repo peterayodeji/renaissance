@@ -1,5 +1,6 @@
-import NewArrivals from './NewArrivals';
-import NewArrivalsList from './NewArrivalsList';
+import HeadingPrimary from '../../ui/HeadingPrimary';
+import WishlistFeed from './WishlistFeed';
+import WishlistInfo from './WishlistInfo';
 
 const ITEMS = [
   {
@@ -14,13 +15,18 @@ const ITEMS = [
     colorOptions: [
       {
         name: 'Yellow summer',
-        value: '#cece6b',
+        value: '#ff4',
         productId: '234',
       },
       {
         name: 'Green lemonade',
         value: '#379e3e',
         productId: '345',
+      },
+      {
+        name: 'Sky blue',
+        value: '#ac99ee',
+        productId: '444',
       },
     ],
   },
@@ -36,13 +42,18 @@ const ITEMS = [
     colorOptions: [
       {
         name: 'Yellow summer',
-        value: '#cece6b',
+        value: '#ff4',
         productId: '234',
       },
       {
         name: 'Green lemonade',
         value: '#379e3e',
         productId: '345',
+      },
+      {
+        name: 'Sky blue',
+        value: '#ac99ee',
+        productId: '444',
       },
     ],
   },
@@ -58,13 +69,18 @@ const ITEMS = [
     colorOptions: [
       {
         name: 'Yellow summer',
-        value: '#cece6b',
+        value: '#ff4',
         productId: '234',
       },
       {
         name: 'Green lemonade',
         value: '#379e3e',
         productId: '345',
+      },
+      {
+        name: 'Sky blue',
+        value: '#ac99ee',
+        productId: '444',
       },
     ],
   },
@@ -78,15 +94,20 @@ const ITEMS = [
       value: '#000',
     },
     colorOptions: [
-      // {
-      //   name: 'Yellow summer',
-      //   value: '#cece6b',
-      //   productId: '234',
-      // },
+      {
+        name: 'Yellow summer',
+        value: '#ff4',
+        productId: '234',
+      },
       {
         name: 'Green lemonade',
         value: '#379e3e',
         productId: '345',
+      },
+      {
+        name: 'Sky blue',
+        value: '#ac99ee',
+        productId: '444',
       },
     ],
   },
@@ -99,18 +120,23 @@ const ITEMS = [
       name: 'Black diamond',
       value: '#000',
     },
-    // colorOptions: [
-    //   {
-    //     name: 'Yellow summer',
-    //     value: '#cece6b',
-    //     productId: '234',
-    //   },
-    //   {
-    //     name: 'Green lemonade',
-    //     value: '#379e3e',
-    //     productId: '345',
-    //   },
-    // ],
+    colorOptions: [
+      {
+        name: 'Yellow summer',
+        value: '#ff4',
+        productId: '234',
+      },
+      {
+        name: 'Green lemonade',
+        value: '#379e3e',
+        productId: '345',
+      },
+      {
+        name: 'Sky blue',
+        value: '#ac99ee',
+        productId: '444',
+      },
+    ],
   },
   {
     id: '006',
@@ -124,13 +150,18 @@ const ITEMS = [
     colorOptions: [
       {
         name: 'Yellow summer',
-        value: '#cece6b',
+        value: '#ff4',
         productId: '234',
       },
       {
         name: 'Green lemonade',
         value: '#379e3e',
         productId: '345',
+      },
+      {
+        name: 'Sky blue',
+        value: '#ac99ee',
+        productId: '444',
       },
     ],
   },
@@ -144,15 +175,20 @@ const ITEMS = [
       value: '#000',
     },
     colorOptions: [
-      // {
-      //   name: 'Yellow summer',
-      //   value: '#cece6b',
-      //   productId: '234',
-      // },
+      {
+        name: 'Yellow summer',
+        value: '#ff4',
+        productId: '234',
+      },
       {
         name: 'Green lemonade',
         value: '#379e3e',
         productId: '345',
+      },
+      {
+        name: 'Sky blue',
+        value: '#ac99ee',
+        productId: '444',
       },
     ],
   },
@@ -165,35 +201,37 @@ const ITEMS = [
       name: 'Black diamond',
       value: '#000',
     },
-    // colorOptions: [
-    //   {
-    //     name: 'Yellow summer',
-    //     value: '#cece6b',
-    //     productId: '234',
-    //   },
-    //   {
-    //     name: 'Green lemonade',
-    //     value: '#379e3e',
-    //     productId: '345',
-    //   },
-    // ],
+    colorOptions: [
+      {
+        name: 'Yellow summer',
+        value: '#ff4',
+        productId: '234',
+      },
+      {
+        name: 'Green lemonade',
+        value: '#379e3e',
+        productId: '345',
+      },
+      {
+        name: 'Sky blue',
+        value: '#ac99ee',
+        productId: '444',
+      },
+    ],
   },
 ];
 
-function MenNewArrivals() {
-  // Load up items from backend when component mounts
+function Wishlist() {
+  const wishlistItems = ITEMS;
+  const isEmptyWishlist = false;
 
   return (
-    <NewArrivals>
-      {/* Later: Potential component (Heading) */}
-      <h2 className="mb-10 text-center text-xl tracking-wide md:mb-12 md:text-2xl lg:text-3xl">
-        NEW ARRIVALS
-      </h2>
-
-      {/* <p className="text-center">Loading...</p> */}
-      <NewArrivalsList newArrivalsItems={ITEMS} />
-    </NewArrivals>
+    <div className="bg-orange-20 grow px-2 py-10 sm:px-4 md:px-8">
+      <HeadingPrimary>WISHLIST</HeadingPrimary>
+      <WishlistFeed wishlistItems={wishlistItems} />
+      <WishlistInfo isEmptyWishlist={isEmptyWishlist} />
+    </div>
   );
 }
 
-export default MenNewArrivals;
+export default Wishlist;

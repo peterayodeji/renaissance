@@ -4,51 +4,219 @@ import NewArrivalsList from './NewArrivalsList';
 const ITEMS = [
   {
     id: '001',
-    name: 'Vienne Women Sweater',
-    price: '$50.00',
+    name: 'Vienne Men Sweater',
+    price: '50',
     image: '/vivienne-westwood-multicolor-stuart-sweater.webp',
+    color: {
+      name: 'Black diamond',
+      value: '#000',
+    },
+    colorOptions: [
+      {
+        name: 'Yellow summer',
+        value: '#ff4',
+        productId: '234',
+      },
+      {
+        name: 'Green lemonade',
+        value: '#379e3e',
+        productId: '345',
+      },
+      {
+        name: 'Sky blue',
+        value: '#ac99ee',
+        productId: '444',
+      },
+    ],
   },
   {
     id: '002',
-    name: 'Vienne Multi-color Sweater',
-    price: '$50.00',
+    name: 'Denim Multi-color Sweater',
+    price: '50',
     image: '/vivienne-westwood-multicolor-stuart-sweater.webp',
+    color: {
+      name: 'Black diamond',
+      value: '#000',
+    },
+    colorOptions: [
+      {
+        name: 'Yellow summer',
+        value: '#ff4',
+        productId: '234',
+      },
+      {
+        name: 'Green lemonade',
+        value: '#379e3e',
+        productId: '345',
+      },
+      {
+        name: 'Sky blue',
+        value: '#ac99ee',
+        productId: '444',
+      },
+    ],
   },
   {
     id: '003',
-    name: 'Vienne Multi-color Sweater',
-    price: '$50.00',
+    name: 'Black Belted Trench Coat',
+    price: '50',
     image: '/vivienne-westwood-multicolor-stuart-sweater.webp',
+    color: {
+      name: 'Black diamond',
+      value: '#000',
+    },
+    colorOptions: [
+      {
+        name: 'Yellow summer',
+        value: '#ff4',
+        productId: '234',
+      },
+      {
+        name: 'Green lemonade',
+        value: '#379e3e',
+        productId: '345',
+      },
+      {
+        name: 'Sky blue',
+        value: '#ac99ee',
+        productId: '444',
+      },
+    ],
   },
   {
     id: '004',
-    name: 'Vienne Multi-color Sweater',
-    price: '$50.00',
+    name: 'Gray Brushed Turtleneck',
+    price: '50',
     image: '/vivienne-westwood-multicolor-stuart-sweater.webp',
+    color: {
+      name: 'Black diamond',
+      value: '#000',
+    },
+    colorOptions: [
+      {
+        name: 'Yellow summer',
+        value: '#ff4',
+        productId: '234',
+      },
+      {
+        name: 'Green lemonade',
+        value: '#379e3e',
+        productId: '345',
+      },
+      {
+        name: 'Sky blue',
+        value: '#ac99ee',
+        productId: '444',
+      },
+    ],
   },
   {
     id: '005',
-    name: 'Vienne Multi-color Sweater',
-    price: '$50.00',
+    name: 'Straight Regular Jean',
+    price: '50',
     image: '/vivienne-westwood-multicolor-stuart-sweater.webp',
+    color: {
+      name: 'Black diamond',
+      value: '#000',
+    },
+    colorOptions: [
+      {
+        name: 'Yellow summer',
+        value: '#ff4',
+        productId: '234',
+      },
+      {
+        name: 'Green lemonade',
+        value: '#379e3e',
+        productId: '345',
+      },
+      {
+        name: 'Sky blue',
+        value: '#ac99ee',
+        productId: '444',
+      },
+    ],
   },
   {
     id: '006',
-    name: 'Vienne Multi-color Sweater',
-    price: '$50.00',
+    name: 'Single-Breasted Wool Coat',
+    price: '50',
     image: '/vivienne-westwood-multicolor-stuart-sweater.webp',
+    color: {
+      name: 'Black diamond',
+      value: '#000',
+    },
+    colorOptions: [
+      {
+        name: 'Yellow summer',
+        value: '#ff4',
+        productId: '234',
+      },
+      {
+        name: 'Green lemonade',
+        value: '#379e3e',
+        productId: '345',
+      },
+      {
+        name: 'Sky blue',
+        value: '#ac99ee',
+        productId: '444',
+      },
+    ],
   },
   {
     id: '007',
     name: 'Vienne Multi-color Sweater',
-    price: '$50.00',
+    price: '50',
     image: '/vivienne-westwood-multicolor-stuart-sweater.webp',
+    color: {
+      name: 'Black diamond',
+      value: '#000',
+    },
+    colorOptions: [
+      {
+        name: 'Yellow summer',
+        value: '#ff4',
+        productId: '234',
+      },
+      {
+        name: 'Green lemonade',
+        value: '#379e3e',
+        productId: '345',
+      },
+      {
+        name: 'Sky blue',
+        value: '#ac99ee',
+        productId: '444',
+      },
+    ],
   },
   {
     id: '008',
-    name: 'Vienne Multi-color Sweater',
-    price: '$50.00',
+    name: 'Regular Fit',
+    price: '50',
     image: '/vivienne-westwood-multicolor-stuart-sweater.webp',
+    color: {
+      name: 'Black diamond',
+      value: '#000',
+    },
+    colorOptions: [
+      {
+        name: 'Yellow summer',
+        value: '#ff4',
+        productId: '234',
+      },
+      {
+        name: 'Green lemonade',
+        value: '#379e3e',
+        productId: '345',
+      },
+      {
+        name: 'Sky blue',
+        value: '#ac99ee',
+        productId: '444',
+      },
+    ],
   },
 ];
 

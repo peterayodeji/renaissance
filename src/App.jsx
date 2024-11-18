@@ -13,6 +13,7 @@ import Men from './pages/Men';
 import Products from './pages/Products';
 import Product from './pages/Product';
 import Cart from './features/cart/Cart';
+import Wishlist from './features/wishlist/Wishlist';
 import SignIn from './features/auth/SignIn';
 import SignUp from './features/auth/SignUp';
 import ResetPassword from './features/auth/ResetPassword';
@@ -39,6 +40,7 @@ const router = createBrowserRouter(
         <Route path="products" element={<Products />} />
         <Route path="product/:productId" element={<Product />} />
         <Route path="cart" element={<Cart />} />
+        <Route path="wishlist" element={<Wishlist />} />
         <Route path="account/sign-in" element={<SignIn />} />
         <Route path="account/register" element={<SignUp />} />
         <Route path="account/reset-password" element={<ResetPassword />} />

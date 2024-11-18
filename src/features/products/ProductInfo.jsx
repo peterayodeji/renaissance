@@ -1,7 +1,7 @@
 import ProductColor from './ProductColor';
 
 function ProductInfo({ product }) {
-  const { name, description, features, color, colorOptions, composition } =
+  const { id, name, description, features, color, colorOptions, composition } =
     product;
 
   return (
@@ -23,7 +23,11 @@ function ProductInfo({ product }) {
           <p className="mb-2">{composition}</p>
         </div>
 
-        <ProductColor color={color} colorOptions={colorOptions} />
+        <ProductColor
+          productId={id}
+          productColor={color}
+          colorOptions={colorOptions}
+        />
       </div>
     </article>
   );

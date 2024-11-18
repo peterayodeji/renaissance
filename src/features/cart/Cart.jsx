@@ -6,7 +6,7 @@ function Cart() {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-yellow-20 mb-12 grow px-2 py-10 sm:px-4 md:px-8">
+    <div className="bg-yellow-20 grow px-2 pb-12 pt-10 sm:px-4 md:px-8">
       <HeadingPrimary>Shopping bag</HeadingPrimary>
 
       <div className="bg-orange-30 grid grid-cols-1 items-end justify-between gap-y-8 md:grid-cols-[320px_250px] md:gap-y-0 lg:grid-cols-1">

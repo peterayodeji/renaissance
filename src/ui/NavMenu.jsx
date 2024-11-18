@@ -9,12 +9,12 @@ function NavMenu() {
     <div className="flex flex-1 justify-end gap-x-8">
       <Search />
 
-      <NavMenuButton onClick={() => navigate('account/sign-in')}>
+      <NavMenuButton onClick={() => navigate('/account/sign-in')}>
         <img src="/user.svg" alt="User" />
         <span>Sign in</span>
       </NavMenuButton>
 
-      <NavMenuButton>
+      <NavMenuButton onClick={() => navigate('/wishlist')}>
         <img src="/heart.svg" alt="Heart" />
         <span>Wishlist</span>
       </NavMenuButton>

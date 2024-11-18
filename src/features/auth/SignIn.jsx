@@ -1,11 +1,40 @@
+import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useLogin } from './useLogin';
+import { useLogout } from './useLogout';
 
 function SignIn() {
+  const [email, setEmail] = useState('johndoe@test.com');
+  const [password, setPassword] = useState('johndoe123');
   const navigate = useNavigate();
+
+  const { login, isLoading } = useLogin();
+  const { logout, isLoading: isLoggingOut } = useLogout();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    if (!email || !password) return;
+
+    login(
+      { email, password },
+      {
+        onSettled: () => {
+          setEmail('');
+          setPassword('');
+        },
+      },
+    );
+
+    // console.log({ email, password });
+  }
 
   return (
     <div className="bg-stone-0 grow pb-14 pt-12">
-      <form className="bg-blue-30 mx-auto max-w-sm text-sm xl:max-w-md">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-blue-30 mx-auto max-w-sm text-sm xl:max-w-md"
+      >
         <h2 className="bg-blue-20 mb-10 text-center text-3xl font-semibold">
           {/* Welcome back */}
           Sign In
@@ -20,6 +49,8 @@ function SignIn() {
               type="email"
               name="email"
               id="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
               className="border border-stone-300 px-4 py-3 text-sm outline-none placeholder:text-sm placeholder:text-inherit"
             />
 
@@ -36,6 +67,8 @@ function SignIn() {
               type="password"
               name="password"
               id="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
               className="border border-stone-300 px-4 py-3 text-sm outline-none placeholder:text-sm placeholder:text-inherit"
             />
 
@@ -55,7 +88,10 @@ function SignIn() {
           </NavLink>
         </div>
 
-        <button className="mb-12 w-full bg-black py-4 font-medium tracking-wider text-white">
+        <button
+          disabled={isLoading}
+          className="mb-12 w-full bg-black py-4 font-medium tracking-wider text-white disabled:opacity-5"
+        >
           <span className="undeline">Sign In</span>
         </button>
 
@@ -71,10 +107,20 @@ function SignIn() {
         </p>
 
         <button
+          type="button"
           onClick={() => navigate('/account/register')}
           className="w-full border border-black py-4 tracking-wider"
         >
           <span>Create Account</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={logout}
+          disabled={isLoggingOut}
+          className="mt-4 w-full bg-red-600 py-4 tracking-wider text-white disabled:opacity-5"
+        >
+          <span>Sign Out</span>
         </button>
       </form>
     </div>

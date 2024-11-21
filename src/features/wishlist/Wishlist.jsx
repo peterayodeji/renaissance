@@ -1,3 +1,6 @@
+// import { useProductInWishlist } from './useProductInWishlist';
+// import { useUserWishlist } from './useUserWishlist';
+
 import HeadingPrimary from '../../ui/HeadingPrimary';
 import WishlistFeed from './WishlistFeed';
 import WishlistInfo from './WishlistInfo';
@@ -222,6 +225,10 @@ const ITEMS = [
 ];
 
 function Wishlist() {
+  // const { isLoading, data, error } = useUserWishlist();
+  // const { isLoading, data, error } = useProductInWishlist();
+  // console.log({ isLoading, data, error });
+
   const wishlistItems = ITEMS;
   const isEmptyWishlist = false;
 

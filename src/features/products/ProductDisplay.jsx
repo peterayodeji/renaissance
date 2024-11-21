@@ -4,7 +4,8 @@ function ProductDisplay({ product, children }) {
   return (
     <li className="bg-red-30">
       <img
-        src={image}
+        // src={image}
+        src="/vivienne-westwood-multicolor-stuart-sweater.webp"
         alt={name}
         className="cursor-pointer"
         onClick={() => console.log(id)}

@@ -1,23 +1,34 @@
 import Pagination from '../../ui/Pagination';
 import ProductDisplay from '../products/ProductDisplay';
 import ProductDisplayList from '../products/ProductDisplayList';
+import { useUserWishlist } from './useUserWishlist';
+// import WishlistAction from './WishlistAction.jsx';
 
 function WishlistFeed({ wishlistItems }) {
+  const { isLoading, data, error } = useUserWishlist();
+  console.log({ isLoading, data, error });
+
   return (
     <>
-      <h3 className="uppercase">3 Items</h3>
+      {data && (
+        <>
+          <h3 className="uppercase">3 Items</h3>
 
-      <ProductDisplayList>
-        {wishlistItems.map(item => (
-          <ProductDisplay key={item.id} product={item}>
-            <p className="bg-blue-30 mt-2 underline decoration-[0.99px] underline-offset-1">
-              Remove
-            </p>
-          </ProductDisplay>
-        ))}
-      </ProductDisplayList>
+          <ProductDisplayList>
+            {data.map(item => (
+              <ProductDisplay key={item.id} product={item}>
+                {/* <WishlistAction product={item} classes="mt-2" /> */}
+              </ProductDisplay>
+            ))}
+          </ProductDisplayList>
 
-      <Pagination pageCount={4} />
+          <Pagination pageCount={4} />
+        </>
+      )}
+
+      {isLoading && <p>LOADING...</p>}
+
+      {error && <p>{error.message}</p>}
     </>
   );
 }

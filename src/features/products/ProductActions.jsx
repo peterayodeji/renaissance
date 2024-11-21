@@ -7,6 +7,8 @@ import {
   addItem,
 } from '../cart/cartSlice';
 
+import WishlistAction from '../wishlist/WishlistAction.jsx';
+
 // import Modal from '../../ui/Modal';
 
 function ProductActions({ product }) {
@@ -101,14 +103,11 @@ function ProductActions({ product }) {
               Add To Bag
             </button>
 
-            <button
-              type="button"
-              onClick={() => console.log('ADDED TO WISHLIST')}
-              className="px-4 py-2 uppercase md:flex-1 md:px-0"
-            >
-              <span className="hidden md:inline-block">Add To Wishlist</span>
-              <img src="/heart.svg" alt="Favourite" className="md:hidden" />
-            </button>
+            <WishlistAction
+              product={product}
+              inline={false}
+              removeCta="In Wishlist"
+            />
           </div>
 
           <p>{model}</p>

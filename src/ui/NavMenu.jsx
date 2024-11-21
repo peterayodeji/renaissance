@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import Search from '../features/search/search';
 import NavMenuButton from './NavMenuButton';
-import { useUser } from '../features/auth/useUser';
+// import { useUser } from '../features/auth/useUser';
 
 function NavMenu() {
   const navigate = useNavigate();
-  const { isLoading, user, isAuthenticated } = useUser();
-  console.log({ isLoading, user, isAuthenticated });
+  // const { isLoading, user, isAuthenticated } = useUser();
+  // console.log({ isLoading, user, isAuthenticated });
 
   return (
     <div className="flex flex-1 justify-end gap-x-8">

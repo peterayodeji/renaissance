@@ -1,12 +1,12 @@
 import CartItemImage from './CartItemImage';
 import CartItemDesc from './CartItemDesc';
-import CartWishlist from './CartWishlist';
+import WishlistAction from '../wishlist/WishlistAction.jsx';
 
-function CartItem() {
+function CartItem({ product }) {
   return (
     <div className="relative grid grid-cols-[130px_1fr] items-center gap-y-2 pb-6 pt-16 lg:grid-cols-[130px_2fr_0.5fr_1fr_1fr_1fr_1fr_0.3fr] lg:gap-x-8 lg:py-4 xl:py-2">
       <CartItemImage />
-      <CartItemDesc />
+      <CartItemDesc product={product} />
 
       <CartItemColumn>
         <span>Size:</span>
@@ -28,9 +28,11 @@ function CartItem() {
         <span>- 1 +</span>
       </CartItemColumn>
 
-      <div className="mt-8 lg:hidden">
-        <CartWishlist>Take off wishlist</CartWishlist>
-      </div>
+      <WishlistAction
+        product={product}
+        classes="mt-8 lg:hidden"
+        removeCta="Take off wishlist"
+      />
 
       <div className="sm:text-bas mt-8 text-right text-sm lg:mt-0 lg:h-full lg:text-left xl:h-[120px]">
         USD 388

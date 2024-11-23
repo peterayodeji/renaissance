@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 @layer components {
+  .input {
+    @apply w-full border border-stone-300 px-4 py-3 text-inherit placeholder:text-inherit placeholder:text-stone-500 focus:outline-none;
+
+    /* @apply focus:outline-none focus:ring-1 focus:ring-black focus:ring-offset-0; */
+  }
+
   /* REMOVING SCROLLBARS */
   /* ... For firefox and ms respectively */
   .remove-scrollbar {

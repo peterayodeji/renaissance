@@ -1,106 +1,115 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 import CheckBox from '../../ui/CheckBox';
+import FormRow from '../../ui/FormRow';
 
 function SignUp() {
   const [newsletterEmailSub, setNewsletterEmailSub] = useState(true);
-
   const navigate = useNavigate();
+
+  const { register, formState, getValues, handleSubmit, reset } = useForm();
+  const { errors } = formState;
+
+  function onSubmit({ firstName, lastName, email, password }) {
+    console.log({ firstName, lastName, email, password, newsletterEmailSub });
+
+    // signup(
+    //   { fullName, email, password },
+    //   {
+    //     onSettled: reset,
+    //   },
+    // );
+  }
 
   return (
     <div className="bg-stone-0 grow pb-14 pt-12">
-      <form className="bg-blue-30 mx-auto max-w-sm text-sm xl:max-w-md">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="bg-blue-30 mx-auto max-w-sm text-sm xl:max-w-md"
+      >
         <h2 className="bg-blue-20 mb-10 text-center text-3xl font-semibold">
           Create Account
         </h2>
 
-        <div className="bg-green-30 mb-4 flex gap-x-2">
-          <div className="flex flex-1 flex-col">
-            <label htmlFor="firstName" className="mb-2">
-              First Name
-            </label>
-            <input
-              type="text"
-              name="firstName"
-              id="firstName"
-              className="w-full border border-stone-300 px-4 py-3 text-sm outline-none placeholder:text-sm placeholder:text-inherit"
-            />
+        <div className="mb-6 space-y-4">
+          <div className="flex gap-x-2">
+            <FormRow label="First Name" error={errors?.firstName?.message}>
+              <input
+                type="text"
+                id="firstName"
+                {...register('firstName', {
+                  required: 'This field is required',
+                })}
+                className="input"
+              />
+            </FormRow>
 
-            <div className="bg-green-30 mt-1 text-red-600">
-              {/* Please, don&#39;t leave me empty */}
-              Please fill out this field
-            </div>
+            <FormRow label="Last Name" error={errors?.lastName?.message}>
+              <input
+                type="text"
+                id="lastName"
+                {...register('lastName', {
+                  required: 'This field is required',
+                })}
+                className="input"
+              />
+            </FormRow>
           </div>
 
-          <div className="flex flex-1 flex-col">
-            <label htmlFor="lastName" className="mb-2">
-              Last Name
-            </label>
+          <FormRow label="Email Address" error={errors?.email?.message}>
             <input
               type="text"
-              name="lastName"
-              id="lastName"
-              className="w-full border border-stone-300 px-4 py-3 text-sm outline-none placeholder:text-sm placeholder:text-inherit"
-            />
-
-            {/* <div className="bg-green-30 mt-1 text-red-600">
-              Use between 10 and 30 characters, with atleast 1 letter and 1
-              number
-            </div> */}
-          </div>
-        </div>
-
-        <div className="bg-pink-30 mb-6 space-y-4">
-          <div className="flex flex-col">
-            <label htmlFor="email" className="mb-2">
-              Email Address
-            </label>
-            <input
-              type="email"
-              name="email"
               id="email"
-              className="border border-stone-300 px-4 py-3 text-sm outline-none placeholder:text-sm placeholder:text-inherit"
+              {...register('email', {
+                required: 'This field is required',
+                pattern: {
+                  value: /\S+@\S+\.\S+/,
+                  message: 'Please provide a valid email address',
+                },
+              })}
+              className="input"
             />
+          </FormRow>
 
-            {/* <div className="bg-green-30 mt-1 text-red-600">
-              Ooops! Please enter a valid email address
-            </div> */}
-          </div>
-
-          <div className="flex flex-col">
-            <label htmlFor="createPassword" className="mb-2">
-              Create Password (Min 6 characters)
-            </label>
+          <FormRow
+            label="Password (min 8 characters)"
+            error={errors?.password?.message}
+          >
             <input
               type="password"
-              name="createPassword"
-              id="createPassword"
-              className="border border-stone-300 px-4 py-3 text-sm outline-none placeholder:text-sm placeholder:text-inherit"
+              id="password"
+              {...register('password', {
+                required: 'This field is required',
+                minLength: {
+                  value: 8,
+                  message: 'Password needs a minimum of 8 characters',
+                },
+              })}
+              className="input"
             />
 
             {/* <div className="bg-green-30 mt-1 text-red-600">
-              Use between 10 and 30 characters, with atleast 1 letter and 1
-              number
-            </div> */}
-          </div>
+            Use between 10 and 30 characters, with atleast 1 letter and 1 number
+          </div> */}
+          </FormRow>
 
-          <div className="flex flex-col">
-            <label htmlFor="confirmPassword" className="mb-2">
-              Confirm Password
-            </label>
+          <FormRow
+            label="Confirm Password"
+            error={errors?.passwordConfirm?.message}
+          >
             <input
               type="password"
-              name="confirmPassword"
-              id="confirmPassword"
-              className="border border-stone-300 px-4 py-3 text-sm outline-none placeholder:text-sm placeholder:text-inherit"
+              id="passwordConfirm"
+              {...register('passwordConfirm', {
+                required: 'This field is required',
+                validate: value =>
+                  value === getValues().password || 'Passwords need to match',
+              })}
+              className="input"
             />
-
-            {/* <div className="bg-green-30 mt-1 text-red-600">
-              Use between 10 and 30 characters, with atleast 1 letter and 1
-              number
-            </div> */}
-          </div>
+          </FormRow>
         </div>
 
         <CheckBox

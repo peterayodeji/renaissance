@@ -1,9 +1,21 @@
 import { NavLink } from 'react-router-dom';
+import FormRow from '../../ui/FormRow';
+import { useForm } from 'react-hook-form';
 
 function ResetPassword() {
+  const { register, formState, getValues, handleSubmit, reset } = useForm();
+  const { errors } = formState;
+
+  function onSubmit({ email }) {
+    console.log({ email });
+  }
+
   return (
     <div className="bg-stone-0 grow pb-14 pt-12">
-      <form className="bg-blue-30 mx-auto max-w-sm text-sm xl:max-w-md">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="bg-blue-30 mx-auto max-w-sm text-sm xl:max-w-md"
+      >
         <h2 className="bg-blue-20 mb-10 text-center text-3xl font-semibold">
           Reset Password
         </h2>
@@ -13,58 +25,21 @@ function ResetPassword() {
           new password.
         </p>
 
-        <div className="bg-orange-30 mb-8 space-y-4">
-          <div className="flex flex-col">
-            <label htmlFor="email" className="mb-2">
-              Email Address
-            </label>
+        <div className="mb-6">
+          <FormRow label="Email Address" error={errors?.email?.message}>
             <input
-              type="email"
-              name="email"
+              type="text"
               id="email"
-              className="border border-stone-300 px-4 py-3 text-sm outline-none placeholder:text-sm placeholder:text-inherit"
+              {...register('email', {
+                required: 'This field is required',
+                pattern: {
+                  value: /\S+@\S+\.\S+/,
+                  message: 'Please provide a valid email address',
+                },
+              })}
+              className="input"
             />
-
-            <div className="bg-green-30 mt-1 text-red-600">
-              Oops! Please enter a valid email address
-            </div>
-          </div>
-
-          {/* <>
-              <div className="flex flex-col">
-                <label htmlFor="createPassword" className="mb-2">
-                  Create Password (Min 6 characters)
-                </label>
-                <input
-                  type="password"
-                  name="createPassword"
-                  id="createPassword"
-                  className="border border-stone-300 px-4 py-3 text-sm outline-none placeholder:text-sm placeholder:text-inherit"
-                />
-
-                <div className="bg-green-30 mt-1 text-red-600">
-                  Use between 10 and 30 characters, with atleast 1 letter and 1
-                  number
-                </div>
-              </div>
-
-              <div className="flex flex-col">
-                <label htmlFor="confirmPassword" className="mb-2">
-                  Confirm Password
-                </label>
-                <input
-                  type="password"
-                  name="confirmPassword"
-                  id="confirmPassword"
-                  className="border border-stone-300 px-4 py-3 text-sm outline-none placeholder:text-sm placeholder:text-inherit"
-                />
-
-                <div className="bg-green-30 mt-1 text-red-600">
-                  Use between 10 and 30 characters, with atleast 1 letter and 1
-                  number{' '}
-                </div>
-              </div>
-            </> */}
+          </FormRow>
         </div>
 
         <button className="mb-8 w-full bg-black py-4 font-medium tracking-wider text-white">

@@ -8,16 +8,20 @@ const NEWSLETTER_OPTIONS = [
 ];
 
 function Newsletter() {
-  const [selectedOption, setSelectedOption] = useState('');
-  const [email, setEmail] = useState('');
+  const [selectedOption, setSelectedOption] = useState('both');
+  const [emailNewsletter, setEmailNewsletter] = useState('');
 
-  function handleFormSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
-    if (!selectedOption || !email) return;
-    console.log(selectedOption, email);
 
-    setSelectedOption('');
-    setEmail('');
+    console.log({ emailNewsletter, selectedOption });
+
+    // signupNewsletter(
+    //   { emailNewsletter },
+    //   {
+    //     onSettled: reset,
+    //   },
+    // );
   }
 
   return (
@@ -37,7 +41,7 @@ function Newsletter() {
           GET UPDATES RELEVANT TO
         </h5>
 
-        <form onSubmit={handleFormSubmit}>
+        <form onSubmit={handleSubmit}>
           <div className="flex justify-center gap-x-8 md:justify-start">
             <RadioButton
               options={NEWSLETTER_OPTIONS}
@@ -60,20 +64,17 @@ function Newsletter() {
             bottom of our emails.
           </p>
 
-          <div className="flex flex-col gap-4 sm:flex-row md:flex-col lg:flex-row lg:gap-2">
+          <div className="flex flex-col gap-4 sm:flex-row sm:gap-2 md:flex-col md:gap-4 lg:flex-row lg:gap-2">
             <input
               type="email"
-              placeholder="Your email, please!"
               required
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              className="flex-1 border border-stone-300 px-4 py-2 text-inherit placeholder:text-stone-500 focus:outline-none focus:ring-1 focus:ring-black focus:ring-offset-0 lg:grow-[1.6]"
+              placeholder="Your email, please!"
+              value={emailNewsletter}
+              onChange={e => setEmailNewsletter(e.target.value)}
+              className="flex-1 border border-stone-300 px-4 py-3 text-inherit outline-none placeholder:text-inherit placeholder:text-stone-500 lg:grow-[1.6]"
             />
-            <button
-              type="submit"
-              disabled={!selectedOption}
-              className="flex-1 bg-black py-2 text-white focus:outline-none focus:ring-1 focus:ring-black focus:ring-offset-0 disabled:cursor-not-allowed disabled:bg-black/80"
-            >
+
+            <button type="submit" className="flex-1 bg-black py-3 text-white">
               Sign Me Up
             </button>
           </div>

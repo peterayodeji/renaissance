@@ -1,38 +1,32 @@
-import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { useLogin } from './useLogin';
 import { useLogout } from './useLogout';
 
-function SignIn() {
-  const [email, setEmail] = useState('johndoe@test.com');
-  const [password, setPassword] = useState('johndoe123');
-  const navigate = useNavigate();
+import FormRow from '../../ui/FormRow';
 
+function SignIn() {
+  const navigate = useNavigate();
   const { login, isLoading } = useLogin();
   const { logout, isLoading: isLoggingOut } = useLogout();
+  const { register, formState, handleSubmit, reset } = useForm();
+  const { errors } = formState;
 
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    if (!email || !password) return;
+  function onSubmit({ email, password }) {
+    console.log({ email, password });
 
     login(
       { email, password },
       {
-        onSettled: () => {
-          setEmail('');
-          setPassword('');
-        },
+        onSettled: reset,
       },
     );
-
-    // console.log({ email, password });
   }
 
   return (
     <div className="bg-stone-0 grow pb-14 pt-12">
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         className="bg-blue-30 mx-auto max-w-sm text-sm xl:max-w-md"
       >
         <h2 className="bg-blue-20 mb-10 text-center text-3xl font-semibold">
@@ -41,42 +35,33 @@ function SignIn() {
         </h2>
 
         <div className="mb-6 space-y-4">
-          <div className="flex flex-col">
-            <label htmlFor="email" className="mb-2">
-              Email Address
-            </label>
+          <FormRow label="Email Address" error={errors?.email?.message}>
             <input
-              type="email"
-              name="email"
+              type="text"
               id="email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              className="border border-stone-300 px-4 py-3 text-sm outline-none placeholder:text-sm placeholder:text-inherit"
+              value="johndoe@test.com" // Remove later
+              {...register('email', {
+                required: 'This field is required',
+                pattern: {
+                  value: /\S+@\S+\.\S+/,
+                  message: 'Please provide a valid email address',
+                },
+              })}
+              className="input"
             />
+          </FormRow>
 
-            {/* <div className="bg-green-30 mt-1 text-red-600">
-              Ooops! Please enter a valid email address
-            </div> */}
-          </div>
-
-          <div className="flex flex-col">
-            <label htmlFor="password" className="mb-2">
-              Password
-            </label>
+          <FormRow label="Password" error={errors?.password?.message}>
             <input
               type="password"
-              name="password"
               id="password"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              className="border border-stone-300 px-4 py-3 text-sm outline-none placeholder:text-sm placeholder:text-inherit"
+              value="johndoe123" // Remove later
+              {...register('password', {
+                required: 'This field is required',
+              })}
+              className="input"
             />
-
-            {/* <div className="bg-green-30 mt-1 text-red-600">
-              Use between 10 and 30 characters, with atleast 1 letter and 1
-              number
-            </div> */}
-          </div>
+          </FormRow>
         </div>
 
         <div className="mb-10 block text-center">

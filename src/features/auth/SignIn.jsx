@@ -1,27 +1,29 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Navigate, NavLink, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+
+import { usePageAccess } from '../../hooks/usePageAccess';
 import { useLogin } from './useLogin';
-import { useLogout } from './useLogout';
 
 import FormRow from '../../ui/FormRow';
 
 function SignIn() {
   const navigate = useNavigate();
-  const { login, isLoading } = useLogin();
-  const { logout, isLoading: isLoggingOut } = useLogout();
+  const { accessible } = usePageAccess();
+  const { login, isLoading: isLoggingIn, error } = useLogin();
   const { register, formState, handleSubmit, reset } = useForm();
   const { errors } = formState;
+  // console.log(error);
 
   function onSubmit({ email, password }) {
-    console.log({ email, password });
-
     login(
       { email, password },
       {
-        onSettled: reset,
+        onSuccess: () => reset(),
       },
     );
   }
+
+  if (!accessible) return <Navigate to="/account" />;
 
   return (
     <div className="bg-stone-0 grow pb-14 pt-12">
@@ -39,7 +41,7 @@ function SignIn() {
             <input
               type="text"
               id="email"
-              value="johndoe@test.com" // Remove later
+              // value="johndoe@test.com" // Remove later
               {...register('email', {
                 required: 'This field is required',
                 pattern: {
@@ -55,7 +57,7 @@ function SignIn() {
             <input
               type="password"
               id="password"
-              value="johndoe123" // Remove later
+              // value="johndoe123" // Remove later
               {...register('password', {
                 required: 'This field is required',
               })}
@@ -67,6 +69,8 @@ function SignIn() {
         <div className="mb-10 block text-center">
           <NavLink
             to="/account/reset-password"
+            replace
+            state={{ accessible: true }}
             className="underline decoration-[0.99px]"
           >
             Forgot Your Password?
@@ -74,7 +78,8 @@ function SignIn() {
         </div>
 
         <button
-          disabled={isLoading}
+          disabled={isLoggingIn}
+          type="submit"
           className="mb-12 w-full bg-black py-4 font-medium tracking-wider text-white disabled:opacity-5"
         >
           <span className="undeline">Sign In</span>
@@ -93,19 +98,15 @@ function SignIn() {
 
         <button
           type="button"
-          onClick={() => navigate('/account/register')}
+          onClick={() =>
+            navigate('/account/register', {
+              replace: true,
+              state: { accessible: true },
+            })
+          }
           className="w-full border border-black py-4 tracking-wider"
         >
           <span>Create Account</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={logout}
-          disabled={isLoggingOut}
-          className="mt-4 w-full bg-red-600 py-4 tracking-wider text-white disabled:opacity-5"
-        >
-          <span>Sign Out</span>
         </button>
       </form>
     </div>

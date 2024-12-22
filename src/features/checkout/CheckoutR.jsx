@@ -1,10 +1,16 @@
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 import CustomList from '../../ui/CustomList';
 import ListItem from '../../ui/CustomListItem';
+import { usePageAccess } from '../../hooks/usePageAccess';
+import { useUser } from '../auth/useUser';
 
 function CheckoutR() {
   const navigate = useNavigate();
+  const { accessible } = usePageAccess();
+  const { isAuthenticated } = useUser();
+
+  if (isAuthenticated || !accessible) return <Navigate to="/cart" />;
 
   return (
     <div className="bg-stone-0 grow pb-14 pt-12">
@@ -29,7 +35,16 @@ function CheckoutR() {
           </CustomList>
         </div>
 
-        <button className="mb-12 w-full bg-black py-4 font-medium tracking-wider text-white">
+        <button
+          type="button"
+          onClick={() =>
+            navigate('/account/register', {
+              replace: true,
+              state: { accessible: true },
+            })
+          }
+          className="mb-12 w-full bg-black py-4 font-medium tracking-wider text-white"
+        >
           <span className="undeline">Continue to Checkout</span>
         </button>
 
@@ -45,7 +60,13 @@ function CheckoutR() {
         </p>
 
         <button
-          onClick={() => navigate('/account/register')}
+          type="button"
+          onClick={() =>
+            navigate('/checkout', {
+              replace: true,
+              state: { accessible: true },
+            })
+          }
           className="w-full border border-black py-4 tracking-wider"
         >
           <span>Checkout as Guest</span>

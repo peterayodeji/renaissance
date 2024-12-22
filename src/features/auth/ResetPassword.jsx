@@ -1,14 +1,18 @@
-import { NavLink } from 'react-router-dom';
+import { Navigate, NavLink } from 'react-router-dom';
 import FormRow from '../../ui/FormRow';
 import { useForm } from 'react-hook-form';
+import { usePageAccess } from '../../hooks/usePageAccess';
 
 function ResetPassword() {
+  const { accessible } = usePageAccess();
   const { register, formState, getValues, handleSubmit, reset } = useForm();
   const { errors } = formState;
 
   function onSubmit({ email }) {
     console.log({ email });
   }
+
+  if (!accessible) return <Navigate to="/account" />;
 
   return (
     <div className="bg-stone-0 grow pb-14 pt-12">
@@ -49,6 +53,8 @@ function ResetPassword() {
         <div className="mb-10 block text-center">
           <NavLink
             to="/account/sign-in"
+            replace
+            state={{ accessible: true }}
             className="underline decoration-[0.99px]"
           >
             Back to Sign In

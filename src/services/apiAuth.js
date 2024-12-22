@@ -1,23 +1,60 @@
 import supabase from './supabase';
 
-export async function signup({ fullName, email, password }) {
-  const { data, error } = await supabase.auth.signUp({
+// # SIGNUP
+export async function signup({
+  firstName,
+  lastName,
+  email,
+  password,
+  newsletter,
+}) {
+  const { data: authData, error: authError } = await supabase.auth.signUp({
     email,
     password,
-    options: {
-      data: {
-        fullName,
-        avatar: '',
-      },
-    },
   });
 
-  if (error) throw new Error(error.message);
+  if (authError) {
+    throw new Error(authError.message);
+  }
 
-  // console.log(data);
-  return data;
+  // Insert user profile into the 'profiles' table
+  const { error: profileError } = await supabase.from('profiles').insert([
+    {
+      id: authData.user.id,
+      firstName,
+      lastName,
+      newsletter,
+    },
+  ]);
+
+  if (profileError) {
+    console.log(profileError.message);
+  }
+
+  return authData;
 }
 
+// # GET USER PROFILE
+export async function getUserProfile() {
+  const user = supabase.auth.user(); // GET CURRENT USER LEGIT WAY
+
+  const { data, error } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('id', user.id)
+    .single();
+
+  if (error) {
+    // throw new Error(error.message);
+    console.error(error.message);
+    return;
+  }
+
+  console.log(data);
+  // return data;
+}
+
+// # LOGIN
 export async function login({ email, password }) {
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
@@ -26,10 +63,10 @@ export async function login({ email, password }) {
 
   if (error) throw new Error(error.message);
 
-  // console.log(data);
   return data;
 }
 
+// # GET CURRENT USER
 export async function getCurrentUser() {
   const { data: session } = await supabase.auth.getSession();
   if (!session.session) return null;
@@ -42,6 +79,7 @@ export async function getCurrentUser() {
   return data?.user;
 }
 
+// # LOGOUT
 export async function logout() {
   const { error } = await supabase.auth.signOut();
   if (error) throw new Error(error.message);

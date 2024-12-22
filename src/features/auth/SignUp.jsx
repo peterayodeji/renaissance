@@ -1,27 +1,33 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useSignup } from './useSignup';
+import { usePageAccess } from '../../hooks/usePageAccess';
 
 import CheckBox from '../../ui/CheckBox';
 import FormRow from '../../ui/FormRow';
 
 function SignUp() {
-  const [newsletterEmailSub, setNewsletterEmailSub] = useState(true);
+  const { accessible } = usePageAccess();
+  const [newsletter, setNewsletter] = useState(true);
+  const { signup, isLoading, error } = useSignup();
   const navigate = useNavigate();
+
+  // console.log(error);
 
   const { register, formState, getValues, handleSubmit, reset } = useForm();
   const { errors } = formState;
 
   function onSubmit({ firstName, lastName, email, password }) {
-    console.log({ firstName, lastName, email, password, newsletterEmailSub });
-
-    // signup(
-    //   { fullName, email, password },
-    //   {
-    //     onSettled: reset,
-    //   },
-    // );
+    signup(
+      { firstName, lastName, email, password, newsletter },
+      {
+        onSuccess: () => reset(),
+      },
+    );
   }
+
+  if (!accessible) return <Navigate to="/account" />;
 
   return (
     <div className="bg-stone-0 grow pb-14 pt-12">
@@ -112,11 +118,7 @@ function SignUp() {
           </FormRow>
         </div>
 
-        <CheckBox
-          value={newsletterEmailSub}
-          onCheck={setNewsletterEmailSub}
-          name="newsletter"
-        >
+        <CheckBox value={newsletter} onCheck={setNewsletter} name="newsletter">
           Sign up to Renaissance emails to stay in the know
         </CheckBox>
 
@@ -135,7 +137,11 @@ function SignUp() {
           </span>
         </p>
 
-        <button className="mb-12 w-full bg-black py-4 font-medium tracking-wider text-white">
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="mb-12 w-full bg-black py-4 font-medium tracking-wider text-white disabled:opacity-5"
+        >
           <span className="undeline">Create Account</span>
         </button>
 
@@ -151,8 +157,15 @@ function SignUp() {
         </p>
 
         <button
-          onClick={() => navigate('/account/sign-in')}
-          className="w-full border border-black py-4 tracking-wider"
+          type="button"
+          disabled={isLoading}
+          onClick={() =>
+            navigate('/account/sign-in', {
+              replace: true,
+              state: { accessible: true },
+            })
+          }
+          className="w-full border border-black py-4 tracking-wider disabled:bg-green-500"
         >
           <span>Sign In</span>
         </button>

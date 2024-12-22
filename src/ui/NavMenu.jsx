@@ -1,21 +1,32 @@
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../features/auth/useUser';
+
 import Search from '../features/search/search';
 import NavMenuButton from './NavMenuButton';
-// import { useUser } from '../features/auth/useUser';
 
 function NavMenu() {
   const navigate = useNavigate();
-  // const { isLoading, user, isAuthenticated } = useUser();
-  // console.log({ isLoading, user, isAuthenticated });
+  const { isAuthenticated } = useUser();
 
   return (
     <div className="flex flex-1 justify-end gap-x-8">
       <Search />
 
-      <NavMenuButton onClick={() => navigate('/account/sign-in')}>
-        <img src="/user.svg" alt="User" />
-        <span>Sign in</span>
-      </NavMenuButton>
+      {isAuthenticated ? (
+        <NavMenuButton onClick={() => navigate('/account')}>
+          <img src="/user.svg" alt="User" />
+          <span>Account</span>
+        </NavMenuButton>
+      ) : (
+        <NavMenuButton
+          onClick={() =>
+            navigate('/account/sign-in', { state: { accessible: true } })
+          }
+        >
+          <img src="/user.svg" alt="User" />
+          <span>Sign in</span>
+        </NavMenuButton>
+      )}
 
       <NavMenuButton onClick={() => navigate('/wishlist')}>
         <img src="/heart.svg" alt="Heart" />

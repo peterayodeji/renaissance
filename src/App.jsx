@@ -18,7 +18,10 @@ import SignIn from './features/auth/SignIn';
 import SignUp from './features/auth/SignUp';
 import ResetPassword from './features/auth/ResetPassword';
 import CheckoutR from './features/checkout/CheckoutR';
+import Checkout from './features/checkout/Checkout';
 import PageNotFound from './pages/PageNotFound';
+import Account from './features/auth/Account';
+import ProtectedRoute from './ui/ProtectedRoute';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -41,10 +44,19 @@ const router = createBrowserRouter(
         <Route path="product/:productId" element={<Product />} />
         <Route path="cart" element={<Cart />} />
         <Route path="wishlist" element={<Wishlist />} />
+        <Route
+          path="account"
+          element={
+            <ProtectedRoute>
+              <Account />
+            </ProtectedRoute>
+          }
+        />
         <Route path="account/sign-in" element={<SignIn />} />
         <Route path="account/register" element={<SignUp />} />
         <Route path="account/reset-password" element={<ResetPassword />} />
         <Route path="/checkout-r" element={<CheckoutR />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>
     </Route>,

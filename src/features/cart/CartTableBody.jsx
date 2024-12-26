@@ -1,7 +1,7 @@
 import CartItem from './CartItem';
 
 const productSample = {
-  id: 'K783654MOV-TEST',
+  id: 15,
   name: 'Multicolor Stuart Sweater',
   price: 660,
   description: 'Knit nylon - and alpaca-blend sweater.',

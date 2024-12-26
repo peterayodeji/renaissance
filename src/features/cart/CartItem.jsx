@@ -30,8 +30,8 @@ function CartItem({ product }) {
 
       <WishlistAction
         product={product}
+        mode="secondary"
         classes="mt-8 lg:hidden"
-        removeCta="Take off wishlist"
       />
 
       <div className="sm:text-bas mt-8 text-right text-sm lg:mt-0 lg:h-full lg:text-left xl:h-[120px]">

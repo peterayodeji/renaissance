@@ -1,34 +1,48 @@
-import Pagination from '../../ui/Pagination';
-import ProductDisplay from '../products/ProductDisplay';
 import ProductDisplayList from '../products/ProductDisplayList';
-import { useUserWishlist } from './useUserWishlist';
-// import WishlistAction from './WishlistAction.jsx';
+import ProductDisplay from '../products/ProductDisplay';
+import WishlistAction from './WishlistAction.jsx';
+import Pagination from '../../ui/Pagination';
+import { useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { useProductsParams } from '../products/useProductsParams.js';
 
-function WishlistFeed({ wishlistItems }) {
-  const { isLoading, data, error } = useUserWishlist();
-  console.log({ isLoading, data, error });
+function WishlistFeed({ wishlist, count, pageCount }) {
+  const { page } = useProductsParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(
+    function () {
+      if (page > pageCount && pageCount >= 2) {
+        searchParams.set('page', pageCount);
+      }
+
+      if (page > pageCount && pageCount < 2) {
+        searchParams.delete('page');
+      }
+
+      setSearchParams(searchParams);
+    },
+    [page, pageCount, searchParams, setSearchParams],
+  );
+
+  if (!count) return;
 
   return (
     <>
-      {data && (
-        <>
-          <h3 className="uppercase">3 Items</h3>
+      <h3 className="uppercase">
+        {count} {count > 1 ? 'Items' : 'Item'}
+      </h3>
 
-          <ProductDisplayList>
-            {data.map(item => (
-              <ProductDisplay key={item.id} product={item}>
-                {/* <WishlistAction product={item} classes="mt-2" /> */}
-              </ProductDisplay>
-            ))}
-          </ProductDisplayList>
+      <ProductDisplayList>
+        {wishlist.map(item => (
+          <div key={item.id}>
+            <ProductDisplay product={item} />
+            <WishlistAction product={item} classes="mt-4" />
+          </div>
+        ))}
+      </ProductDisplayList>
 
-          <Pagination pageCount={4} />
-        </>
-      )}
-
-      {isLoading && <p>LOADING...</p>}
-
-      {error && <p>{error.message}</p>}
+      <Pagination pageCount={pageCount} />
     </>
   );
 }

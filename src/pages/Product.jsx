@@ -3,7 +3,7 @@ import ProductSuggestion from '../features/products/ProductSuggestion';
 import ProductRecentView from '../features/products/ProductRecentView';
 
 const productSample = {
-  id: 'K783654MOV',
+  id: 5,
   name: 'Multicolor Stuart Sweater',
   price: 660,
   description: 'Knit nylon - and alpaca-blend sweater.',

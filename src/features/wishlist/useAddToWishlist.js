@@ -10,14 +10,14 @@ export function useAddToWishlist() {
     error,
   } = useMutation({
     mutationFn: addToWishlist,
-    // onSuccess: (_, { userId }) => {
-    onSettled: (a, b, c) => {
-      console.log({ a, b, c });
-      // Invalidate the user wishlist query to refresh data
-      // queryClient.invalidateQueries(['userWishlist', userId]);
+    onSuccess: (_, { userId, productId }) => {
+      // console.log('ADD', { userId, productId });
+
+      // Invalidate the user wishlist queries to refresh data
+      queryClient.invalidateQueries(['userWishlist', userId]);
+      queryClient.invalidateQueries(['isProductInWishlist', userId, productId]);
     },
   });
 
-  // Ensure these three for mutation
   return { isAdding, addProduct, error };
 }

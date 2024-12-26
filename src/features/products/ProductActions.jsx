@@ -6,8 +6,9 @@ import {
   increaseItemQuantity,
   addItem,
 } from '../cart/cartSlice';
+import WishlistAction from '../wishlist/WishlistAction';
 
-import WishlistAction from '../wishlist/WishlistAction.jsx';
+// import WishlistAction from '../wishlist/WishlistAction.jsx';
 
 // import Modal from '../../ui/Modal';
 
@@ -63,7 +64,7 @@ function ProductActions({ product }) {
           className="bg-cyan-20 w-full space-y-4 text-sm"
         >
           <div className="flex justify-between">
-            <h3 className="w-40 uppercase lg:hidden">{product.name}</h3>
+            <h3 className="w-40 uppercase lg:hidden">{name}</h3>
             <p>${price} USD</p>
           </div>
 
@@ -103,11 +104,7 @@ function ProductActions({ product }) {
               Add To Bag
             </button>
 
-            <WishlistAction
-              product={product}
-              inline={false}
-              removeCta="In Wishlist"
-            />
+            <WishlistAction product={product} mode="primary" />
           </div>
 
           <p>{model}</p>

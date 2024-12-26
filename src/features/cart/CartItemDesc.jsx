@@ -2,7 +2,7 @@ import WishlistAction from '../wishlist/WishlistAction.jsx';
 
 function CartItemDesc({ product }) {
   return (
-    <div className="bg-purple-30 flex h-full flex-col xl:h-[120px]">
+    <div className="flex h-full flex-col xl:h-[120px]">
       <h4 className="sm:text-bas pr-8 text-sm font-semibold uppercase sm:pr-0">
         Multicolor Stuart Sweater
       </h4>
@@ -16,7 +16,7 @@ function CartItemDesc({ product }) {
       </p>
 
       <div className="mt-auto hidden lg:block">
-        <WishlistAction product={product} removeCta="Take off wishlist" />
+        <WishlistAction product={product} mode="secondary" />
       </div>
     </div>
   );

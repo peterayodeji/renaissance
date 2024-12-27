@@ -21,7 +21,7 @@ export function useProductsParams() {
     !tagsParam || tagsParam === 'all' ? null : decodeURIComponent(tagsParam);
 
   // * SORT
-  const sortValue = searchParams.get('sort') || 'created_at-asc';
+  const sortValue = searchParams.get('sort') || 'date-asc';
   const [field, direction] = sortValue.split('-');
   const sort = { field, direction };
 

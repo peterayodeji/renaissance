@@ -85,6 +85,7 @@ export async function getProductsSearch({ searchValue, category }) {
       .from('products')
       .select('*')
       .eq('category', category)
+      .ilike('tagsText', `%${searchValue}%`)
       .select('id, subcategory, tags'),
   ]);
 

@@ -12,15 +12,17 @@ function WishlistFeed({ wishlist, count, pageCount }) {
 
   useEffect(
     function () {
+      const newParams = new URLSearchParams(searchParams);
+
       if (page > pageCount && pageCount >= 2) {
-        searchParams.set('page', pageCount);
+        newParams.set('page', pageCount);
+        setSearchParams(newParams);
       }
 
       if (page > pageCount && pageCount < 2) {
-        searchParams.delete('page');
+        newParams.delete('page');
+        setSearchParams(newParams);
       }
-
-      setSearchParams(searchParams);
     },
     [page, pageCount, searchParams, setSearchParams],
   );

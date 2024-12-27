@@ -1,9 +1,11 @@
+import { convertTitleCase } from '../../utils/helpers';
+
 function SearchInput({ searchInput, setSearchInput, category }) {
   return (
     <div className="relative mb-4">
       <input
         value={searchInput}
-        placeholder={`Search ${category}`}
+        placeholder={`Search ${convertTitleCase(category)}`}
         onChange={e => setSearchInput(e.target.value)}
         className="w-full border px-4 py-3 text-sm outline-none placeholder:text-sm placeholder:text-inherit"
       />

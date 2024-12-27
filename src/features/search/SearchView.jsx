@@ -14,7 +14,7 @@ import PartialOverlay from '../../ui/PartialOverlay';
 
 function SearchView({ open, onClose }) {
   const [searchInput, setSearchInput] = useState('');
-  const [category, setCategory] = useState('Women');
+  const [category, setCategory] = useState('women');
   const isValidInput = searchInput.length > 1;
 
   const debouncedQuery = useDebouncedQuery({
@@ -68,6 +68,7 @@ function SearchView({ open, onClose }) {
 
             {isValidResult && !error && isValidInput && (
               <SearchResultsList
+                category={category}
                 subcategoryMatches={subcategoryMatches}
                 tagsMatches={tagsMatches}
                 nameMatches={nameMatches}

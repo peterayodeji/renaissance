@@ -4,8 +4,8 @@ import { useOutsideClick } from '../../hooks/useOutsideClick';
 import { useProductsParams } from './useProductsParams';
 
 const SORT_OPTIONS = [
-  { label: 'Recommended', value: 'created_at-asc' },
-  { label: 'Newest', value: 'created_at-desc' },
+  { label: 'Recommended', value: 'date-asc' },
+  { label: 'Newest', value: 'date-desc' },
   { label: 'Lowest Price', value: 'price-asc' },
   { label: 'Highest Price', value: 'price-desc' },
 ];

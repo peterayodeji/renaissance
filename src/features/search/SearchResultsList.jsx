@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom';
+import { convertTitleCase } from '../../utils/helpers';
 
 function SearchResultsList({
+  category,
   subcategoryMatches,
   tagsMatches,
   nameMatches,
@@ -22,10 +24,16 @@ function SearchResultsList({
           {subcategoryMatches.map(({ subcategory, id }) => (
             <ResultsListItem
               key={id}
-              onClick={() => navigate('/product/123')}
+              onClick={() =>
+                navigate(
+                  `/products?category=${category}&subcategory=${encodeURIComponent(subcategory)}`,
+                )
+              }
               onClose={onClose}
             >
-              <StyledSpan weight={500}>{subcategory}</StyledSpan>
+              <StyledSpan weight={500}>
+                {convertTitleCase(subcategory)}
+              </StyledSpan>
               <span className="text-stone-500">Category</span>
             </ResultsListItem>
           ))}
@@ -39,11 +47,15 @@ function SearchResultsList({
             <ResultsListItem
               key={key}
               maxGap={false}
-              onClick={() => navigate('/product/123')}
+              onClick={() =>
+                navigate(
+                  `/products?category=${category}&subcategory=${encodeURIComponent(subcategory)}&tags=${encodeURIComponent(tag)}`,
+                )
+              }
               onClose={onClose}
             >
-              <StyledSpan weight={500}>{tag}</StyledSpan>
-              <StyledSpan>{subcategory}</StyledSpan>
+              <StyledSpan weight={500}>{convertTitleCase(tag)}</StyledSpan>
+              <StyledSpan>{convertTitleCase(subcategory)}</StyledSpan>
             </ResultsListItem>
           ))}
         </ResultsList>
@@ -55,7 +67,7 @@ function SearchResultsList({
           {nameMatches.map(({ id, name }) => (
             <ResultsListItem
               key={id}
-              onClick={() => navigate('/product/123')}
+              onClick={() => navigate(`/product/${id}`)}
               onClose={onClose}
             >
               <StyledSpan>{name}</StyledSpan>

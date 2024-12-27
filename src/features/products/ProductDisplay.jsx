@@ -1,8 +1,11 @@
+import { useNavigate } from 'react-router-dom';
+
 function ProductDisplay({ product, children }) {
+  const navigate = useNavigate();
   const { id, image, name, price } = product;
 
   return (
-    <li onClick={() => console.log(id)} className="cursor-pointer">
+    <li onClick={() => navigate(`/product/${id}`)} className="cursor-pointer">
       <img
         // src={image}
         src="/vivienne-westwood-multicolor-stuart-sweater.webp"

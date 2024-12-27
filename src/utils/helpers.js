@@ -1,3 +1,17 @@
+function capitalize(str) {
+  return str[0].toUpperCase() + str.slice(1);
+}
+
+export function convertTitleCase(str) {
+  const convertedStr = str
+    .toLowerCase()
+    .split(' ')
+    .map(word => capitalize(word))
+    .join(' ');
+
+  return convertedStr;
+}
+
 export function isValidRes([...values]) {
   const isArr = [...values]?.every(val => Array.isArray(val));
   const itemPresent = [...values]?.some(

@@ -9,6 +9,7 @@ function NewArrivalsList({ newArrivalsItems }) {
   return (
     <div className="relative">
       <Swiper
+        className="grid"
         modules={[Navigation, Pagination]}
         spaceBetween={20}
         slidesPerView="auto"
@@ -33,7 +34,10 @@ function NewArrivalsList({ newArrivalsItems }) {
         }}
       >
         {newArrivalsItems.map(item => (
-          <SwiperSlide key={item.id} className="w-[200px] sm:w-[250px]">
+          <SwiperSlide
+            key={item.id}
+            className="flex w-[200px] items-end sm:w-[250px]"
+          >
             <ProductDisplay product={item} />
           </SwiperSlide>
         ))}

@@ -96,3 +96,33 @@ export async function getProductsSearch({ searchValue, category }) {
 
   return { subcategory: subcategory.data, name: name.data, tags: tags.data };
 }
+
+export async function getProductById({ productId }) {
+  const { data: product, error: productError } = await supabase
+    .from('products')
+    .select('*')
+    .eq('id', productId)
+    .single();
+
+  if (productError || (Array.isArray(product) && !product.length)) {
+    // console.log(productError);
+    throw new Error(`The Product with id:${productId} could not be loaded`);
+  }
+
+  // Get similar products
+  const { data: similarProducts, error: similarProductsError } = await supabase
+    .from('products')
+    .select('*')
+    .contains('types', JSON.stringify([product.mainType]))
+    .neq('id', productId)
+    .select('id, name, price');
+
+  if (similarProductsError) {
+    // console.log(similarProductsError.message);
+    throw new Error(
+      `Similar Products for Product with id:${productId} could not be loaded`,
+    );
+  }
+
+  return { product, similarProducts };
+}

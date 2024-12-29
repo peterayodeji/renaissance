@@ -2,6 +2,8 @@ import ProductMain from '../features/products/ProductMain';
 import ProductSuggestion from '../features/products/ProductSuggestion';
 import ProductRecentView from '../features/products/ProductRecentView';
 
+// import { useProduct } from '../features/products/useProduct';
+
 const productSample = {
   id: 5,
   name: 'Multicolor Stuart Sweater',
@@ -52,13 +54,37 @@ const productSample = {
 };
 
 function Product() {
+  // const { isLoading, product, similarProducts, error } = useProduct();
+
+  // console.log({ isLoading, error });
+  // console.log({ product, similarProducts });
+
   return (
-    <div className="bg-purple-40 grow bg-white">
-      <ProductMain product={productSample} />
-      <ProductSuggestion />
+    <>
+      <ProductView>
+        {/* {isLoading && <p>LOADING...</p>}
+        {error && <p>{error.message}</p>} */}
+
+        <ProductMain product={productSample} />
+        <ProductSuggestion />
+
+        {/* {product && <ProductMain product={product} />} */}
+        {/* {similarProducts && (
+          <ProductSuggestion similarProducts={similarProducts} />
+        )} */}
+      </ProductView>
+
       <ProductRecentView />
-    </div>
+    </>
   );
 }
 
 export default Product;
+
+function ProductView({ children }) {
+  return (
+    <div className="bg-whit bg-purple-40 min-h-[calc(100vh-3.5rem)] lg:min-h-[calc(100vh-4rem)] 2xl:min-h-[calc(100vh-5rem)]">
+      {children}
+    </div>
+  );
+}

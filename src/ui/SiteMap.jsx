@@ -32,7 +32,7 @@ const POLICY_LINKS = [
 
 function SiteMap() {
   return (
-    <div className="flex flex-wrap justify-between gap-x-4 gap-y-12 px-2 py-12 sm:gap-x-12 sm:px-4 md:px-8">
+    <div className="flex flex-wrap justify-between gap-x-4 gap-y-12 px-2 py-12 sm:gap-x-12 sm:px-4 md:px-8 xl:px-10 2xl:px-12">
       <FooterLinks title="Shop Online" links={SHOP_ONLINE_LINKS} />
       <FooterLinks title="Company" links={COMPANY_LINKS} />
       <FooterLinks title="Social" links={SOCIAL_LINKS} />

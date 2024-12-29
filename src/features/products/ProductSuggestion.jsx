@@ -1,3 +1,4 @@
+import { useScreenLessThan } from '../../hooks/useScreenLessThan';
 import ProductDisplay from './ProductDisplay';
 
 const similarProducts = [
@@ -25,7 +26,8 @@ const similarProducts = [
 ];
 
 function ProductSuggestion() {
-  const suggestionProducts = similarProducts.slice(0, 10);
+  const isMobile = useScreenLessThan(768);
+  const suggestionProducts = similarProducts.slice(0, isMobile ? 10 : 12);
 
   return (
     <div className="bg-cyan-40 overflow-hidden py-8 text-sm lg:pb-16 lg:pt-0">

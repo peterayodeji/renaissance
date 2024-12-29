@@ -126,3 +126,21 @@ export async function getProductById({ productId }) {
 
   return { product, similarProducts };
 }
+
+export async function getNewArrivalProducts({ category }) {
+  console.log({ category });
+
+  const { data, error } = await supabase
+    .from('products')
+    .select('*')
+    .contains('types', JSON.stringify(['new-arrival']))
+    .eq('category', category);
+  // .select('id, name, price, images');
+
+  if (error) {
+    // console.log(error);
+    throw new Error(`New Arrival Products could not be loaded`);
+  }
+
+  return data;
+}

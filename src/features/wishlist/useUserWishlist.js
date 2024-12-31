@@ -11,7 +11,7 @@ export function useUserWishlist() {
   const { page } = useProductsParams();
 
   const {
-    isLoading,
+    isFetching,
     data: { wishlist, count } = {},
     error,
   } = useQuery({
@@ -45,5 +45,5 @@ export function useUserWishlist() {
     });
 
   const userWishlist = { wishlist, count, pageCount };
-  return { isLoading, userWishlist, error };
+  return { isFetching, userWishlist, error };
 }

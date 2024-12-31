@@ -1,4 +1,8 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  useQuery,
+  useQueryClient,
+  keepPreviousData,
+} from '@tanstack/react-query';
 import { useProductsParams } from './useProductsParams';
 import { getProducts } from '../../services/apiProducts';
 import { PAGE_SIZE } from '../../utils/constants';
@@ -9,12 +13,13 @@ export function useProducts() {
 
   // * QUERY
   const {
-    isLoading,
+    isFetching,
     data: { data: products, count } = {},
     error,
   } = useQuery({
     queryKey: ['products', category, subcategory, tags, sort, page],
     queryFn: () => getProducts({ category, subcategory, tags, sort, page }),
+    placeholderData: keepPreviousData,
   });
 
   // * PRE-FETCHING
@@ -33,5 +38,5 @@ export function useProducts() {
         getProducts({ category, subcategory, tags, sort, page: page - 1 }),
     });
 
-  return { isLoading, products, pageCount, error };
+  return { isFetching, products, pageCount, error };
 }

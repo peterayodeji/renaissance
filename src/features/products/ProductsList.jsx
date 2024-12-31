@@ -1,64 +1,33 @@
 import { useProducts } from './useProducts';
 
 import ProductsFeed from './ProductsFeed';
+import Loader from '../../ui/Loader';
 import StatusFeedbackWrapper from '../../ui/StatusFeedbackWrapper';
 
-function ProductsList({ isLoadingFilterData, errorFilterData }) {
+function ProductsList({ isFetchingFilterData, errorFilterData }) {
   const {
-    isLoading: isLoadingProducts,
+    isFetching: isFetchingProducts,
     products,
     pageCount,
     error: errorProducts,
   } = useProducts();
 
-  // console.log(products);
-
-  const showStatus = Boolean(
-    isLoadingFilterData ||
-      isLoadingProducts ||
-      errorFilterData ||
-      errorProducts,
-  );
+  const busy = Boolean(isFetchingFilterData || isFetchingProducts);
+  const error = Boolean(errorFilterData || errorProducts);
 
   return (
     <>
-      {showStatus && (
-        <StatusFeedback
-          isLoadingFilterData={isLoadingFilterData}
-          isLoading={isLoadingProducts}
-          errorFilterData={errorFilterData}
-          error={errorProducts}
-        />
-      )}
-
-      {!showStatus && Array.isArray(products) && products.length && (
+      {!error && Array.isArray(products) && products.length && (
         <ProductsFeed products={products} pageCount={pageCount} />
+      )}
+      {busy && <Loader />}
+      {error && (
+        <StatusFeedbackWrapper>
+          <p>ERROR - Products could not be loaded.</p>
+        </StatusFeedbackWrapper>
       )}
     </>
   );
 }
 
 export default ProductsList;
-
-function StatusFeedback({
-  isLoadingFilterData,
-  isLoading,
-  errorFilterData,
-  error,
-}) {
-  if (isLoadingFilterData || isLoading) {
-    return (
-      <StatusFeedbackWrapper>
-        <p>LOADING...</p>
-      </StatusFeedbackWrapper>
-    );
-  }
-
-  if (errorFilterData || error) {
-    return (
-      <StatusFeedbackWrapper>
-        <p>Products could not be loaded.</p>
-      </StatusFeedbackWrapper>
-    );
-  }
-}

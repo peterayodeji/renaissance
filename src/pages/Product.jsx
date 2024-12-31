@@ -1,8 +1,10 @@
 import ProductMain from '../features/products/ProductMain';
 import ProductSuggestion from '../features/products/ProductSuggestion';
 import ProductRecentView from '../features/products/ProductRecentView';
+import StatusFeedbackWrapper from '../ui/StatusFeedbackWrapper';
 
-// import { useProduct } from '../features/products/useProduct';
+import { useProduct } from '../features/products/useProduct';
+import Loader from '../ui/Loader';
 
 const productSample = {
   id: 5,
@@ -54,27 +56,26 @@ const productSample = {
 };
 
 function Product() {
-  // const { isLoading, product, similarProducts, error } = useProduct();
-
-  // console.log({ isLoading, error });
-  // console.log({ product, similarProducts });
+  const { isFetching, product, similarProducts, error } = useProduct();
 
   return (
     <>
       <ProductView>
-        {/* {isLoading && <p>LOADING...</p>}
-        {error && <p>{error.message}</p>} */}
-
-        <ProductMain product={productSample} />
-        <ProductSuggestion />
-
-        {/* {product && <ProductMain product={product} />} */}
-        {/* {similarProducts && (
+        {!error && product && <ProductMain product={productSample} />}
+        {!error && similarProducts && (
           <ProductSuggestion similarProducts={similarProducts} />
-        )} */}
+        )}
       </ProductView>
 
       <ProductRecentView />
+
+      {isFetching && <Loader />}
+
+      {error && (
+        <StatusFeedbackWrapper>
+          <p>ERROR - {error.message}.</p>
+        </StatusFeedbackWrapper>
+      )}
     </>
   );
 }

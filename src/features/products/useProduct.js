@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import { getProductById } from '../../services/apiProducts';
 import { useParams } from 'react-router-dom';
 import { useEffect, useMemo } from 'react';
@@ -11,13 +11,14 @@ export function useProduct() {
 
   // * QUERY
   const {
-    isLoading,
+    isFetching,
     data: { product, similarProducts } = {},
     isSuccess,
     error,
   } = useQuery({
     queryKey: ['product', productId],
     queryFn: () => getProductById({ productId }),
+    placeholderData: keepPreviousData,
   });
 
   const staleProduct = useMemo(() => product, [product]);
@@ -32,5 +33,5 @@ export function useProduct() {
     [isSuccess, staleProduct, dispatch],
   );
 
-  return { isLoading, product, similarProducts, error };
+  return { isFetching, product, similarProducts, error };
 }

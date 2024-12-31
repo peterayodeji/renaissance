@@ -6,18 +6,18 @@ import ProductsOperations from '../features/products/ProductsOperations';
 import ProductsList from '../features/products/ProductsList';
 
 function Products() {
-  const { filters, isLoading, error } = useProductsFilters();
+  const { filters, isFetching, error } = useProductsFilters();
 
   return (
     <div className="bg-red-20 relative grow px-2 py-10 sm:px-4 md:px-8">
-      {isLoading || error ? null : (
+      {filters && !error ? (
         <ProductsHeader>
           <ProductsTitle />
           <ProductsOperations filters={filters} />
         </ProductsHeader>
-      )}
+      ) : null}
 
-      <ProductsList isLoadingFilterData={isLoading} errorFilterData={error} />
+      <ProductsList isFetchingFilterData={isFetching} errorFilterData={error} />
     </div>
   );
 }

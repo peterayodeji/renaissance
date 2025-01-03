@@ -8,7 +8,7 @@ import { useAddToWishlist } from './useAddToWishlist';
 function WishlistAction({ product, mode, classes }) {
   const { user, isAuthenticated } = useUser();
   const userId = user?.id;
-  const { id: productId } = product;
+  const { id: productId, name, price } = product;
 
   const dispatch = useDispatch();
   const isInAnonWishlist = useSelector(isWishlistItem(productId));
@@ -34,7 +34,7 @@ function WishlistAction({ product, mode, classes }) {
     } else {
       isInWishlist
         ? dispatch(removeItem(productId))
-        : dispatch(addItem(product));
+        : dispatch(addItem({ id: productId, name, price }));
     }
   };
 
@@ -94,9 +94,9 @@ function WishlistBtn({ actionHandler, isBusy, isInWishlist }) {
 
           <span className="md:hidden">
             {isInWishlist ? (
-              <img src="/heart.svg" alt="heart" className="w-7" />
-            ) : (
               <img src="/full-heart.svg" alt="heart" className="w-7" />
+            ) : (
+              <img src="/heart.svg" alt="heart" className="w-7" />
             )}
           </span>
         </>

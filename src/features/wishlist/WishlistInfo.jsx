@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 function WishlistInfo({ count, isAuthenticated }) {
   const isEmptyList = count < 1;
 
@@ -10,6 +12,8 @@ function WishlistInfo({ count, isAuthenticated }) {
 export default WishlistInfo;
 
 function WishlistEmpty() {
+  const navigate = useNavigate();
+
   return (
     <div>
       <h3 className="mb-2 font-semibold uppercase">Save Your Favorite Items</h3>
@@ -18,7 +22,10 @@ function WishlistEmpty() {
         effortless access.
       </p>
 
-      <button className="w-auto border border-black px-10 py-3 sm:w-full sm:max-w-sm">
+      <button
+        onClick={() => navigate('/products')}
+        className="w-auto border border-black px-10 py-3 sm:w-full sm:max-w-sm"
+      >
         EXPLORE MORE
       </button>
     </div>
@@ -26,6 +33,8 @@ function WishlistEmpty() {
 }
 
 function WishlistSyncAccount() {
+  const navigate = useNavigate();
+
   return (
     <div className="mt-8 py-8 sm:py-12">
       <h3 className="mb-2 font-semibold uppercase">
@@ -36,7 +45,14 @@ function WishlistSyncAccount() {
         to your account.
       </p>
 
-      <button className="w-auto border border-black px-10 py-3 sm:w-full sm:max-w-sm">
+      <button
+        onClick={() =>
+          navigate('/account/sign-in', {
+            state: { accessible: true },
+          })
+        }
+        className="w-auto border border-black px-10 py-3 sm:w-full sm:max-w-sm"
+      >
         SYNC YOUR ACCOUNT
       </button>
     </div>

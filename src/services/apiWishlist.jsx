@@ -4,7 +4,7 @@ import { PAGE_SIZE } from '../utils/constants';
 export const fetchUserWishlist = async ({ userId, page }) => {
   let query = supabase
     .from('wishlist')
-    .select('productId, products(*)', { count: 'exact' })
+    .select('productId, products(id, name, price)', { count: 'exact' })
     .eq('userId', userId);
 
   // * PAGINATION

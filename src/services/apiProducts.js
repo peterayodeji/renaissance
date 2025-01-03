@@ -128,8 +128,6 @@ export async function getProductById({ productId }) {
 }
 
 export async function getNewArrivalProducts({ category }) {
-  console.log({ category });
-
   const { data, error } = await supabase
     .from('products')
     .select('*')
@@ -138,9 +136,11 @@ export async function getNewArrivalProducts({ category }) {
   // .select('id, name, price, images');
 
   if (error) {
-    // console.log(error);
-    throw new Error(`New Arrival Products could not be loaded`);
+    // console.log(error.message);
+    throw new Error('New Arrival Products could not be loaded');
   }
+
+  // console.log(data);
 
   return data;
 }

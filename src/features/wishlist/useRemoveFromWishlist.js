@@ -11,8 +11,6 @@ export function useRemoveFromWishlist() {
   } = useMutation({
     mutationFn: removeFromWishlist,
     onSuccess: (_, { userId, productId }) => {
-      // console.log('REMOVE', { userId, productId });
-
       // Invalidate the user wishlist queries to refresh data
       queryClient.invalidateQueries(['userWishlist', userId]);
       queryClient.invalidateQueries(['isProductInWishlist', userId, productId]);

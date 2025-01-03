@@ -5,7 +5,6 @@ const productsSlice = createSlice({
   initialState: JSON.parse(localStorage.getItem('recentView')) || [],
   reducers: {
     addProduct(state, action) {
-      // payload = newProduct
       const newProduct = action.payload;
 
       // Check if product with same id already exists
@@ -13,12 +12,19 @@ const productsSlice = createSlice({
 
       if (!exists) {
         const newState = [newProduct, ...state].slice(0, 10);
-        localStorage.setItem('recentView', JSON.stringify(newState));
         return newState;
       } else {
         return state;
       }
     },
+  },
+  extraReducers: builder => {
+    builder.addMatcher(
+      action => action.type === 'recentView/addProduct',
+      state => {
+        localStorage.setItem('recentView', JSON.stringify(state));
+      },
+    );
   },
 });
 

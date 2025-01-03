@@ -13,7 +13,7 @@ function MenNewArrivals() {
         NEW ARRIVALS
       </h2>
 
-      {!isLoading && !error ? (
+      {!isLoading && !error && data ? (
         <NewArrivalsList newArrivalsItems={data} />
       ) : null}
     </NewArrivals>

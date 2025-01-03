@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  cart: [],
+  cart: JSON.parse(localStorage.getItem('cartRenaissance')) || [],
 };
 
 const cartSlice = createSlice({
@@ -13,19 +13,21 @@ const cartSlice = createSlice({
       state.cart.push(action.payload);
     },
     deleteItem(state, action) {
-      // payload = itemId
-      state.cart = state.cart.filter(item => item.itemId !== action.payload);
+      // payload = cartItemId
+      state.cart = state.cart.filter(
+        item => item.cartItemId !== action.payload,
+      );
     },
     increaseItemQuantity(state, action) {
-      // payload = itemId
-      const item = state.cart.find(item => item.itemId === action.payload);
+      // payload = cartItemId
+      const item = state.cart.find(item => item.cartItemId === action.payload);
 
       item.quantity++;
       item.totalPrice = item.quantity * item.unitPrice;
     },
     decreaseItemQuantity(state, action) {
-      // payload = itemId
-      const item = state.cart.find(item => item.itemId === action.payload);
+      // payload = cartItemId
+      const item = state.cart.find(item => item.cartItemId === action.payload);
 
       item.quantity--;
       item.totalPrice = item.quantity * item.unitPrice;
@@ -35,6 +37,14 @@ const cartSlice = createSlice({
     clearCart(state) {
       state.cart = [];
     },
+  },
+  extraReducers: builder => {
+    builder.addMatcher(
+      action => action.type.startsWith('cart/'),
+      state => {
+        localStorage.setItem('cartRenaissance', JSON.stringify(state.cart));
+      },
+    );
   },
 });
 
@@ -57,7 +67,9 @@ export const getTotalCartPrice = state =>
   state.cart.cart.reduce((sum, item) => sum + item.totalPrice, 0);
 
 export const getCurrentQuantityById = id => state =>
-  state.cart.cart.find(item => item.itemId === id)?.quantity ?? 0;
+  state.cart.cart.find(item => item.cartItemId === id)?.quantity ?? 0;
 
 export const getCartItemById = id => state =>
-  state.cart.cart.find(item => item.itemId === id);
+  state.cart.cart.find(item => item.cartItemId === id);
+
+export const isEmptyCart = state => state.cart.cart.length < 1;

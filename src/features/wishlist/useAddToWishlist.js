@@ -11,8 +11,6 @@ export function useAddToWishlist() {
   } = useMutation({
     mutationFn: addToWishlist,
     onSuccess: (_, { userId, productId }) => {
-      // console.log('ADD', { userId, productId });
-
       // Invalidate the user wishlist queries to refresh data
       queryClient.invalidateQueries(['userWishlist', userId]);
       queryClient.invalidateQueries(['isProductInWishlist', userId, productId]);

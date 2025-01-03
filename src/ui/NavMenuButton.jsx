@@ -2,7 +2,7 @@ function NavMenuButton({ children, ...props }) {
   return (
     <button
       {...props}
-      className="bg-blue-20 flex flex-col items-center px-2 py-1 text-xs"
+      className="bg-blue-30 flex flex-col items-center px-2 py-1 text-xs lg:w-16"
     >
       {children}
     </button>

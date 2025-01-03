@@ -1,22 +1,71 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import {
   getCartItemById,
   increaseItemQuantity,
   addItem,
 } from '../cart/cartSlice';
+
 import WishlistAction from '../wishlist/WishlistAction';
-
-// import WishlistAction from '../wishlist/WishlistAction.jsx';
-
 // import Modal from '../../ui/Modal';
+
+const placeHolder = {
+  id: 5,
+  name: 'Multicolor Stuart Sweater',
+  price: 660,
+  description: 'Knit nylon - and alpaca-blend sweater.',
+  features: [
+    'Rib knit crewneck, hem, and cuffs',
+    'Logo graphic printed at front',
+    'Dropped shoulders',
+    'Button fastening at rolled cuffs',
+  ],
+  color: {
+    name: 'Black diamond',
+    value: '#000',
+  },
+  colorOptions: [
+    {
+      name: 'Yellow summer',
+      value: '#ff4',
+      productId: '234',
+    },
+    {
+      name: 'Green lemonade',
+      value: '#379e3e',
+      productId: '345',
+    },
+    {
+      name: 'Sky blue',
+      value: '#ac99ee',
+      productId: '444',
+    },
+  ],
+  composition: '30% polyamide, 28% alpaca, 19% wool, 16% cotton, 7% polyester.',
+  sizes: [
+    { label: 'XS-S = XS', value: 'XS', quantity: 3 },
+    { label: 'S-M = S', value: 'S', quantity: 0 },
+    { label: 'M-L = M', value: 'M', quantity: 1 },
+    { label: 'L-XL = L', value: 'L', quantity: null },
+  ],
+  model: 'Model is 6ft 2" and wears size M-L.',
+  country: 'Italy',
+  images: [
+    '/vivienne-westwood-multicolor-stuart-sweater.webp',
+    '/vivienne-westwood-multicolor-stuart-sweater.webp',
+    '/vivienne-westwood-multicolor-stuart-sweater.webp',
+    '/vivienne-westwood-multicolor-stuart-sweater.webp',
+  ],
+};
 
 function ProductActions({ product }) {
   const dispatch = useDispatch();
   const [currentSize, setCurrentSize] = useState({ value: '', quantity: null });
   // const [showSuccessModal, setShowSuccessModal] = useState(true);
-  const { id, name, description, color, price, sizes, model } = product;
+  // const { id, name, description, color, price, sizes, model } = product;
+
+  const { id, name, price } = product;
+  const { description, color, sizes, model } = placeHolder;
 
   // Create unique id for cart item using id, size
   const cartItemId = id + currentSize.value;
@@ -36,24 +85,24 @@ function ProductActions({ product }) {
 
     if (cartItem) {
       dispatch(increaseItemQuantity(cartItemId));
-      console.log('ADDED TO CART!');
       return;
     }
 
     const newItem = {
-      itemId: cartItemId,
+      id,
+      cartItemId,
       name,
       description,
       color,
       size: currentSize.value,
       quantity: 1,
       maxQuantity: currentSize.quantity,
+      price,
       unitPrice: price,
       totalPrice: price * 1,
     };
 
     dispatch(addItem(newItem));
-    console.log('ADDED TO CART!');
   }
 
   return (
@@ -82,13 +131,15 @@ function ProductActions({ product }) {
               <option
                 key={size.value}
                 value={size.value}
-                disabled={size.quantity < 1}
+                disabled={size.quantity === 0}
                 data-quantity={size.quantity}
               >
-                {size.label} -{' '}
-                {size.quantity < 1
-                  ? 'Sold Out'
-                  : `Only ${size.quantity} remaining`}
+                {size.label}{' '}
+                {size.quantity === 0
+                  ? '- Sold Out'
+                  : size.quantity
+                    ? `Only ${size.quantity} remaining`
+                    : ''}
               </option>
             ))}
           </select>

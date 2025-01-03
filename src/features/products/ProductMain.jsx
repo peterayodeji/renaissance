@@ -5,6 +5,15 @@ import ProductOverviewDesktop from './ProductOverviewDesktop';
 import ProductFullView from './ProductFullView';
 import ProductOverviewMobile from './ProductOverviewMobile';
 
+const placeHolder = {
+  images: [
+    '/vivienne-westwood-multicolor-stuart-sweater.webp',
+    '/vivienne-westwood-multicolor-stuart-sweater.webp',
+    '/vivienne-westwood-multicolor-stuart-sweater.webp',
+    '/vivienne-westwood-multicolor-stuart-sweater.webp',
+  ],
+};
+
 function ProductMain({ product }) {
   const [zoomViewIndex, setZoomViewIndex] = useState(-1);
   const isMobile = useScreenLessThan(1024);
@@ -29,7 +38,7 @@ function ProductMain({ product }) {
         <ProductFullView
           zoomViewIndex={zoomViewIndex}
           setZoomViewIndex={setZoomViewIndex}
-          images={product.images}
+          images={placeHolder.images}
         />
       ) : null}
     </>

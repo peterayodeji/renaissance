@@ -1,89 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  wishlist: [
-    {
-      id: 1,
-      name: 'Multicolor Stuart Sweater',
-      price: 660,
-    },
-    {
-      id: 2,
-      name: 'Multicolor Stuart Sweater',
-      price: 660,
-    },
-    {
-      id: 3,
-      name: 'Multicolor Stuart Sweater',
-      price: 660,
-    },
-    {
-      id: 4,
-      name: 'Multicolor Stuart Sweater',
-      price: 660,
-    },
-    {
-      id: 5,
-      name: 'Multicolor Stuart Sweater',
-      price: 660,
-    },
-    {
-      id: 6,
-      name: 'Multicolor Stuart Sweater',
-      price: 660,
-    },
-    {
-      id: 7,
-      name: 'Multicolor Stuart Sweater',
-      price: 660,
-    },
-    {
-      id: 8,
-      name: 'Multicolor Stuart Sweater',
-      price: 660,
-    },
-    {
-      id: 9,
-      name: 'Multicolor Stuart Sweater',
-      price: 660,
-    },
-    {
-      id: 10,
-      name: 'Multicolor Stuart Sweater',
-      price: 660,
-    },
-    {
-      id: 11,
-      name: 'Multicolor Stuart Sweater',
-      price: 660,
-    },
-    {
-      id: 12,
-      name: 'Multicolor Stuart Sweater',
-      price: 660,
-    },
-    {
-      id: 13,
-      name: 'Multicolor Stuart Sweater',
-      price: 660,
-    },
-  ],
+  wishlist: JSON.parse(localStorage.getItem('wishlistRenaissance')) || [],
 };
-
-// const initialState = {
-//   wishlist: [],
-// };
 
 const wishlistSlice = createSlice({
   name: 'wishlist',
   initialState,
   reducers: {
     addItem(state, action) {
-      // payload = newItem
       state.wishlist.push(action.payload);
     },
     removeItem(state, action) {
-      // payload = itemId
       state.wishlist = state.wishlist.filter(
         item => item.id !== action.payload,
       );
@@ -91,6 +19,17 @@ const wishlistSlice = createSlice({
     clearWishlist(state) {
       state.wishlist = [];
     },
+  },
+  extraReducers: builder => {
+    builder.addMatcher(
+      action => action.type.startsWith('wishlist/'),
+      state => {
+        localStorage.setItem(
+          'wishlistRenaissance',
+          JSON.stringify(state.wishlist),
+        );
+      },
+    );
   },
 });
 

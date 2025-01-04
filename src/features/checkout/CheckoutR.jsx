@@ -13,7 +13,7 @@ function CheckoutR() {
   if (isAuthenticated || !accessible) return <Navigate to="/cart" />;
 
   return (
-    <div className="bg-stone-0 grow pb-14 pt-12">
+    <div className="bg-stone-20 grow px-2 pb-14 pt-12 sm:px-4">
       <form className="bg-blue-30 mx-auto max-w-sm text-sm xl:max-w-md">
         <h2 className="bg-blue-20 mb-10 text-center text-3xl font-semibold">
           Checkout

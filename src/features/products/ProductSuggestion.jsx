@@ -35,7 +35,7 @@ function ProductSuggestion() {
         YOU MAY ALSO LIKE
       </h3>
 
-      <ul className="remove-scrollbar bg-yellow-40 grid grid-cols-2 items-end gap-x-4 gap-y-10 overflow-x-scroll px-2 sm:grid-cols-3 sm:px-4 md:flex md:gap-x-6 md:px-8 xl:px-10 2xl:px-12 [&>*]:shrink-0">
+      <ul className="remove-scrollbar bg-yellow-40 grid grid-cols-2 gap-x-4 gap-y-10 overflow-x-scroll px-2 sm:grid-cols-3 sm:px-4 md:flex md:gap-x-6 md:px-8 xl:px-10 2xl:px-12 [&>*]:shrink-0">
         {suggestionProducts.map(product => (
           <ProductDisplay
             key={product.id}

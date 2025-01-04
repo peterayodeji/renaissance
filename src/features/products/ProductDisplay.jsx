@@ -9,7 +9,7 @@ function ProductDisplay({ product, children, imgClasses = '' }) {
   return (
     <li
       onClick={() => navigate(`/product/${id}`)}
-      className="bg-purple-30 cursor-pointer"
+      className={`bg-purple-30 cursor-pointer ${imgLoadErr ? 'self-end' : ''}`}
     >
       {!imgLoadErr ? (
         <img

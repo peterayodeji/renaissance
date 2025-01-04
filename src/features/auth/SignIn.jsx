@@ -26,7 +26,7 @@ function SignIn() {
   if (!accessible) return <Navigate to="/account" />;
 
   return (
-    <div className="bg-stone-0 grow pb-14 pt-12">
+    <div className="bg-stone-20 grow px-2 pb-14 pt-12 sm:px-4">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="bg-blue-30 mx-auto max-w-sm text-sm xl:max-w-md"
@@ -80,7 +80,7 @@ function SignIn() {
         <button
           disabled={isLoggingIn}
           type="submit"
-          className="mb-12 w-full bg-black py-4 font-medium tracking-wider text-white disabled:opacity-5"
+          className="mb-12 w-full bg-black py-4 font-medium tracking-wider text-white disabled:cursor-not-allowed disabled:opacity-80"
         >
           <span className="undeline">Sign In</span>
         </button>

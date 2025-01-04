@@ -13,7 +13,7 @@ function CartItemDesc({ product }) {
 
       {product.maxQuantity ? (
         <p className="sm:text-bas mb-4 mt-2 text-sm lg:mb-0 lg:text-sm">
-          Only {product.maxQuantity} remaining
+          Only {product.maxQuantity} remaining!*
         </p>
       ) : (
         ''

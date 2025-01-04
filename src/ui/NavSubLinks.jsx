@@ -1,6 +1,6 @@
 function NavSubLinks({ links, children }) {
   return (
-    <div className="animate-SlideInLong pt-2">
+    <div className="animate-SlideInLong pt-4">
       <h6 className="mb-4 text-sm tracking-wide lg:text-base 2xl:text-lg">
         {children}
       </h6>

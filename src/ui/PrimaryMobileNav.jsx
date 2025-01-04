@@ -1,6 +1,5 @@
 import { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
-
 import { useFixedScrollFlicker } from '../hooks/useFixedScrollFlicker';
 
 import MobileNavActions from './MobileNavActions';
@@ -11,10 +10,11 @@ const PRIMARY_LINKS = [
   { name: 'Women', to: 'women', isEnclosed: true },
   { name: 'Men', to: 'men', isEnclosed: true },
   { name: 'Lifestyle', to: '/lifestyle', isEnclosed: false },
+  { name: 'Shop', to: '/products', isEnclosed: false },
   { name: 'Wishlist', to: '/wishlist', isEnclosed: false },
-  { name: 'Locations', to: '/locations', isEnclosed: false },
-  { name: 'Customer Care', to: '/customer-care', isEnclosed: false },
-  { name: 'Live Assistance', to: '/live-assistance', isEnclosed: false },
+  // { name: 'Locations', to: '/locations', isEnclosed: false },
+  // { name: 'Customer Care', to: '/customer-care', isEnclosed: false },
+  // { name: 'Live Assistance', to: '/live-assistance', isEnclosed: false },
 ];
 
 function PrimaryMobileNav({ activeOption, setActiveOption, onClose }) {
@@ -41,7 +41,9 @@ function PrimaryMobileNav({ activeOption, setActiveOption, onClose }) {
 
             {!isEnclosed && (
               <li>
-                <NavLink to={to}>{name}</NavLink>
+                <NavLink onClick={onClose} className="cursor-pointer" to={to}>
+                  {name}
+                </NavLink>
               </li>
             )}
           </Fragment>

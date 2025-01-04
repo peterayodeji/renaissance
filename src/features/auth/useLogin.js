@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { login as loginApi } from '../../services/apiAuth';
 
 export function useLogin() {
   const queryClient = useQueryClient();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const {
     mutate: login,
@@ -13,9 +13,9 @@ export function useLogin() {
   } = useMutation({
     mutationFn: loginApi,
     onSuccess: user => {
-      console.log(user);
+      // console.log(user);
       queryClient.setQueryData(['user'], user.user);
-      // navigate('/dashboard', { replace: true });
+      navigate(-1, { replace: true });
     },
   });
 

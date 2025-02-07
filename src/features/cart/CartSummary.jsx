@@ -1,15 +1,19 @@
 import { useSelector } from 'react-redux';
 import { isEmptyCart, getTotalCartPrice } from './cartSlice';
+import { calcPay } from '../../utils/helpers';
 
-function CartSummary() {
+function CartSummary({ children, shippingCost }) {
   const isEmpty = useSelector(isEmptyCart);
   const totalCartPrice = useSelector(getTotalCartPrice);
-  const promotion = totalCartPrice >= 100 ? totalCartPrice * 0.15 : 0;
-  const totalSummaryVal = totalCartPrice - promotion;
+  const { totalPay, promoPrice } = calcPay({
+    totalCartPrice,
+    shippingCost,
+  });
 
   return (
     <div className="space-y-4">
-      <h5 className="lg:hidden">CART SUMMARY</h5>
+      {children}
+      {!shippingCost && <h5 className="lg:hidden">CART SUMMARY</h5>}
 
       {!isEmpty && (
         <div>
@@ -27,16 +31,18 @@ function CartSummary() {
 
             <CartSummaryValue>
               <span>-$</span>
-              <span>{promotion.toFixed(2)}</span>
+              <span>{promoPrice.toFixed(2)}</span>
             </CartSummaryValue>
           </CartSummaryItem>
 
           <CartSummaryItem>
-            <p>Delivery fee</p>
+            <p>Shipping cost</p>
 
             <CartSummaryValue>
-              <span>&nbsp;</span>
-              <span>TBD</span>
+              <span>{shippingCost == null ? '' : '$'}</span>
+              <span>
+                {shippingCost == null ? 'TBD' : shippingCost.toFixed(2)}
+              </span>
             </CartSummaryValue>
           </CartSummaryItem>
         </div>
@@ -57,7 +63,7 @@ function CartSummary() {
         <p>TOTAL</p>
         <CartSummaryValue>
           <span>$</span>
-          <span>{!isEmpty ? totalSummaryVal.toFixed(2) : '0.00'}</span>
+          <span>{!isEmpty ? totalPay.toFixed(2) : '0.00'}</span>
         </CartSummaryValue>
       </CartSummaryItem>
     </div>

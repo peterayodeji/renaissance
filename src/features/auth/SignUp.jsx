@@ -40,7 +40,7 @@ function SignUp() {
         </h2>
 
         <div className="mb-6 space-y-4">
-          <div className="flex gap-x-2">
+          <div className="flex flex-col gap-x-2 gap-y-4 sm:flex-row">
             <FormRow label="First Name" error={errors?.firstName?.message}>
               <input
                 type="text"

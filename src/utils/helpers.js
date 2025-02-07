@@ -1,3 +1,14 @@
+import { PROMO } from './constants';
+
+export function calcPay({ totalCartPrice, shippingCost }) {
+  const promoPrice = totalCartPrice >= 100 ? totalCartPrice * PROMO : 0;
+  const totalPay = shippingCost
+    ? totalCartPrice - promoPrice + shippingCost
+    : totalCartPrice - promoPrice;
+
+  return { totalPay, promoPrice };
+}
+
 function capitalize(str) {
   return str[0].toUpperCase() + str.slice(1);
 }

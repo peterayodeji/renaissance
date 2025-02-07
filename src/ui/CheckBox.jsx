@@ -2,7 +2,7 @@ function CheckBox({ value, onCheck, name, children }) {
   return (
     <label
       htmlFor={name}
-      className="bg-green-30 inline-flex cursor-pointer items-center gap-x-2 py-1 font-medium"
+      className="bg-green-30 font-mediu inline-flex cursor-pointer gap-x-2 py-1"
     >
       <div className="relative flex h-5 w-5 items-center justify-center border-2 border-stone-900">
         <input
@@ -10,7 +10,7 @@ function CheckBox({ value, onCheck, name, children }) {
           name={name}
           id={name}
           checked={value}
-          onChange={() => onCheck(check => !check)}
+          onChange={() => onCheck?.(check => !check)}
           className="peer hidden"
         />
 
@@ -34,7 +34,7 @@ function CheckBox({ value, onCheck, name, children }) {
         <span className="absolute right-[-2px] top-[-2px] hidden h-3 w-[2px] bg-stone-100 peer-checked:inline-block"></span>
       </div>
 
-      <span>{children}</span>
+      <div>{children}</div>
     </label>
   );
 }

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
   getCartItemById,
   increaseItemQuantity,
@@ -7,7 +8,7 @@ import {
 } from '../cart/cartSlice';
 
 import WishlistAction from '../wishlist/WishlistAction';
-// import Modal from '../../ui/Modal';
+import Modal from '../../ui/Modal';
 
 const placeHolder = {
   id: 5,
@@ -60,8 +61,9 @@ const placeHolder = {
 
 function ProductActions({ product }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [currentSize, setCurrentSize] = useState({ value: '', quantity: null });
-  // const [showSuccessModal, setShowSuccessModal] = useState(true);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   // const { id, name, description, color, price, sizes, model } = product;
 
   const { id, name, price } = product;
@@ -85,6 +87,7 @@ function ProductActions({ product }) {
 
     if (cartItem) {
       dispatch(increaseItemQuantity(cartItemId));
+      setShowSuccessModal(true);
       return;
     }
 
@@ -103,6 +106,7 @@ function ProductActions({ product }) {
     };
 
     dispatch(addItem(newItem));
+    setShowSuccessModal(true);
   }
 
   return (
@@ -162,11 +166,21 @@ function ProductActions({ product }) {
         </form>
       </article>
 
-      {/* <Modal>
-        <p className="bg-fuchsia-40 h-[150px] w-[400px] py-4">
-          YOU HAVE SUCCESSFULLY ADDED ITEM TO CART!
-        </p>
-      </Modal> */}
+      {showSuccessModal && (
+        <Modal close={() => setShowSuccessModal(false)}>
+          <h3>ITEM ADDED TO BAG</h3>
+          <p>
+            Item successfully added! Continue shopping or review selections by
+            clicking proceed to bag.
+          </p>
+          <button
+            onClick={() => navigate('/cart')}
+            className="bg-black px-5 py-3 text-xs text-white"
+          >
+            PROCEED TO BAG
+          </button>
+        </Modal>
+      )}
     </>
   );
 }

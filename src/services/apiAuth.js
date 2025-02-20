@@ -11,24 +11,29 @@ export async function signup({
   const { data: authData, error: authError } = await supabase.auth.signUp({
     email,
     password,
+    options: {
+      data: {
+        fullName: firstName + ' ' + lastName,
+      },
+    },
   });
 
   if (authError) {
     throw new Error(authError.message);
   }
 
-  // Insert user profile into the 'profiles' table
-  const { error: profileError } = await supabase.from('profiles').insert([
+  if (!newsletter) return authData;
+
+  // Subscribe to newsletter
+  const { error: newsletterError } = await supabase.from('newsletters').upsert([
     {
-      id: authData.user.id,
-      firstName,
-      lastName,
-      newsletter,
+      email,
+      userId: authData.user.id,
     },
   ]);
 
-  if (profileError) {
-    console.log(profileError.message);
+  if (newsletterError) {
+    console.log(newsletterError.message);
   }
 
   return authData;

@@ -1,4 +1,4 @@
-import Newsletter from './Newsletter';
+import Newsletter from '../features/newsletter/Newsletter';
 import SiteMap from './SiteMap';
 import Copyright from './Copyright';
 

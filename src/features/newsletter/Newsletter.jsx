@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useSubscribe } from '../features/newsletter/useSubscribe';
+import { useSubscribe } from './useSubscribe';
 
-import RadioButton from './RadioButton';
-import Modal from './Modal';
+import RadioButton from '../../ui/RadioButton';
+import Modal from '../../ui/Modal';
 
 const NEWSLETTER_OPTIONS = [
   { label: 'Women', value: 'women' },

@@ -14,7 +14,7 @@ function Cart() {
       <HeadingPrimary>Shopping bag</HeadingPrimary>
 
       <div
-        className={`grid grid-cols-1 items-end justify-between gap-y-8 md:gap-y-0 lg:grid-cols-1 ${!isEmpty ? 'md:grid-cols-[320px_250px]' : ''}`}
+        className={`grid grid-cols-1 items-end justify-between gap-y-8 md:gap-y-0 lg:grid-cols-1 ${!isEmpty ? 'md:grid-cols-[320px_320px]' : ''}`}
       >
         {!isEmpty && <CartTable />}
 

@@ -4,7 +4,7 @@ import CartNote from './CartNote';
 
 function CartInfoActions() {
   return (
-    <div className="w-full md:ml-auto md:w-[250px] lg:w-auto lg:max-w-sm">
+    <div className="bg-blue-40 w-full md:ml-auto md:w-[320px] lg:w-auto lg:max-w-sm">
       <CartSummary />
       <CartActions />
       <CartNote />

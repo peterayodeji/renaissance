@@ -8,7 +8,7 @@ import { usePageAccess } from '../../hooks/usePageAccess';
 
 import HeadingPrimary from '../../ui/HeadingPrimary';
 import ShippingMethod from './ShippingMethod';
-import Payment from './Payment';
+import Payment from '../payment/Payment';
 import ShippingAddress from './ShippingAddress';
 import CheckoutInfoAction from './CheckoutInfoAction';
 
@@ -16,8 +16,15 @@ function Checkout() {
   const { accessible } = usePageAccess();
   const [selectedOption, setSelectedOption] = useState('creditDebitCard');
 
-  const { register, formState, getValues, handleSubmit, reset } = useForm();
-  const { errors } = formState;
+  const {
+    register,
+    getValues,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    mode: 'onBlur', // Runs validation when user loses focus
+  });
 
   const shippingCost = 10;
   // const totalCartPrice = useSelector(getTotalCartPrice);
@@ -30,7 +37,7 @@ function Checkout() {
   if (!accessible) return <Navigate to="/cart" />;
 
   function onSubmit(inp) {
-    console.log(inp);
+    console.log({ inp, selectedOption });
   }
 
   return (

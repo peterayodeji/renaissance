@@ -1,6 +1,12 @@
 import FormRow from '../../ui/FormRow';
 
 function ShippingAddress({ register, errors }) {
+  //   const preventNonNumeric = e => {
+  //     if (!/[0-9]/.test(e.key) && e.key !== 'Backspace' && e.key !== ' ') {
+  //       e.preventDefault();
+  //     }
+  //   };
+
   return (
     <div className="space-y-4">
       <h4 className="bg-purple-40 border-b border-stone-300 pb-2">
@@ -10,6 +16,9 @@ function ShippingAddress({ register, errors }) {
       <div className="flex flex-col gap-x-2 gap-y-4 sm:flex-row md:flex-col lg:flex-row">
         <FormRow label="First Name" error={errors?.firstName?.message}>
           <input
+            // inputMode="numeric"
+            // pattern="[0-9 ]*"
+            // onKeyDown={preventNonNumeric}
             type="text"
             id="firstName"
             {...register('firstName', {

@@ -1,6 +1,13 @@
+import { useCardNumber } from './useCardNumber';
+import { useCardExpDate } from './useCardExpDate';
+
 import FormRow from '../../ui/FormRow';
 
 function PayPalPayment({ register, errors }) {
+  const { cardNumber, handleChange } = useCardNumber('cardNumberPP');
+  const { expDate, handleExpChange, validateExpDate, inputRef } =
+    useCardExpDate('expirationDatePP');
+
   return (
     <div className="space-y-4">
       <h4 className="bg-purple-40 border-b border-stone-300 pb-2">
@@ -19,7 +26,12 @@ function PayPalPayment({ register, errors }) {
             id="cardNumberPP"
             {...register('cardNumberPP', {
               required: 'This field is required',
+              minLength: { value: 19, message: 'Invalid card number' },
             })}
+            value={cardNumber}
+            onChange={handleChange}
+            placeholder="1234 1234 1234 1234"
+            maxLength="19" // 16 digits + 3 spaces
             className="input"
           />
         </FormRow>
@@ -30,10 +42,16 @@ function PayPalPayment({ register, errors }) {
         >
           <input
             type="text"
+            ref={inputRef}
             id="expirationDatePP"
             {...register('expirationDatePP', {
               required: 'This field is required',
+              validate: validateExpDate,
             })}
+            value={expDate}
+            onChange={handleExpChange}
+            placeholder="MM / YY"
+            maxLength="7" // 4 digits + 2 spaces + 1 slash
             className="input w-44"
           />
         </FormRow>

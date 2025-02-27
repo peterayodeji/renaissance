@@ -1,6 +1,15 @@
+import { useCardNumber } from './useCardNumber';
+import { useCardExpDate } from './useCardExpDate';
+import { useSecurityCode } from './useSecurityCode';
+
 import FormRow from '../../ui/FormRow';
 
 function CreditDebitCardPayment({ register, errors }) {
+  const { cardNumber, handleChange } = useCardNumber('cardNumberCDC');
+  const { expDate, handleExpChange, validateExpDate, inputRef } =
+    useCardExpDate('expirationDateCDC');
+  const { securityCode, handleCodeChange } = useSecurityCode('securityCodeCDC');
+
   return (
     <div className="space-y-4">
       <h4 className="bg-purple-40 border-b border-stone-300 pb-2">
@@ -19,7 +28,12 @@ function CreditDebitCardPayment({ register, errors }) {
             id="cardNumberCDC"
             {...register('cardNumberCDC', {
               required: 'This field is required',
+              minLength: { value: 19, message: 'Invalid card number' },
             })}
+            value={cardNumber}
+            onChange={handleChange}
+            placeholder="1234 1234 1234 1234"
+            maxLength="19" // 16 digits + 3 spaces
             className="input"
           />
         </FormRow>
@@ -30,10 +44,16 @@ function CreditDebitCardPayment({ register, errors }) {
         >
           <input
             type="text"
+            ref={inputRef}
             id="expirationDateCDC"
             {...register('expirationDateCDC', {
               required: 'This field is required',
+              validate: validateExpDate,
             })}
+            value={expDate}
+            onChange={handleExpChange}
+            placeholder="MM / YY"
+            maxLength="7" // 4 digits + 2 spaces + 1 slash
             className="input w-44"
           />
         </FormRow>
@@ -60,7 +80,12 @@ function CreditDebitCardPayment({ register, errors }) {
             id="securityCodeCDC"
             {...register('securityCodeCDC', {
               required: 'This field is required',
+              minLength: { value: 3, message: 'Invalid security code' },
             })}
+            value={securityCode}
+            onChange={handleCodeChange}
+            placeholder="CVC"
+            maxLength="3" // 3 digits
             className="input w-44"
           />
         </FormRow>

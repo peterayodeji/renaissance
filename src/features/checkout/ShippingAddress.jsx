@@ -1,11 +1,18 @@
 import FormRow from '../../ui/FormRow';
+import { useShippingAddress } from './useShippingAddress.js';
+import { countryOptions, truncateText } from '../../utils/helpers';
 
-function ShippingAddress({ register, errors }) {
-  //   const preventNonNumeric = e => {
-  //     if (!/[0-9]/.test(e.key) && e.key !== 'Backspace' && e.key !== ' ') {
-  //       e.preventDefault();
-  //     }
-  //   };
+function ShippingAddress({ register, errors, reset }) {
+  // const preventNonNumeric = e => {
+  //   if (!/[0-9]/.test(e.key) && e.key !== 'Backspace' && e.key !== ' ') {
+  //     e.preventDefault();
+  //   }
+  // };
+
+  const { isLoading, stateOptions, selectedCountry, handleCountryChange } =
+    useShippingAddress(reset);
+
+  console.log({ isLoading });
 
   return (
     <div className="space-y-4">
@@ -16,9 +23,6 @@ function ShippingAddress({ register, errors }) {
       <div className="flex flex-col gap-x-2 gap-y-4 sm:flex-row md:flex-col lg:flex-row">
         <FormRow label="First Name" error={errors?.firstName?.message}>
           <input
-            // inputMode="numeric"
-            // pattern="[0-9 ]*"
-            // onKeyDown={preventNonNumeric}
             type="text"
             id="firstName"
             {...register('firstName', {
@@ -90,30 +94,42 @@ function ShippingAddress({ register, errors }) {
 
       <div className="flex flex-col gap-x-2 gap-y-4 sm:flex-row md:flex-col lg:flex-row">
         <FormRow label="Country/Region" error={errors?.country?.message}>
-          <input
-            type="text"
+          <select
             id="country"
-            {...register('country', {
-              required: 'This field is required',
-            })}
+            {...register('country', { required: 'Country is required' })}
+            value={selectedCountry}
+            onChange={handleCountryChange}
             className="input"
-          />
+          >
+            {countryOptions.map(({ countryCode, country }) => (
+              <option key={countryCode} value={countryCode}>
+                {truncateText(country, 30)}
+              </option>
+            ))}
+          </select>
         </FormRow>
 
         <FormRow label="State/Province" error={errors?.state?.message}>
-          <input
-            type="text"
+          <select
             id="state"
-            {...register('state', {
-              required: 'This field is required',
-            })}
-            className="input w-44"
-          />
+            {...register('state', { required: 'State is required' })}
+            disabled={!selectedCountry}
+            className="input disabled:cursor-not-allowed"
+          >
+            {stateOptions.map(([state, stateCode]) => (
+              <option key={stateCode} value={state}>
+                {truncateText(state, 30)}
+              </option>
+            ))}
+          </select>
         </FormRow>
       </div>
 
       <FormRow label="Phone" error={errors?.zip?.message}>
         <input
+          // inputMode="numeric"
+          // pattern="[0-9 ]*"
+          // onKeyDown={preventNonNumeric}
           type="text"
           id="phone"
           {...register('phone', {

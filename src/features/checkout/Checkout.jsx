@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { usePageAccess } from '../../hooks/usePageAccess';
+import { countryOptions, getCountryData } from '../../utils/helpers';
+
 // import { useSelector } from 'react-redux';
 // import { getTotalCartPrice } from '../cart/cartSlice';
 // import { calcPay } from '../../utils/helpers';
@@ -22,9 +24,7 @@ function Checkout() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({
-    mode: 'onBlur', // Runs validation when user loses focus
-  });
+  } = useForm({ mode: 'onBlur' });
 
   const shippingCost = 10;
   // const totalCartPrice = useSelector(getTotalCartPrice);
@@ -37,6 +37,12 @@ function Checkout() {
   if (!accessible) return <Navigate to="/cart" />;
 
   function onSubmit(inp) {
+    const { country, countryCode } = getCountryData(
+      inp.country,
+      countryOptions,
+    );
+
+    console.log({ country, countryCode });
     console.log({ inp, selectedOption });
   }
 
@@ -49,7 +55,7 @@ function Checkout() {
         className="bg-green-70 flex flex-col items-start gap-y-8 md:flex-row md:justify-between lg:gap-x-24"
       >
         <div className="bg-blue-10 w-full space-y-8 md:w-[320px] lg:w-[55%] xl:w-[60%]">
-          <ShippingAddress register={register} errors={errors} />
+          <ShippingAddress register={register} errors={errors} reset={reset} />
           <ShippingMethod />
           <Payment
             register={register}

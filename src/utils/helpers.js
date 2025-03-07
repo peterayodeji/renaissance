@@ -1,4 +1,19 @@
 import { PROMO } from './constants';
+import { allCountries } from 'country-region-data';
+
+export const truncateText = (text, maxLength) =>
+  text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+
+export const getCountryData = (selectedCountry, countryOptions) =>
+  countryOptions.find(c => c.countryCode === selectedCountry);
+
+export const countryOptions = allCountries.map(
+  ([country, countryCode, states]) => ({
+    country,
+    countryCode,
+    states,
+  }),
+);
 
 export function calcPay({ totalCartPrice, shippingCost }) {
   const promoPrice = totalCartPrice >= 100 ? totalCartPrice * PROMO : 0;

@@ -1,4 +1,5 @@
 import supabase from './supabase';
+const ipinfoToken = import.meta.env.VITE_API_IPINFO;
 
 // # SIGNUP
 export async function signup({
@@ -88,4 +89,15 @@ export async function getCurrentUser() {
 export async function logout() {
   const { error } = await supabase.auth.signOut();
   if (error) throw new Error(error.message);
+}
+
+// # GET USER LOCATION
+export async function getUserLocation() {
+  const res = await fetch(`https://ipinfo.io/json?token=${ipinfoToken}`);
+  if (!res.ok) {
+    // console.log('Failed to fetch location');
+    throw new Error('Failed to fetch location');
+  }
+
+  return res.json();
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useQuery } from '@tanstack/react-query';
 import { getUserLocation } from '../../services/apiAuth';
@@ -6,12 +6,11 @@ import { countryOptions, getCountryData } from '../../utils/helpers';
 
 export function useShippingAddress(reset) {
   const { watch, setValue } = useForm();
+  const [isResetDone, setIsResetDone] = useState(false);
   const { isLoading, data, isError } = useQuery({
     queryKey: ['userLocation'],
     queryFn: getUserLocation,
   });
-
-  const [isResetDone, setIsResetDone] = useState(false);
 
   useEffect(() => {
     if (isError) {
@@ -21,13 +20,13 @@ export function useShippingAddress(reset) {
 
   useEffect(() => {
     if (data && !isResetDone) {
-      // reset({ firstName: 'John' });
+      reset({ state: data.region });
       setValue('country', data.country, { shouldValidate: true });
       setIsResetDone(true); // Ensure reset only happens once per visit
     }
   }, [data, reset, setValue, isResetDone]);
 
-  const selectedCountry = watch('country', 'US');
+  const selectedCountry = watch('country', '');
 
   // Get states for selected country
   const stateOptions =

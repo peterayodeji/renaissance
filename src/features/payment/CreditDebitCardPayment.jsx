@@ -34,6 +34,7 @@ function CreditDebitCardPayment({ register, errors }) {
             onChange={handleChange}
             placeholder="1234 1234 1234 1234"
             maxLength="19" // 16 digits + 3 spaces
+            autoComplete="new-password"
             className="input"
           />
         </FormRow>
@@ -54,6 +55,7 @@ function CreditDebitCardPayment({ register, errors }) {
             onChange={handleExpChange}
             placeholder="MM / YY"
             maxLength="7" // 4 digits + 2 spaces + 1 slash
+            autoComplete="new-password"
             className="input w-44"
           />
         </FormRow>
@@ -70,6 +72,7 @@ function CreditDebitCardPayment({ register, errors }) {
             {...register('cardholdersNameCDC', {
               required: 'This field is required',
             })}
+            autoComplete="new-password"
             className="input"
           />
         </FormRow>
@@ -86,6 +89,7 @@ function CreditDebitCardPayment({ register, errors }) {
             onChange={handleCodeChange}
             placeholder="CVC"
             maxLength="3" // 3 digits
+            autoComplete="new-password"
             className="input w-44"
           />
         </FormRow>

@@ -1,6 +1,8 @@
-import FormRow from '../../ui/FormRow';
 import { useShippingAddress } from './useShippingAddress.js';
 import { countryOptions, truncateText } from '../../utils/helpers';
+
+import FormRow from '../../ui/FormRow';
+import Loader from '../../ui/Loader.jsx';
 
 function ShippingAddress({ register, errors, reset }) {
   // const preventNonNumeric = e => {
@@ -11,8 +13,6 @@ function ShippingAddress({ register, errors, reset }) {
 
   const { isLoading, stateOptions, selectedCountry, handleCountryChange } =
     useShippingAddress(reset);
-
-  console.log({ isLoading });
 
   return (
     <div className="space-y-4">
@@ -60,9 +60,7 @@ function ShippingAddress({ register, errors, reset }) {
           <input
             type="text"
             id="company"
-            {...register('company', {
-              required: 'This field is required',
-            })}
+            {...register('company')}
             className="input"
           />
         </FormRow>
@@ -101,6 +99,7 @@ function ShippingAddress({ register, errors, reset }) {
             onChange={handleCountryChange}
             className="input"
           >
+            <option value="">Select Country</option>
             {countryOptions.map(({ countryCode, country }) => (
               <option key={countryCode} value={countryCode}>
                 {truncateText(country, 30)}
@@ -138,6 +137,8 @@ function ShippingAddress({ register, errors, reset }) {
           className="input w-44"
         />
       </FormRow>
+
+      {isLoading && <Loader />}
     </div>
   );
 }

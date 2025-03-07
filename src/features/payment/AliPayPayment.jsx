@@ -32,6 +32,7 @@ function AliPayPayment({ register, errors }) {
             onChange={handleChange}
             placeholder="1234 1234 1234 1234"
             maxLength="19" // 16 digits + 3 spaces
+            autoComplete="new-password"
             className="input"
           />
         </FormRow>
@@ -52,6 +53,7 @@ function AliPayPayment({ register, errors }) {
             onChange={handleExpChange}
             placeholder="MM / YY"
             maxLength="7" // 4 digits + 2 spaces + 1 slash
+            autoComplete="new-password"
             className="input w-44"
           />
         </FormRow>
@@ -67,6 +69,7 @@ function AliPayPayment({ register, errors }) {
           {...register('cardholdersNameAP', {
             required: 'This field is required',
           })}
+          autoComplete="new-password"
           className="input w-44"
         />
       </FormRow>

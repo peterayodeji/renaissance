@@ -20,8 +20,13 @@ import ResetPassword from './features/auth/ResetPassword';
 import CheckoutR from './features/checkout/CheckoutR';
 import Checkout from './features/checkout/Checkout';
 import PageNotFound from './pages/PageNotFound';
-import Account from './features/auth/Account';
+import Account from './features/account/Account';
 import ProtectedRoute from './ui/ProtectedRoute';
+import AccountLayout from './features/account/AccountLayout';
+import AccountDetails from './features/account/AccountDetails';
+import AccountOrders from './features/account/AccountOrders';
+import AccountPreferences from './features/account/AccountPreferences';
+import AccountAddresses from './features/account/AccountAddresses';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -48,10 +53,17 @@ const router = createBrowserRouter(
           path="account"
           element={
             <ProtectedRoute>
-              <Account />
+              <AccountLayout />
             </ProtectedRoute>
           }
-        />
+        >
+          <Route index element={<AccountDetails />} />
+          <Route path="orders" element={<AccountOrders />} />
+          <Route path="details" element={<AccountDetails />} />
+          <Route path="preferences" element={<AccountPreferences />} />
+          <Route path="addresses" element={<AccountAddresses />} />
+          <Route path="logout" element={<Account />} />
+        </Route>
         <Route path="account/sign-in" element={<SignIn />} />
         <Route path="account/register" element={<SignUp />} />
         <Route path="account/reset-password" element={<ResetPassword />} />

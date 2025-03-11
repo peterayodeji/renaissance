@@ -1,4 +1,4 @@
-import { useLogout } from './useLogout';
+import { useLogout } from '../auth/useLogout';
 
 function Account() {
   const { logout, isLoading: isLoggingOut } = useLogout();

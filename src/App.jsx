@@ -20,7 +20,6 @@ import ResetPassword from './features/auth/ResetPassword';
 import CheckoutR from './features/checkout/CheckoutR';
 import Checkout from './features/checkout/Checkout';
 import PageNotFound from './pages/PageNotFound';
-import Account from './features/account/Account';
 import ProtectedRoute from './ui/ProtectedRoute';
 import AccountLayout from './features/account/AccountLayout';
 import AccountDetails from './features/account/AccountDetails';
@@ -62,7 +61,6 @@ const router = createBrowserRouter(
           <Route path="details" element={<AccountDetails />} />
           <Route path="preferences" element={<AccountPreferences />} />
           <Route path="addresses" element={<AccountAddresses />} />
-          <Route path="logout" element={<Account />} />
         </Route>
         <Route path="account/sign-in" element={<SignIn />} />
         <Route path="account/register" element={<SignUp />} />

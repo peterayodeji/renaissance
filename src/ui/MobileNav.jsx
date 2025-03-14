@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
+import { useNavigate } from 'react-router-dom';
+import { useUser } from '../features/auth/useUser';
+
 import PrimaryMobileNav from './PrimaryMobileNav';
 import SecondaryMobileNav from './SecondaryMobileNav';
 import TertiaryMobileNav from './TertiaryMobileNav';
-import { createPortal } from 'react-dom';
-import { useUser } from '../features/auth/useUser';
-import { useNavigate } from 'react-router-dom';
+import Logout from '../features/auth/Logout';
 
 function MobileNav({ isOpen, onClose }) {
   const [activeOption, setActiveOption] = useState(null);
@@ -64,16 +66,20 @@ function MobileNav({ isOpen, onClose }) {
               </button>
             </>
           ) : (
-            <button
-              type="button"
-              onClick={() => {
-                navigate('/account');
-                onClose();
-              }}
-              className="w-full bg-black py-2 tracking-wider text-white disabled:opacity-5"
-            >
-              <span className="undeline">View Account</span>
-            </button>
+            <>
+              <button
+                type="button"
+                onClick={() => {
+                  navigate('/account');
+                  onClose();
+                }}
+                className="w-full bg-black py-2 tracking-wider text-white disabled:opacity-5"
+              >
+                <span className="undeline">View Account</span>
+              </button>
+
+              <Logout callback={onClose} />
+            </>
           )}
         </div>
       </div>

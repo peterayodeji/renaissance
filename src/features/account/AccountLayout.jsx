@@ -1,4 +1,5 @@
 import { Link, Outlet } from 'react-router-dom';
+import Logout from '../auth/Logout';
 
 function AccountLayout() {
   return (
@@ -22,7 +23,7 @@ function AccountLayout() {
               <Link to="/account/addresses">Addresses</Link>
             </li>
             <li>
-              <Link to="/account/logout">Logout</Link>
+              <Logout type="secondary" />
             </li>
           </ul>
         </nav>

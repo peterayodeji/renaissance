@@ -58,6 +58,7 @@ function Newsletter() {
           <form onSubmit={handleSubmit}>
             <div className="flex justify-center gap-x-8 md:justify-start">
               <RadioButton
+                name="emailNewsletter"
                 options={NEWSLETTER_OPTIONS}
                 selectedOption={selectedOption}
                 onSelectOption={setSelectedOption}

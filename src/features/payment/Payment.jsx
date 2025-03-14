@@ -19,6 +19,7 @@ function Payment({ register, errors, selectedOption, setSelectedOption }) {
 
         <div className="bg-green-30 flex flex-col items-start gap-y-2">
           <RadioButton
+            name="payment"
             options={PAYMENT_OPTIONS}
             selectedOption={selectedOption}
             onSelectOption={setSelectedOption}

@@ -29,7 +29,7 @@ function AccountLayout() {
       </aside>
 
       {/* Main Content */}
-      <main className="bg-blue-60 w-full max-w-sm pb-14 pt-12 lg:min-h-[calc(100vh-4rem)] xl:max-w-md 2xl:min-h-[calc(100vh-5rem)]">
+      <main className="bg-green-60 w-full max-w-sm pb-14 pt-12 lg:min-h-[calc(100vh-4rem)] xl:max-w-md 2xl:min-h-[calc(100vh-5rem)]">
         <Outlet />
       </main>
 

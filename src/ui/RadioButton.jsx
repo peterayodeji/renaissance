@@ -1,4 +1,4 @@
-function RadioButton({ options, selectedOption, onSelectOption }) {
+function RadioButton({ name, options, selectedOption, onSelectOption }) {
   return (
     <>
       {options.map(({ value, label }) => (
@@ -10,7 +10,7 @@ function RadioButton({ options, selectedOption, onSelectOption }) {
           <div className="relative flex h-5 w-5 items-center justify-center border-2 border-gray-900">
             <input
               type="radio"
-              name="gender"
+              name={name}
               value={value}
               id={value}
               checked={selectedOption === value}

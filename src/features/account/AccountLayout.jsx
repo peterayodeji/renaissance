@@ -2,7 +2,7 @@ import { Link, Outlet } from 'react-router-dom';
 
 function AccountLayout() {
   return (
-    <div className="bg-stone-40 flex grow px-8 text-sm lg:items-end xl:px-10 2xl:px-12">
+    <div className="bg-stone-10 flex grow px-8 text-sm lg:items-end xl:px-10 2xl:px-12">
       {/* Sidebar */}
       <aside className="hiddenn bg-pink-80 flex-1 lg:sticky lg:bottom-0 lg:h-[calc(100vh-4rem)] 2xl:h-[calc(100vh-5rem)]">
         <nav className="mt-14">

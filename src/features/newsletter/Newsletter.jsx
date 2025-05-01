@@ -5,9 +5,9 @@ import RadioButton from '../../ui/RadioButton';
 import Modal from '../../ui/Modal';
 
 const NEWSLETTER_OPTIONS = [
-  { label: 'Women', value: 'women' },
-  { label: 'Men', value: 'men' },
-  { label: 'Both', value: 'both' },
+  { id: 'radio-opt-6e3b', label: 'Women', value: 'women' },
+  { id: 'radio-opt-7f4c', label: 'Men', value: 'men' },
+  { id: 'radio-opt-8g5d', label: 'Both', value: 'both' },
 ];
 
 function Newsletter() {

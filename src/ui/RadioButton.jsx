@@ -1,10 +1,10 @@
 function RadioButton({ name, options, selectedOption, onSelectOption }) {
   return (
     <>
-      {options.map(({ value, label }) => (
+      {options.map(({ id, label, value }) => (
         <label
           key={value}
-          htmlFor={value}
+          htmlFor={id}
           className="flex cursor-pointer items-center gap-x-2"
         >
           <div className="relative flex h-5 w-5 items-center justify-center border-2 border-gray-900">
@@ -12,7 +12,7 @@ function RadioButton({ name, options, selectedOption, onSelectOption }) {
               type="radio"
               name={name}
               value={value}
-              id={value}
+              id={id}
               checked={selectedOption === value}
               onChange={e => onSelectOption(e.target.value)}
               className="peer hidden"

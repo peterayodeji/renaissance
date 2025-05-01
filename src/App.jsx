@@ -26,6 +26,7 @@ import AccountDetails from './features/account/AccountDetails';
 import AccountOrders from './features/account/AccountOrders';
 import AccountPreferences from './features/account/AccountPreferences';
 import AccountAddresses from './features/account/AccountAddresses';
+import AccountOptions from './features/account/AccountOptions';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -62,6 +63,16 @@ const router = createBrowserRouter(
           <Route path="preferences" element={<AccountPreferences />} />
           <Route path="addresses" element={<AccountAddresses />} />
         </Route>
+
+        <Route
+          path="account/options"
+          element={
+            <ProtectedRoute>
+              <AccountOptions />
+            </ProtectedRoute>
+          }
+        />
+
         <Route path="account/sign-in" element={<SignIn />} />
         <Route path="account/register" element={<SignUp />} />
         <Route path="account/reset-password" element={<ResetPassword />} />

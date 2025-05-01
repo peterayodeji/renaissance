@@ -21,7 +21,7 @@ function CreditDebitCardPayment({ register, errors }) {
         payment information.
       </p>
 
-      <div className="flex flex-col gap-x-2 gap-y-4 sm:flex-row md:flex-col lg:flex-row">
+      <div className="flex flex-col gap-x-2 gap-y-4 lg:flex-row">
         <FormRow label="Card number" error={errors?.cardNumberCDC?.message}>
           <input
             type="text"
@@ -61,7 +61,7 @@ function CreditDebitCardPayment({ register, errors }) {
         </FormRow>
       </div>
 
-      <div className="flex flex-col gap-x-2 gap-y-4 sm:flex-row md:flex-col lg:flex-row">
+      <div className="flex flex-col gap-x-2 gap-y-4 lg:flex-row">
         <FormRow
           label="Cardholder's name"
           error={errors?.cardholdersNameCDC?.message}

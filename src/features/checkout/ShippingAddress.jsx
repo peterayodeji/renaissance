@@ -20,7 +20,7 @@ function ShippingAddress({ register, errors, reset }) {
         SHIPPING ADDRESS
       </h4>
 
-      <div className="flex flex-col gap-x-2 gap-y-4 sm:flex-row md:flex-col lg:flex-row">
+      <div className="flex flex-col gap-x-2 gap-y-4 lg:flex-row">
         <FormRow label="First Name" error={errors?.firstName?.message}>
           <input
             type="text"
@@ -44,7 +44,7 @@ function ShippingAddress({ register, errors, reset }) {
         </FormRow>
       </div>
 
-      <div className="flex flex-col gap-x-2 gap-y-4 sm:flex-row md:flex-col lg:flex-row">
+      <div className="flex flex-col gap-x-2 gap-y-4 lg:flex-row">
         <FormRow label="Street Address" error={errors?.streetAddress?.message}>
           <input
             type="text"
@@ -66,7 +66,7 @@ function ShippingAddress({ register, errors, reset }) {
         </FormRow>
       </div>
 
-      <div className="flex flex-col gap-x-2 gap-y-4 sm:flex-row md:flex-col lg:flex-row">
+      <div className="flex flex-col gap-x-2 gap-y-4 lg:flex-row">
         <FormRow label="City" error={errors?.city?.message}>
           <input
             type="text"
@@ -90,7 +90,7 @@ function ShippingAddress({ register, errors, reset }) {
         </FormRow>
       </div>
 
-      <div className="flex flex-col gap-x-2 gap-y-4 sm:flex-row md:flex-col lg:flex-row">
+      <div className="flex flex-col gap-x-2 gap-y-4 lg:flex-row">
         <FormRow label="Country/Region" error={errors?.country?.message}>
           <select
             id="country"

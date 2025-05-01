@@ -19,7 +19,7 @@ function PayPalPayment({ register, errors }) {
         payment information.
       </p>
 
-      <div className="flex flex-col gap-x-2 gap-y-4 sm:flex-row md:flex-col lg:flex-row">
+      <div className="flex flex-col gap-x-2 gap-y-4 lg:flex-row">
         <FormRow label="Card number" error={errors?.cardNumberPP?.message}>
           <input
             type="text"

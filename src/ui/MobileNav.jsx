@@ -70,7 +70,7 @@ function MobileNav({ isOpen, onClose }) {
               <button
                 type="button"
                 onClick={() => {
-                  navigate('/account');
+                  navigate('/account/options');
                   onClose();
                 }}
                 className="w-full bg-black py-2 tracking-wider text-white disabled:opacity-5"

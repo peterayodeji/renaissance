@@ -5,14 +5,14 @@ import RadioButton from '../../ui/RadioButton';
 import FormRow from '../../ui/FormRow';
 
 const NEWSLETTER_OPTIONS = [
-  { label: 'Subscribed', value: 'subscribed' },
-  { label: 'Unsubscribed', value: 'unsubscribed' },
+  { id: 'radio-opt-1a7c', label: 'Subscribed', value: 'subscribed' },
+  { id: 'radio-opt-2b8d', label: 'Unsubscribed', value: 'unsubscribed' },
 ];
 
 const GENDER_OPTIONS = [
-  { label: 'Women', value: 'women' },
-  { label: 'Men', value: 'men' },
-  { label: 'Both', value: 'both' },
+  { id: 'radio-opt-3f2e', label: 'Women', value: 'women' },
+  { id: 'radio-opt-4c9a', label: 'Men', value: 'men' },
+  { id: 'radio-opt-5d1f', label: 'Both', value: 'both' },
 ];
 
 function AccountPreferences() {
@@ -29,7 +29,7 @@ function AccountPreferences() {
       <div className="mb-8 space-y-6">
         <div className="space-y-3">
           <h4 className="text-base">Newsletters</h4>
-          <div className="flex justify-center gap-x-8 md:justify-start">
+          <div className="flex gap-x-8">
             <RadioButton
               name="newsletter"
               options={NEWSLETTER_OPTIONS}
@@ -46,7 +46,7 @@ function AccountPreferences() {
         <div className="space-y-3">
           <h4 className="text-base">Preferences</h4>
           <p>Gender</p>
-          <div className="flex justify-center gap-x-8 md:justify-start">
+          <div className="flex gap-x-8">
             <RadioButton
               name="gender"
               options={GENDER_OPTIONS}

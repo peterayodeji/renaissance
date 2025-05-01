@@ -11,7 +11,7 @@ function ProductViewMobile({ images, setZoomViewIndex }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   return (
-    <div className="mx-auto w-[95vw] sm:w-[50vw]">
+    <div className="bg-green-40 mx-auto w-[95vw] md:w-[50vw]">
       <Swiper
         style={{
           '--swiper-navigation-color': 'transparent',
@@ -38,7 +38,7 @@ function ProductViewMobile({ images, setZoomViewIndex }) {
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper h-[75px] w-[80%] px-2 sm:w-full sm:px-8 md:px-12"
+        className="mySwiper bg-yellow-30 h-[75px] w-[80%] px-2 sm:px-12 md:w-full"
       >
         {/* use url for key later */}
         {images.map((img, index) => (

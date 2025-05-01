@@ -12,7 +12,7 @@ const placeHolder = {
 
 function ProductOverviewMobile({ product, setZoomViewIndex }) {
   return (
-    <div className="bg-yellow-30 grid pt-4 sm:grid-cols-[1fr_1fr] sm:pb-16">
+    <div className="bg-yellow-30 grid pt-4 md:grid-cols-[1fr_1fr] md:pb-16">
       <ProductViewMobile
         images={placeHolder.images}
         setZoomViewIndex={setZoomViewIndex}

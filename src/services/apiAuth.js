@@ -85,6 +85,25 @@ export async function getCurrentUser() {
   return data?.user;
 }
 
+// # UPDATE CURRENT USER
+export async function updateCurrentUser({ fullName, password }) {
+  // 1. Update fullName of the current user
+  const { data, error } = await supabase.auth.updateUser({
+    data: { fullName },
+  });
+  if (error) throw new Error(error.message);
+
+  if (!password) return data;
+
+  // 2. Update password of the current user
+  const { data: updatedUser, error: error2 } = await supabase.auth.updateUser({
+    password,
+  });
+
+  if (error2) throw new Error(error.message);
+  return updatedUser;
+}
+
 // # LOGOUT
 export async function logout() {
   const { error } = await supabase.auth.signOut();

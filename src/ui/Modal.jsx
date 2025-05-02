@@ -11,11 +11,11 @@ function Modal({ children, close }) {
     <Overlay>
       <div
         ref={modalEl}
-        className="bg-yellow-30 fixed left-1/2 top-1/2 w-64 -translate-x-1/2 -translate-y-1/2 transform border border-stone-300 bg-white px-5 pb-5 pt-7 text-sm transition-all sm:w-96"
+        className="bg-yellow-30 fixed left-1/2 top-1/2 w-[310px] -translate-x-1/2 -translate-y-1/2 transform border border-stone-300 bg-white px-5 pb-5 pt-7 text-sm transition-all sm:w-96"
       >
         <button
           onClick={close}
-          className="bg-green-30 absolute right-5 top-2 p-2"
+          className="bg-green-30 absolute right-2 top-1 p-2"
         >
           <img src="/x.svg" alt="Cancel" className="w-5" />
         </button>

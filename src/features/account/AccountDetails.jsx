@@ -1,103 +1,172 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useUser } from '../auth/useUser';
+import { useUpdateUser } from '../auth/useUpdateUser';
+
 import FormRow from '../../ui/FormRow';
+import Modal from '../../ui/Modal';
 
 function AccountDetails() {
-  const { register, formState, getValues, handleSubmit, reset } = useForm();
-  const { errors } = formState;
+  const {
+    user: {
+      email,
+      user_metadata: { fullName: currentFullName },
+    },
+  } = useUser();
+  const [firstName, lastName] = currentFullName.trim().split(' ');
+
+  const {
+    register,
+    formState: { errors },
+    getValues,
+    handleSubmit,
+    reset,
+  } = useForm({
+    defaultValues: { firstName, lastName },
+  });
+
+  const { updateUser, isUpdating } = useUpdateUser();
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [error, setError] = useState('');
+
+  function onSubmit({ firstName, lastName, password }) {
+    const fullName = `${firstName} ${lastName}`;
+    updateUser(
+      { fullName, password },
+      {
+        onSuccess: ({ user }) => {
+          setShowSuccessModal(true);
+
+          const [firstName, lastName] = user.user_metadata.fullName
+            .trim()
+            .split(' ');
+          reset({ firstName, lastName, password: '', passwordConfirm: '' });
+        },
+        onError: err => {
+          setError(err.message);
+
+          const [firstName, lastName] = currentFullName.trim().split(' ');
+          reset({ firstName, lastName, password: '', passwordConfirm: '' });
+        },
+      },
+    );
+  }
 
   return (
-    <form className="bg-yellow-30">
-      <h2 className="bg-blue-20 mb-10 text-center text-3xl font-semibold">
-        Account Details
-      </h2>
+    <>
+      <form onSubmit={handleSubmit(onSubmit)} className="bg-yellow-30">
+        <h2 className="bg-blue-20 mb-10 text-center text-3xl font-semibold">
+          Account Details
+        </h2>
 
-      <div className="mb-6 space-y-4">
-        <div className="flex flex-col gap-x-2 gap-y-4 lg:flex-row">
-          <FormRow label="First Name" error={errors?.firstName?.message}>
+        <div className="mb-6 space-y-4">
+          <div className="flex flex-col gap-x-2 gap-y-4 lg:flex-row">
+            <FormRow label="First Name" error={errors?.firstName?.message}>
+              <input
+                type="text"
+                id="firstName"
+                {...register('firstName', {
+                  required: 'Please fill out this field',
+                })}
+                // disabled={isUpdating}
+                className="input"
+              />
+            </FormRow>
+
+            <FormRow label="Last Name" error={errors?.lastName?.message}>
+              <input
+                type="text"
+                id="lastName"
+                {...register('lastName', {
+                  required: 'Please fill out this field',
+                })}
+                // disabled={isUpdating}
+                className="input"
+              />
+            </FormRow>
+          </div>
+
+          <FormRow label="Email Address">
             <input
               type="text"
-              id="firstName"
-              {...register('firstName', {
-                required: 'This field is required',
+              value={email}
+              id="email"
+              disabled
+              className="input cursor-not-allowed bg-stone-100"
+            />
+          </FormRow>
+
+          <FormRow
+            label="Password (min 8 characters)"
+            error={errors?.password?.message}
+          >
+            <input
+              type="password"
+              id="password"
+              {...register('password', {
+                minLength: {
+                  value: 8,
+                  message: 'Password needs a minimum of 8 characters',
+                },
               })}
               className="input"
             />
           </FormRow>
 
-          <FormRow label="Last Name" error={errors?.lastName?.message}>
+          <FormRow
+            label="Confirm Password"
+            error={errors?.passwordConfirm?.message}
+          >
             <input
-              type="text"
-              id="lastName"
-              {...register('lastName', {
-                required: 'This field is required',
+              type="password"
+              id="passwordConfirm"
+              {...register('passwordConfirm', {
+                validate: value =>
+                  value === getValues().password || 'Passwords need to match',
               })}
               className="input"
             />
           </FormRow>
         </div>
 
-        <FormRow label="Email Address" error={errors?.email?.message}>
-          <input
-            type="text"
-            id="email"
-            {...register('email', {
-              required: 'This field is required',
-              pattern: {
-                value: /\S+@\S+\.\S+/,
-                message: 'Please provide a valid email address',
-              },
-            })}
-            className="input"
-          />
-        </FormRow>
-
-        <FormRow
-          label="Password (min 8 characters)"
-          error={errors?.password?.message}
+        <button
+          type="submit"
+          disabled={isUpdating}
+          className="w-full bg-black py-4 font-medium tracking-wider text-white disabled:cursor-not-allowed disabled:opacity-5"
         >
-          <input
-            type="password"
-            id="password"
-            {...register('password', {
-              required: 'This field is required',
-              minLength: {
-                value: 8,
-                message: 'Password needs a minimum of 8 characters',
-              },
-            })}
-            className="input"
-          />
+          <span className="undeline">Save Changes</span>
+        </button>
+      </form>
 
-          {/* <div className="bg-green-30 mt-1 text-red-600">
-        Use between 10 and 30 characters, with atleast 1 letter and 1 number
-      </div> */}
-        </FormRow>
+      {showSuccessModal && (
+        <Modal close={() => setShowSuccessModal(false)}>
+          <h3>CHANGES SAVED SUCCESSFULLY</h3>
+          <p>You have succesfully made changes to your account details.</p>
+          <button
+            onClick={() => setShowSuccessModal(false)}
+            className="bg-black px-5 py-3 text-xs text-white"
+          >
+            OK
+          </button>
+        </Modal>
+      )}
 
-        <FormRow
-          label="Confirm Password"
-          error={errors?.passwordConfirm?.message}
-        >
-          <input
-            type="password"
-            id="passwordConfirm"
-            {...register('passwordConfirm', {
-              required: 'This field is required',
-              validate: value =>
-                value === getValues().password || 'Passwords need to match',
-            })}
-            className="input"
-          />
-        </FormRow>
-      </div>
-
-      <button
-        type="submit"
-        // disabled={isLoading}
-        className="w-full bg-black py-4 font-medium tracking-wider text-white disabled:opacity-5"
-      >
-        <span className="undeline">Save Changes</span>
-      </button>
-    </form>
+      {error && (
+        <Modal close={() => setError('')}>
+          <h3>CHANGES NOT SUCCESSFUL</h3>
+          <p>
+            An error occured while making changes to your account details!{' '}
+            {error.message}
+          </p>
+          <button
+            onClick={() => setError('')}
+            className="bg-black px-5 py-3 text-xs text-white"
+          >
+            OK
+          </button>
+        </Modal>
+      )}
+    </>
   );
 }
 

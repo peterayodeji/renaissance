@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useUser } from '../features/auth/useUser';
 
+import Loader from './Loader';
+
 function ProtectedRoute({ children }) {
   const navigate = useNavigate();
 
@@ -18,12 +20,7 @@ function ProtectedRoute({ children }) {
   );
 
   // 3. While loading, show a spinner
-  if (isLoading)
-    return (
-      <div>
-        <p>LOADING...</p>
-      </div>
-    );
+  if (isLoading) return <Loader />;
 
   // 4.If there IS a user, render the app
   if (isAuthenticated) return children;

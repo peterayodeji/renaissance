@@ -1,14 +1,20 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { subscribe } from '../../services/apiNewsletter';
 
-export function useSubscribe() {
+export function useSubscribe(email) {
+  const queryClient = useQueryClient();
+
   const {
-    isPending,
+    isPending: isPendingSubscribe,
     mutate: subscribeNewsletter,
-    error,
+    error: errorSubscribe,
   } = useMutation({
     mutationFn: subscribe,
+    onSuccess: updatedPreference => {
+      queryClient.setQueryData(['newsletter', email], updatedPreference);
+      // queryClient.invalidateQueries({ queryKey: ['newsletter', email] });
+    },
   });
 
-  return { isPending, subscribeNewsletter, error };
+  return { isPendingSubscribe, subscribeNewsletter, errorSubscribe };
 }

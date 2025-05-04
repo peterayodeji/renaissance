@@ -27,7 +27,7 @@ function AccountDetails() {
 
   const { updateUser, isUpdating } = useUpdateUser();
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
 
   function onSubmit({ firstName, lastName, password }) {
     const fullName = `${firstName} ${lastName}`;
@@ -43,7 +43,7 @@ function AccountDetails() {
           reset({ firstName, lastName, password: '', passwordConfirm: '' });
         },
         onError: err => {
-          setError(err.message);
+          setError(err);
 
           const [firstName, lastName] = currentFullName.trim().split(' ');
           reset({ firstName, lastName, password: '', passwordConfirm: '' });
@@ -152,14 +152,11 @@ function AccountDetails() {
       )}
 
       {error && (
-        <Modal close={() => setError('')}>
+        <Modal close={() => setError(null)}>
           <h3>CHANGES NOT SUCCESSFUL</h3>
-          <p>
-            An error occured while making changes to your account details!{' '}
-            {error.message}
-          </p>
+          <p>An error occured while making changes to your account details!</p>
           <button
-            onClick={() => setError('')}
+            onClick={() => setError(null)}
             className="bg-black px-5 py-3 text-xs text-white"
           >
             OK

@@ -1,18 +1,17 @@
-import { useShippingAddress } from './useShippingAddress.js';
+import { useCountryRegion } from '../../hooks/useCountryRegion.js';
 import { countryOptions, truncateText } from '../../utils/helpers';
 
 import FormRow from '../../ui/FormRow';
-import Loader from '../../ui/Loader.jsx';
 
-function ShippingAddress({ register, errors, reset }) {
+function ShippingAddress({ register, errors, fetchedShippingData }) {
   // const preventNonNumeric = e => {
   //   if (!/[0-9]/.test(e.key) && e.key !== 'Backspace' && e.key !== ' ') {
   //     e.preventDefault();
   //   }
   // };
 
-  const { isLoading, stateOptions, selectedCountry, handleCountryChange } =
-    useShippingAddress(reset);
+  const { stateOptions, selectedCountry, handleCountryChange } =
+    useCountryRegion(fetchedShippingData?.countryCode);
 
   return (
     <div className="space-y-4">
@@ -115,6 +114,7 @@ function ShippingAddress({ register, errors, reset }) {
             disabled={!selectedCountry}
             className="input disabled:cursor-not-allowed"
           >
+            <option value="">Select State</option>
             {stateOptions.map(([state, stateCode]) => (
               <option key={stateCode} value={state}>
                 {truncateText(state, 30)}
@@ -124,7 +124,7 @@ function ShippingAddress({ register, errors, reset }) {
         </FormRow>
       </div>
 
-      <FormRow label="Phone" error={errors?.zip?.message}>
+      <FormRow label="Phone" error={errors?.phone?.message}>
         <input
           // inputMode="numeric"
           // pattern="[0-9 ]*"
@@ -137,8 +137,6 @@ function ShippingAddress({ register, errors, reset }) {
           className="input w-44"
         />
       </FormRow>
-
-      {isLoading && <Loader />}
     </div>
   );
 }

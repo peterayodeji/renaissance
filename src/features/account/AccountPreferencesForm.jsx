@@ -42,7 +42,7 @@ function AccountPreferencesForm({ data }) {
   const isBusyForm = isPendingSubscribe || isPendingUnSubscribe;
 
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -58,17 +58,17 @@ function AccountPreferencesForm({ data }) {
 
     if (newsletter === 'subscribed') {
       subscribeNewsletter(updateData, {
-        onSuccess: (_, { preference, countryCode }) => {
+        onSuccess: ({ preference, countryCode }) => {
           setShowSuccessModal(true);
           setNewsletter('subscribed');
           setGender(preference);
           setSelectedCountryCode(countryCode);
         },
         onError: err => {
-          setError(err.message);
-          setNewsletter('subscribed');
-          setGender(data.preference);
-          setSelectedCountryCode(data.countryCode);
+          setError(err);
+          setNewsletter(subscribeStatus);
+          setGender(data?.preference || 'both');
+          setSelectedCountryCode(data?.countryCode || '');
         },
       });
     }
@@ -82,10 +82,10 @@ function AccountPreferencesForm({ data }) {
           setSelectedCountryCode('');
         },
         onError: err => {
-          setError(err.message);
-          setNewsletter('subscribed');
-          setGender(data.preference);
-          setSelectedCountryCode(data.countryCode);
+          setError(err);
+          setNewsletter(subscribeStatus);
+          setGender(data?.preference || 'both');
+          setSelectedCountryCode(data?.countryCode || '');
         },
       });
     }
@@ -166,14 +166,13 @@ function AccountPreferencesForm({ data }) {
       )}
 
       {error && (
-        <Modal close={() => setError('')}>
+        <Modal close={() => setError(null)}>
           <h3>CHANGES NOT SUCCESSFUL</h3>
           <p>
-            An error occured while making changes to your email preferences!{' '}
-            {error.message}
+            An error occured while making changes to your email preferences!
           </p>
           <button
-            onClick={() => setError('')}
+            onClick={() => setError(null)}
             className="bg-black px-5 py-3 text-xs text-white"
           >
             OK
